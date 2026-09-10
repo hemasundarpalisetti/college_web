@@ -2,8 +2,6 @@
  * Centralized College Information - Sri Sivani College of Engineering (SSCE)
  * Configured with authentic institutional identity, affiliations, and provided campus assets.
  */
-const BASE = import.meta.env.BASE_URL || '/';
-
 export const collegeInfo = {
   name: "Sri Sivani College of Engineering",
   shortName: "SSCE",
@@ -16,8 +14,8 @@ export const collegeInfo = {
   accreditation: "Approved by AICTE, Affiliated to JNTUK (CC-W6) • UGC 2(f) & 12(B) • ISO 9001:2015",
   affiliation: "Affiliated to Jawaharlal Nehru Technological University Kakinada (JNTUK)",
   collegeCode: "W6",
-  logo: `${BASE}assets/logo/college-logo.png`,
-  heroVideo: `${BASE}assets/video/college-intro.mp4`,
+  logo: "./assets/logo/college-logo.png",
+  heroVideo: "./assets/video/college-intro.mp4",
   contact: {
     email: "info@srisivani.edu.in",
     phone: "+91 (08942) 231188 / 231189",
@@ -28,28 +26,28 @@ export const collegeInfo = {
       id: "b1",
       title: "Sri Sivani Main Academic Complex",
       description: "Central administrative headquarters and high-tech multimedia lecture complexes.",
-      path: `${BASE}assets/images/college-building-1.jpg`,
+      path: "./assets/images/college-building-1.jpg",
       tag: "Main Block"
     },
     {
       id: "c1",
       title: "Grand Entrance Archway (SSCE Gate)",
       description: "Iconic campus gateway on NH-16 Chilakapalem Junction welcoming students and visitors.",
-      path: `${BASE}assets/images/campus-1.jpg`,
+      path: "./assets/images/campus-1.jpg",
       tag: "Campus Entrance"
     },
     {
       id: "b2",
       title: "Academic Quadrangle & Sports Arena",
       description: "Multi-tiered academic wing overlooking spacious sports courts and green grounds.",
-      path: `${BASE}assets/images/college-building-2.jpg`,
+      path: "./assets/images/college-building-2.jpg",
       tag: "Academic Complex"
     },
     {
       id: "c2",
       title: "Campus Avenue & Department Wing",
       description: "Tree-lined central avenue leading to specialized engineering laboratories and classrooms.",
-      path: `${BASE}assets/images/campus-2.jpg`,
+      path: "./assets/images/campus-2.jpg",
       tag: "Campus Avenue"
     }
   ]

@@ -71,10 +71,15 @@ export function getStudents() {
   initializeStorage();
   try {
     const data = localStorage.getItem(KEYS.STUDENTS);
-    return data ? JSON.parse(data) : [];
+    const parsed = data ? JSON.parse(data) : [];
+    if (!Array.isArray(parsed) || parsed.length === 0) {
+      localStorage.setItem(KEYS.STUDENTS, JSON.stringify(INITIAL_STUDENTS));
+      return INITIAL_STUDENTS;
+    }
+    return parsed;
   } catch (err) {
     console.error('[Storage] Error getting students:', err);
-    return [];
+    return INITIAL_STUDENTS;
   }
 }
 
@@ -190,7 +195,12 @@ export function getFaculty() {
   initializeStorage();
   try {
     const data = localStorage.getItem(KEYS.FACULTY);
-    return data ? JSON.parse(data) : INITIAL_FACULTY;
+    const parsed = data ? JSON.parse(data) : [];
+    if (!Array.isArray(parsed) || parsed.length === 0) {
+      localStorage.setItem(KEYS.FACULTY, JSON.stringify(INITIAL_FACULTY));
+      return INITIAL_FACULTY;
+    }
+    return parsed;
   } catch (err) {
     console.error('[Storage] Error getting faculty:', err);
     return INITIAL_FACULTY;
@@ -210,16 +220,38 @@ export function getAllMarks() {
   initializeStorage();
   try {
     const data = localStorage.getItem(KEYS.MARKS);
-    return data ? JSON.parse(data) : {};
+    const parsed = data ? JSON.parse(data) : null;
+    if (!parsed || Object.keys(parsed).length === 0) {
+      localStorage.setItem(KEYS.MARKS, JSON.stringify(INITIAL_MARKS));
+      return INITIAL_MARKS;
+    }
+    return parsed;
   } catch (err) {
     console.error('[Storage] Error reading marks:', err);
-    return {};
+    return INITIAL_MARKS;
   }
 }
 
 export function getStudentMarks(studentId) {
   const allMarks = getAllMarks();
-  return allMarks[studentId] || { semester1: [], semester2: [] };
+  if (allMarks[studentId]) return allMarks[studentId];
+  if (INITIAL_MARKS[studentId]) return INITIAL_MARKS[studentId];
+  return {
+    semester1: DEFAULT_SUBJECTS_SEM1.map(sub => ({
+      code: sub.code,
+      subject: sub.name,
+      credits: sub.credits,
+      internal: 30,
+      external: 45
+    })),
+    semester2: DEFAULT_SUBJECTS_SEM2.map(sub => ({
+      code: sub.code,
+      subject: sub.name,
+      credits: sub.credits,
+      internal: 32,
+      external: 48
+    }))
+  };
 }
 
 /**
@@ -269,17 +301,32 @@ export function getAllAttendance() {
   initializeStorage();
   try {
     const data = localStorage.getItem(KEYS.ATTENDANCE);
-    return data ? JSON.parse(data) : {};
+    const parsed = data ? JSON.parse(data) : null;
+    if (!parsed || Object.keys(parsed).length === 0) {
+      localStorage.setItem(KEYS.ATTENDANCE, JSON.stringify(INITIAL_ATTENDANCE));
+      return INITIAL_ATTENDANCE;
+    }
+    return parsed;
   } catch (err) {
     console.error('[Storage] Error reading attendance:', err);
-    return {};
+    return INITIAL_ATTENDANCE;
   }
 }
 
 export function getStudentAttendance(studentId) {
   const allAttendance = getAllAttendance();
-  return allAttendance[studentId] || [];
+  if (allAttendance[studentId]) return allAttendance[studentId];
+  if (INITIAL_ATTENDANCE[studentId]) return INITIAL_ATTENDANCE[studentId];
+  return DEFAULT_SUBJECTS_SEM2.map(sub => ({
+    code: sub.code,
+    subject: sub.name,
+    totalClasses: 45,
+    present: 40,
+    absent: 5,
+    percentage: 88.89
+  }));
 }
+
 
 /**
  * Updates attendance for a single student and single subject

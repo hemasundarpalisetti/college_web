@@ -143,10 +143,10 @@ export function calculateStudentSummary(studentId, marksData, attendanceData) {
   });
 
   const sem1Obtained = sem1Subjects.reduce((acc, curr) => acc + (curr.total || 0), 0);
-  const sem1Max = sem1Subjects.length * 100;
-  const sem1Pct = calculatePercentage(sem1Obtained, sem1Max);
-  const sem1SGPA = calculateSGPA(sem1Subjects);
-  const sem1Passed = sem1Subjects.every(s => s.status === 'Pass');
+  const sem1Max = (sem1Subjects.length || 1) * 100;
+  const sem1Pct = calculatePercentage(sem1Obtained, sem1Subjects.length > 0 ? sem1Max : 100);
+  const sem1SGPA = calculateSGPA(sem1Subjects) || 0;
+  const sem1Passed = sem1Subjects.length > 0 ? sem1Subjects.every(s => s.status === 'Pass') : true;
 
   // Semester 2 Results
   const sem2Subjects = (studentMarks.semester2 || []).map(s => {
@@ -162,22 +162,22 @@ export function calculateStudentSummary(studentId, marksData, attendanceData) {
   });
 
   const sem2Obtained = sem2Subjects.reduce((acc, curr) => acc + (curr.total || 0), 0);
-  const sem2Max = sem2Subjects.length * 100;
-  const sem2Pct = calculatePercentage(sem2Obtained, sem2Max);
-  const sem2SGPA = calculateSGPA(sem2Subjects);
-  const sem2Passed = sem2Subjects.every(s => s.status === 'Pass');
+  const sem2Max = (sem2Subjects.length || 1) * 100;
+  const sem2Pct = calculatePercentage(sem2Obtained, sem2Subjects.length > 0 ? sem2Max : 100);
+  const sem2SGPA = calculateSGPA(sem2Subjects) || 0;
+  const sem2Passed = sem2Subjects.length > 0 ? sem2Subjects.every(s => s.status === 'Pass') : true;
 
   // Overall Attendance
   const attendanceStats = calculateOverallAttendance(studentAttendance);
 
   // Overall CGPA (Average of SGPA1 & SGPA2)
-  const validSGPAs = [sem1SGPA, sem2SGPA].filter(s => s > 0);
+  const validSGPAs = [sem1SGPA, sem2SGPA].filter(s => typeof s === 'number' && !isNaN(s) && s > 0);
   const overallCGPA = validSGPAs.length > 0 
     ? parseFloat((validSGPAs.reduce((a, b) => a + b, 0) / validSGPAs.length).toFixed(2))
-    : 0;
+    : (sem2SGPA || sem1SGPA || 0);
 
   const totalObtained = sem1Obtained + sem2Obtained;
-  const totalMax = sem1Max + sem2Max;
+  const totalMax = (sem1Subjects.length + sem2Subjects.length) * 100 || 100;
   const overallPercentage = calculatePercentage(totalObtained, totalMax);
 
   return {
@@ -185,21 +185,22 @@ export function calculateStudentSummary(studentId, marksData, attendanceData) {
       subjects: sem1Subjects,
       obtained: sem1Obtained,
       max: sem1Max,
-      percentage: sem1Pct,
-      sgpa: sem1SGPA,
+      percentage: isNaN(sem1Pct) ? 0 : sem1Pct,
+      sgpa: isNaN(sem1SGPA) ? 0 : sem1SGPA,
       status: sem1Passed ? 'Pass' : 'Fail'
     },
     sem2: {
       subjects: sem2Subjects,
       obtained: sem2Obtained,
       max: sem2Max,
-      percentage: sem2Pct,
-      sgpa: sem2SGPA,
+      percentage: isNaN(sem2Pct) ? 0 : sem2Pct,
+      sgpa: isNaN(sem2SGPA) ? 0 : sem2SGPA,
       status: sem2Passed ? 'Pass' : 'Fail'
     },
     attendance: attendanceStats,
-    overallCGPA,
-    overallPercentage,
+    overallCGPA: isNaN(overallCGPA) ? 0 : overallCGPA,
+    overallPercentage: isNaN(overallPercentage) ? 0 : overallPercentage,
     overallStatus: (sem1Passed && sem2Passed) ? 'Passed' : 'Needs Improvement'
   };
 }
+
