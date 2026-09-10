@@ -1,0 +1,85 @@
+/* ==========================================================================
+   COLLEGE PORTAL - DESIGN SYSTEM THEME TOKENS
+   Strict adherence to Cobalt/Royal Blue + Crisp White + Light Blue + Dark Navy
+   ========================================================================== */
+
+:root {
+  /* Primary Colors */
+  --primary-900: #1e3a8a;
+  --primary-800: #1e40af; /* Deep Royal Blue */
+  --primary-700: #1d4ed8; /* Cobalt Blue Primary */
+  --primary-600: #2563eb; /* Active Blue */
+  --primary-500: #3b82f6;
+  --primary-400: #60a5fa;
+  --primary-300: #93c5fd;
+  --primary-200: #bfdbfe;
+  --primary-100: #dbeafe; /* Light Blue Accent */
+  --primary-50:  #eff6ff; /* Soft Background */
+
+  /* Neutral & Base Colors */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc; /* Very light slate/blue */
+  --bg-tertiary: #f1f5f9;
+  --bg-card: #ffffff;
+  --bg-card-hover: #fcfdfe;
+  --bg-glass: rgba(255, 255, 255, 0.92);
+
+  /* Typography Colors */
+  --text-primary: #0f172a;   /* Dark navy/slate */
+  --text-secondary: #334155; /* Medium dark slate */
+  --text-muted: #64748b;     /* Slate */
+  --text-light: #94a3b8;
+  --text-inverse: #ffffff;
+  --text-link: #1d4ed8;
+  --text-link-hover: #1e40af;
+
+  /* Borders & Dividers */
+  --border-subtle: #e2e8f0;
+  --border-focus: #2563eb;
+  --border-light: #edf2f7;
+  --border-primary-subtle: #dbeafe;
+
+  /* Status Colors */
+  --status-success-bg: #ecfdf5;
+  --status-success-text: #065f46;
+  --status-success-border: #a7f3d0;
+
+  --status-warning-bg: #fffbeb;
+  --status-warning-text: #92400e;
+  --status-warning-border: #fde68a;
+
+  --status-danger-bg: #fef2f2;
+  --status-danger-text: #991b1b;
+  --status-danger-border: #fecaca;
+
+  --status-info-bg: #eff6ff;
+  --status-info-text: #1e40af;
+  --status-info-border: #bfdbfe;
+
+  /* Shadows */
+  --shadow-xs: 0 1px 2px 0 rgba(15, 23, 42, 0.04);
+  --shadow-sm: 0 1px 3px 0 rgba(15, 23, 42, 0.08), 0 1px 2px -1px rgba(15, 23, 42, 0.06);
+  --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.08), 0 2px 4px -2px rgba(15, 23, 42, 0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(15, 23, 42, 0.08), 0 4px 6px -4px rgba(15, 23, 42, 0.04);
+  --shadow-xl: 0 20px 25px -5px rgba(15, 23, 42, 0.1), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+  --shadow-blue: 0 8px 20px -4px rgba(29, 78, 216, 0.25);
+  --shadow-blue-sm: 0 4px 12px -2px rgba(29, 78, 216, 0.15);
+
+  /* Radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Dimensions */
+  --header-height: 70px;
+  --sidebar-width: 260px;
+  --sidebar-collapsed-width: 72px;
+  --content-max-width: 1320px;
+}
