@@ -19,12 +19,12 @@ export function Navbar() {
         <div className="navbar-left">
           <Link to="/" className="navbar-logo-link" aria-label="Sri Sivani College of Engineering">
             <img
-              src="/assets/logo/college-logo.png"
+              src={collegeInfo.logo}
               alt={collegeInfo.name}
               className="navbar-logo-img"
               onError={(e) => {
                 e.target.onerror = null;
-                e.target.src = collegeInfo.logo;
+                e.target.src = `${import.meta.env.BASE_URL}assets/logo/college-logo.png`;
               }}
             />
           </Link>
