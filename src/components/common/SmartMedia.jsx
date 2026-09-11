@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 /**
  * SmartImage attempts to load the provided local asset.
@@ -9,7 +9,6 @@ export function SmartImage({ src, alt, className = '', style = {}, tag = 'Campus
   const [hasError, setHasError] = useState(false);
 
   if (!src || hasError) {
-    // Generate institutional SVG placeholder
     return (
       <div
         className={`smart-img-fallback ${className}`}
@@ -66,7 +65,7 @@ export function SmartImage({ src, alt, className = '', style = {}, tag = 'Campus
             {title || alt || 'College Facility'}
           </h4>
           <p style={{ color: '#bfdbfe', fontSize: '0.8rem', margin: 0, opacity: 0.9 }}>
-            Apex Institute of Engineering &amp; Technology
+            Sri Sivani College of Engineering
           </p>
         </div>
       </div>
@@ -86,70 +85,134 @@ export function SmartImage({ src, alt, className = '', style = {}, tag = 'Campus
 }
 
 /**
- * SmartVideo automatically plays the college video when present,
- * or gracefully renders a modern animated institutional hero visual.
+ * LandscapeHeroVideo renders the college video in a sleek 16:9 landscape format,
+ * muted and autoplaying continuously on load.
  */
-export function SmartVideo({ src, poster, className = '', overlayContent = null }) {
+export function LandscapeHeroVideo({ src, poster, className = '' }) {
+  const videoRef = useRef(null);
   const [videoFailed, setVideoFailed] = useState(false);
 
+  // Path resolution supporting both dev and build base URLs
+  const resolvedSrc = src?.startsWith('./')
+    ? `${import.meta.env.BASE_URL}${src.replace(/^\.\//, '')}`
+    : src;
+
+  const resolvedPoster = poster?.startsWith('./')
+    ? `${import.meta.env.BASE_URL}${poster.replace(/^\.\//, '')}`
+    : poster || `${import.meta.env.BASE_URL}assets/images/college-building-1.jpg`;
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.muted = true;
+      videoRef.current.defaultMuted = true;
+      const playPromise = videoRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          // Autoplay policy fallback: muted autoplay is generally allowed
+        });
+      }
+    }
+  }, [resolvedSrc]);
+
   return (
-    <div className={`hero-video-wrapper ${className}`} style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden' }}>
+    <div
+      className={`landscape-video-container ${className}`}
+      style={{
+        width: '100%',
+        position: 'relative',
+        borderRadius: '16px',
+        overflow: 'hidden',
+        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.2)',
+        backgroundColor: '#0f172a',
+        aspectRatio: '16 / 9',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}
+    >
       {!videoFailed ? (
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          poster={poster || '/assets/images/college-building-1.jpg'}
-          onError={() => setVideoFailed(true)}
-          style={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            position: 'absolute',
-            inset: 0
-          }}
-        >
-          <source src={src} type="video/mp4" />
-        </video>
-      ) : (
-        <div
-          style={{
-            position: 'absolute',
-            inset: 0,
-            background: 'radial-gradient(ellipse at 70% 20%, #1e40af 0%, #1e3a8a 50%, #0f172a 100%)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}
-        >
+        <>
+          <video
+            ref={videoRef}
+            src={resolvedSrc}
+            autoPlay
+            muted
+            loop
+            playsInline
+            controls
+            poster={resolvedPoster}
+            onError={() => setVideoFailed(true)}
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              aspectRatio: '16 / 9',
+              display: 'block'
+            }}
+          >
+            <source src={resolvedSrc} type="video/mp4" />
+          </video>
+
+          {/* Quick badge pill on top of video */}
           <div
             style={{
               position: 'absolute',
-              inset: 0,
-              backgroundImage: 'radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px)',
-              backgroundSize: '24px 24px'
+              top: '12px',
+              left: '12px',
+              backgroundColor: 'rgba(15, 23, 42, 0.75)',
+              backdropFilter: 'blur(8px)',
+              color: '#ffffff',
+              padding: '0.25rem 0.75rem',
+              borderRadius: '999px',
+              fontSize: '0.72rem',
+              fontWeight: '700',
+              letterSpacing: '0.05em',
+              textTransform: 'uppercase',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.4rem',
+              border: '1px solid rgba(255, 255, 255, 0.2)',
+              pointerEvents: 'none',
+              zIndex: 3
             }}
-          />
-        </div>
-      )}
-
-      {/* Subtle Royal Blue / Dark Navy Overlay */}
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          background: 'linear-gradient(180deg, rgba(15, 23, 42, 0.72) 0%, rgba(30, 58, 138, 0.65) 60%, rgba(15, 23, 42, 0.85) 100%)',
-          zIndex: 2
-        }}
-      />
-
-      {/* Overlay content */}
-      {overlayContent && (
-        <div style={{ position: 'relative', zIndex: 3, width: '100%', height: '100%' }}>
-          {overlayContent}
+          >
+            <span
+              style={{
+                width: '6px',
+                height: '6px',
+                borderRadius: '50%',
+                backgroundColor: '#22c55e',
+                boxShadow: '0 0 6px #22c55e'
+              }}
+            />
+            Campus Overview
+          </div>
+        </>
+      ) : (
+        <div
+          style={{
+            width: '100%',
+            height: '100%',
+            background: 'linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 100%)',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: '#ffffff',
+            padding: '1.5rem',
+            textAlign: 'center'
+          }}
+        >
+          <p style={{ fontWeight: '600', marginBottom: '0.5rem' }}>Campus Overview Video</p>
+          <span style={{ fontSize: '0.8rem', opacity: 0.8 }}>Sri Sivani College of Engineering</span>
         </div>
       )}
     </div>
   );
 }
+
+// Keep SmartVideo for backward compatibility
+export function SmartVideo({ src, poster, className = '' }) {
+  return <LandscapeHeroVideo src={src} poster={poster} className={className} />;
+}
+

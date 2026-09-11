@@ -7,7 +7,11 @@ export default defineConfig(({ command }) => ({
   base: command === 'serve' ? '/' : './',
   server: {
     port: 5173,
-    host: true
+    host: true,
+    watch: {
+      ignored: ['**/*.mp4', '**/*.mkv', '**/*.avi', '**/*.pdf', '**/.git/**']
+    }
   }
 }))
+
 

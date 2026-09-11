@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {
   LogIn,
@@ -15,127 +15,182 @@ import {
 } from 'lucide-react';
 import { Navbar } from '../../components/common/Navbar';
 import { Footer } from '../../components/common/Footer';
-import { SmartVideo, SmartImage } from '../../components/common/SmartMedia';
+import { SmartImage } from '../../components/common/SmartMedia';
 import { EngineeringDayBanner } from '../../components/common/EngineeringDayBanner';
 import { collegeInfo } from '../../data/collegeInfo';
 import { useAuth } from '../../context/AuthContext';
+import heroVideoFile from '../../assets/video/college-intro.mp4';
 
 export function HomePage() {
   const { user } = useAuth();
+  const videoRef = useRef(null);
+
+  // Guarantee muted autoplay across all browsers without user interaction
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      video.muted = true;
+      video.defaultMuted = true;
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          // Fallback if needed
+        });
+      }
+    }
+  }, []);
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: '#ffffff' }}>
       <Navbar />
 
-      {/* 1. HERO VIDEO SECTION */}
-      <section style={{ height: '80vh', minHeight: '520px', position: 'relative', overflow: 'hidden' }}>
-        <SmartVideo
-          src={collegeInfo.heroVideo}
-          poster="/assets/images/college-building-1.jpg"
-          overlayContent={
-            <div
-              style={{
-                height: '100%',
-                maxWidth: 'var(--content-max-width)',
-                margin: '0 auto',
-                padding: '0 2rem',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'flex-start',
-                color: '#ffffff'
-              }}
-            >
-              {/* College Logo / Shield Pill */}
-              <div
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.6rem',
-                  backgroundColor: 'rgba(255, 255, 255, 0.15)',
-                  backdropFilter: 'blur(8px)',
-                  padding: '0.45rem 1.15rem',
-                  borderRadius: 'var(--radius-full)',
-                  border: '1px solid rgba(255, 255, 255, 0.25)',
-                  marginBottom: '1rem'
-                }}
-              >
-                <GraduationCap size={18} color="#93c5fd" />
-                <span style={{ fontSize: '0.825rem', fontWeight: '700', letterSpacing: '0.06em', textTransform: 'uppercase', color: '#ffffff' }}>
-                  {collegeInfo.name}
-                </span>
-              </div>
+      {/* 1. HERO VIDEO SECTION (RAW VIDEO QUALITY & COLORS, NO COLOR FILTERS) */}
+      <section
+        style={{
+          position: 'relative',
+          overflow: 'hidden',
+          minHeight: '520px',
+          height: '75vh',
+          display: 'flex',
+          alignItems: 'center',
+          backgroundColor: '#000000'
+        }}
+      >
+        {/* Exact Video Quality & Natural Colors - Zero Color Filters */}
+        <video
+          ref={videoRef}
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster="./assets/images/college-building-1.jpg"
+          style={{
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            zIndex: 1,
+            filter: 'none'
+          }}
+        >
+          <source src={heroVideoFile} type="video/mp4" />
+          <source src="./assets/video/college-intro.mp4" type="video/mp4" />
+          <source src="/assets/video/college-intro.mp4" type="video/mp4" />
+        </video>
 
-              <h1
-                style={{
-                  fontSize: 'clamp(1.75rem, 3.2vw, 2.35rem)',
-                  fontWeight: '700',
-                  color: '#ffffff',
-                  lineHeight: 1.25,
-                  maxWidth: '750px',
-                  marginBottom: '1rem',
-                  letterSpacing: '-0.02em'
-                }}
-              >
-                COLLEGE ACADEMIC PORTAL
-              </h1>
+        {/* Hero Content (Clean readable typography with text-shadow, leaving entire video natural) */}
+        <div
+          style={{
+            position: 'relative',
+            zIndex: 3,
+            maxWidth: 'var(--content-max-width)',
+            width: '100%',
+            margin: '0 auto',
+            padding: '0 2rem',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'flex-start'
+          }}
+        >
+          {/* College Logo / Shield Pill */}
+          <div
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.6rem',
+              backgroundColor: 'rgba(15, 23, 42, 0.65)',
+              backdropFilter: 'blur(8px)',
+              padding: '0.45rem 1.15rem',
+              borderRadius: 'var(--radius-full)',
+              border: '1px solid rgba(255, 255, 255, 0.35)',
+              marginBottom: '1rem',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.3)'
+            }}
+          >
+            <GraduationCap size={18} color="#93c5fd" />
+            <span style={{ fontSize: '0.825rem', fontWeight: '700', letterSpacing: '0.06em', textTransform: 'uppercase', color: '#ffffff' }}>
+              {collegeInfo.name}
+            </span>
+          </div>
 
-              <p
-                style={{
-                  fontSize: 'clamp(1rem, 2vw, 1.25rem)',
-                  color: '#dbeafe',
-                  lineHeight: 1.6,
-                  maxWidth: '700px',
-                  marginBottom: '2.25rem',
-                  fontWeight: '400'
-                }}
-              >
-                Unified academic management system for engineering students and faculty. Access grades, attendance analytics, semester transcripts, and institutional records.
-              </p>
+          {/* Exact preserved font size */}
+          <h1
+            style={{
+              fontSize: 'clamp(1.75rem, 3.2vw, 2.35rem)',
+              fontWeight: '700',
+              color: '#ffffff',
+              lineHeight: 1.25,
+              maxWidth: '750px',
+              marginBottom: '1rem',
+              letterSpacing: '-0.02em',
+              textShadow: '0 2px 12px rgba(0,0,0,0.85), 0 4px 20px rgba(0,0,0,0.6)'
+            }}
+          >
+            COLLEGE ACADEMIC PORTAL
+          </h1>
 
-              {/* CTAs */}
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center' }}>
-                {user ? (
-                  <Link
-                    to={user.role === 'faculty' ? '/faculty/dashboard' : '/student/dashboard'}
-                    className="btn btn-primary btn-lg"
-                    style={{ fontSize: '1.05rem', padding: '0.9rem 2rem' }}
-                  >
-                    <ShieldCheck size={20} />
-                    <span>Enter {user.role === 'faculty' ? 'Faculty' : 'Student'} Dashboard</span>
-                    <ArrowRight size={18} />
-                  </Link>
-                ) : (
-                  <>
-                    <Link
-                      to="/login"
-                      className="btn btn-primary btn-lg"
-                      id="hero-login-btn"
-                      style={{ fontSize: '1.05rem', padding: '0.9rem 2.25rem' }}
-                    >
-                      <LogIn size={20} />
-                      <span>Access Portal Login</span>
-                      <ArrowRight size={18} />
-                    </Link>
-                    <a
-                      href="#college-info"
-                      className="btn btn-outline btn-lg"
-                      style={{
-                        backgroundColor: 'rgba(255, 255, 255, 0.12)',
-                        color: '#ffffff',
-                        borderColor: 'rgba(255, 255, 255, 0.3)',
-                        backdropFilter: 'blur(6px)'
-                      }}
-                    >
-                      <span>Explore Overview</span>
-                    </a>
-                  </>
-                )}
-              </div>
-            </div>
-          }
-        />
+          {/* Exact preserved font size */}
+          <p
+            style={{
+              fontSize: 'clamp(1rem, 2vw, 1.25rem)',
+              color: '#f8fafc',
+              lineHeight: 1.6,
+              maxWidth: '700px',
+              marginBottom: '2.25rem',
+              fontWeight: '500',
+              textShadow: '0 2px 8px rgba(0,0,0,0.85), 0 1px 4px rgba(0,0,0,0.9)'
+            }}
+          >
+            Unified academic management system for engineering students and faculty. Access grades, attendance analytics, semester transcripts, and institutional records.
+          </p>
+
+          {/* CTAs */}
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center' }}>
+            {user ? (
+              <Link
+                to={user.role === 'faculty' ? '/faculty/dashboard' : '/student/dashboard'}
+                className="btn btn-primary btn-lg"
+                style={{ fontSize: '1.05rem', padding: '0.9rem 2rem', boxShadow: '0 4px 14px rgba(0,0,0,0.35)' }}
+              >
+                <ShieldCheck size={20} />
+                <span>Enter {user.role === 'faculty' ? 'Faculty' : 'Student'} Dashboard</span>
+                <ArrowRight size={18} />
+              </Link>
+            ) : (
+              <>
+                <Link
+                  to="/login"
+                  className="btn btn-primary btn-lg"
+                  id="hero-login-btn"
+                  style={{ fontSize: '1.05rem', padding: '0.9rem 2.25rem', boxShadow: '0 4px 14px rgba(0,0,0,0.35)' }}
+                >
+                  <LogIn size={20} />
+                  <span>Access Portal Login</span>
+                  <ArrowRight size={18} />
+                </Link>
+                <a
+                  href="#college-info"
+                  className="btn btn-outline btn-lg"
+                  style={{
+                    backgroundColor: 'rgba(15, 23, 42, 0.65)',
+                    color: '#ffffff',
+                    borderColor: 'rgba(255, 255, 255, 0.4)',
+                    backdropFilter: 'blur(8px)',
+                    boxShadow: '0 4px 14px rgba(0,0,0,0.35)'
+                  }}
+                >
+                  <span>Explore Overview</span>
+                </a>
+              </>
+            )}
+          </div>
+        </div>
       </section>
+
+
+
 
       {/* 2. COLLEGE INFORMATION SECTION */}
       <section id="college-info" style={{ padding: '5rem 0', backgroundColor: '#ffffff' }}>
