@@ -35,13 +35,17 @@ export function ResultPdfTemplate({ student, semesterKey = 'semester1', marks = 
           src={collegeInfo.logo}
           alt={collegeInfo.name}
           style={{
-            maxHeight: '65px',
-            maxWidth: '260px',
-            objectFit: 'contain'
+            height: '64px',
+            width: '64px',
+            aspectRatio: '1 / 1',
+            objectFit: 'contain',
+            flexShrink: 0
           }}
         />
         <div className="document-title-block" style={{ borderLeft: '2px solid #1e40af', paddingLeft: '1rem' }}>
-          <h1 className="doc-inst-name">{collegeInfo.name}</h1>
+          <h1 className="doc-inst-name" style={{ color: '#000000', margin: 0, fontSize: '1.25rem' }}>
+            SRI SIVANI COLLEGE OF ENGINEERING (AUTONOMOUS)
+          </h1>
           <p className="doc-inst-sub">{collegeInfo.accreditation}</p>
           <p style={{ fontSize: '0.75rem', color: '#64748b', margin: 0 }}>
             {collegeInfo.location} • Affiliated to JNTUK (CC-W6)

@@ -53,20 +53,28 @@ export function Navbar() {
   return (
     <nav className="site-navbar" role="navigation" aria-label="Main Navigation">
       <div className="site-navbar-container">
-        {/* BRANDING GROUP (Logo + Portal Name) */}
+        {/* BRANDING GROUP (Logo + College Name + Portal Name) */}
         <div className="navbar-brand-group">
-          {/* 1. LEFT: Official College Logo */}
+          {/* 1. LEFT: Official College Logo & Name in Black */}
           <div className="navbar-left">
-            <Link to="/" className="navbar-logo-link" aria-label="Sri Sivani College of Engineering Home">
+            <Link to="/" className="navbar-logo-link" aria-label="Sri Sivani College of Engineering (Autonomous)">
               <img
                 src={collegeInfo.logo}
-                alt={collegeInfo.name}
+                alt="Sri Sivani College of Engineering"
                 className="navbar-logo-img"
                 onError={(e) => {
                   e.target.onerror = null;
                   e.target.src = `${import.meta.env.BASE_URL}assets/logo/college-logo.png`;
                 }}
               />
+              <div className="navbar-brand-text">
+                <span className="navbar-college-name">
+                  SRI SIVANI COLLEGE OF ENGINEERING
+                </span>
+                <span className="navbar-college-tag">
+                  (AUTONOMOUS)
+                </span>
+              </div>
             </Link>
           </div>
 

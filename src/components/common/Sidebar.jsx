@@ -60,36 +60,31 @@ export function Sidebar({ isOpen, onClose }) {
       <aside className={`sidebar ${isOpen ? 'open' : ''}`}>
         {/* Brand Banner */}
         <div className="sidebar-brand">
-          <div
+          <img
+            src={collegeInfo.logo}
+            alt={collegeInfo.name}
             style={{
-              width: '38px',
-              height: '38px',
-              borderRadius: '8px',
-              background: 'linear-gradient(135deg, var(--primary-800), var(--primary-600))',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: '#ffffff',
-              boxShadow: 'var(--shadow-blue-sm)'
+              width: '36px',
+              height: '36px',
+              aspectRatio: '1 / 1',
+              objectFit: 'contain',
+              flexShrink: 0
             }}
-          >
-            <GraduationCap size={22} />
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
+          />
+          <div style={{ display: 'flex', flexDirection: 'column', lineHeight: 1.15 }}>
             <span
               style={{
                 fontFamily: "'Plus Jakarta Sans', sans-serif",
                 fontWeight: '800',
-                fontSize: '1.05rem',
-                color: 'var(--text-primary)',
-                letterSpacing: '-0.02em',
-                lineHeight: 1.15
+                fontSize: '0.875rem',
+                color: '#000000',
+                letterSpacing: '0.01em'
               }}
             >
-              COLLEGE PORTAL
+              SRI SIVANI
             </span>
-            <span style={{ fontSize: '0.7rem', fontWeight: '600', color: 'var(--primary-700)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-              {isFaculty ? 'Faculty Management' : 'Student Access'}
+            <span style={{ fontSize: '0.65rem', fontWeight: '700', color: '#000000', letterSpacing: '0.04em' }}>
+              (AUTONOMOUS)
             </span>
           </div>
         </div>

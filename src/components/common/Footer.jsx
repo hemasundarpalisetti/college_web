@@ -10,11 +10,17 @@ export function Footer() {
           {/* Col 1: Brand & Bio */}
           <div className="footer-col-brand">
             <div className="footer-brand-header">
-              <img
-                src={collegeInfo.logo}
-                alt={collegeInfo.name}
-                className="footer-logo-img"
-              />
+              <div className="footer-brand-logo-wrap">
+                <img
+                  src={collegeInfo.logo}
+                  alt={collegeInfo.name}
+                  className="footer-logo-img"
+                />
+                <div className="footer-brand-text">
+                  <span className="footer-college-name">SRI SIVANI COLLEGE OF ENGINEERING</span>
+                  <span className="footer-college-tag">(AUTONOMOUS)</span>
+                </div>
+              </div>
               <div className="footer-accreditation-badge">
                 {collegeInfo.accreditation}
               </div>

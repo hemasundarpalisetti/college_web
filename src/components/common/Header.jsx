@@ -32,18 +32,35 @@ export function Header({ toggleSidebar }) {
           <Menu size={20} />
         </button>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-          <span
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+          <img
+            src={collegeInfo.logo}
+            alt={collegeInfo.name}
             style={{
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
-              fontWeight: '700',
-              fontSize: '1.05rem',
-              color: 'var(--text-primary)'
+              width: '36px',
+              height: '36px',
+              aspectRatio: '1 / 1',
+              objectFit: 'contain',
+              flexShrink: 0
             }}
-          >
-            {collegeInfo.shortName} Academic Portal
-          </span>
-          <span className="badge badge-primary" style={{ display: 'inline-flex' }}>
+          />
+          <div style={{ display: 'flex', flexDirection: 'column', lineHeight: 1.15 }}>
+            <span
+              style={{
+                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                fontWeight: '800',
+                fontSize: '0.925rem',
+                color: '#000000',
+                letterSpacing: '0.01em'
+              }}
+            >
+              SRI SIVANI COLLEGE OF ENGINEERING
+            </span>
+            <span style={{ fontSize: '0.675rem', fontWeight: '700', color: '#000000' }}>
+              (AUTONOMOUS) • Academic Portal
+            </span>
+          </div>
+          <span className="badge badge-primary" style={{ display: 'inline-flex', marginLeft: '0.35rem' }}>
             {isFaculty ? 'Faculty Panel' : 'Student Panel'}
           </span>
         </div>

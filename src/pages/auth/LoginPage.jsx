@@ -115,21 +115,31 @@ export function LoginPage() {
             <span>Back to Home</span>
           </Link>
 
-          <div style={{ marginBottom: '0.75rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.85rem', marginBottom: '0.85rem' }}>
             <img
               src={collegeInfo.logo}
               alt={collegeInfo.name}
               style={{
-                maxHeight: '60px',
-                maxWidth: '90%',
-                objectFit: 'contain'
+                height: '54px',
+                width: '54px',
+                aspectRatio: '1 / 1',
+                objectFit: 'contain',
+                flexShrink: 0
               }}
             />
+            <div style={{ textAlign: 'left', lineHeight: '1.2' }}>
+              <div style={{ fontSize: '0.925rem', fontWeight: '800', color: '#000000', letterSpacing: '0.02em', textTransform: 'uppercase' }}>
+                SRI SIVANI COLLEGE OF ENGINEERING
+              </div>
+              <div style={{ fontSize: '0.75rem', fontWeight: '700', color: '#000000', letterSpacing: '0.04em' }}>
+                (AUTONOMOUS)
+              </div>
+            </div>
           </div>
 
           <h2
             style={{
-              fontSize: '1.35rem',
+              fontSize: '1.25rem',
               fontWeight: '800',
               color: 'var(--text-primary)',
               letterSpacing: '-0.02em',
