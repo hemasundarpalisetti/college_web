@@ -86,7 +86,11 @@
   gap: 1.5rem;
 }
 
-/* 1. LEFT: College Logo */
+/* 1. LEFT & BRAND GROUP */
+.navbar-brand-group {
+  display: contents;
+}
+
 .navbar-left {
   display: flex;
   align-items: center;
@@ -199,32 +203,163 @@
 
 @media (max-width: 900px) {
   .site-navbar-container {
-    grid-template-columns: 1fr;
-    justify-items: center;
-    text-align: center;
-    padding: 0.65rem 1rem;
-    gap: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0.4rem 1rem;
+    gap: 0.35rem;
   }
-  .navbar-left {
-    justify-content: center;
-  }
-  .navbar-logo-img {
-    height: 55px; /* 50-60px mobile */
-    max-width: 220px;
-  }
-  .navbar-portal-title {
-    font-size: 22px; /* 20-24px mobile */
-  }
-  .navbar-portal-subtitle {
-    font-size: 11px;
-  }
-  .navbar-right {
+
+  .navbar-brand-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     width: 100%;
+    gap: 0.5rem;
+  }
+
+  .navbar-left {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .navbar-logo-img {
+    height: 40px;
+    max-height: 42px;
+    width: auto;
+    max-width: 150px;
+    object-fit: contain;
+  }
+
+  .navbar-center {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
     justify-content: center;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-    padding-top: 0.5rem;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .navbar-portal-brand {
+    align-items: flex-end;
+    text-align: right;
+    line-height: 1.15;
+  }
+
+  .navbar-portal-title {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: 0.01em;
+  }
+
+  .navbar-portal-subtitle {
+    font-size: 9.5px;
+    font-weight: 700;
+    margin-top: 2px;
+    letter-spacing: 0.04em;
+  }
+
+  .navbar-right {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 0.5rem;
+    padding-top: 0.3rem;
     border-top: 1px solid var(--border-light);
+  }
+
+  .navbar-nav-link {
+    font-size: 0.775rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  #nav-login-btn,
+  .navbar-right .btn {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.65rem;
+    min-height: 28px;
+    border-radius: var(--radius-sm);
+    gap: 0.25rem;
+    white-space: nowrap;
+  }
+
+  #nav-login-btn svg,
+  .navbar-right .btn svg {
+    width: 13px;
+    height: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-navbar-container {
+    padding: 0.3rem 0.75rem;
+    gap: 0.25rem;
+  }
+
+  .navbar-logo-img {
+    height: 35px;
+    max-height: 36px;
+    max-width: 130px;
+  }
+
+  .navbar-portal-title {
+    font-size: 14px;
+  }
+
+  .navbar-portal-subtitle {
+    font-size: 8.5px;
+  }
+
+  .navbar-right {
+    gap: 0.35rem;
+    padding-top: 0.25rem;
+  }
+
+  .navbar-nav-link {
+    font-size: 0.725rem;
+    padding: 0.15rem 0.25rem;
+  }
+
+  #nav-login-btn,
+  .navbar-right .btn {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.55rem;
+    min-height: 26px;
+  }
+}
+
+@media (max-width: 350px) {
+  .site-navbar-container {
+    padding: 0.25rem 0.5rem;
+  }
+
+  .navbar-logo-img {
+    height: 30px;
+    max-width: 110px;
+  }
+
+  .navbar-portal-title {
+    font-size: 12.5px;
+  }
+
+  .navbar-portal-subtitle {
+    font-size: 7.5px;
+  }
+
+  .navbar-nav-link {
+    font-size: 0.675rem;
+    padding: 0.1rem 0.2rem;
+  }
+
+  #nav-login-btn,
+  .navbar-right .btn {
+    font-size: 0.675rem;
+    padding: 0.2rem 0.45rem;
   }
 }
 
@@ -498,9 +633,9 @@
 /* Mobile Hero Media Queries (< 768px) */
 @media (max-width: 768px) {
   .hero-video-section {
-    min-height: 440px;
+    min-height: 380px;
     height: auto;
-    padding: 3rem 0;
+    padding: 2.25rem 0;
   }
 
   .hero-content-container {
@@ -511,48 +646,64 @@
   .hero-college-badge {
     padding: 0.3rem 0.75rem;
     gap: 0.4rem;
-    margin-bottom: 0.65rem;
+    margin-bottom: 0.6rem;
   }
 
   .hero-college-badge-text {
-    font-size: 0.7rem;
+    font-size: 0.8rem; /* ~13px */
     letter-spacing: 0.04em;
     white-space: normal;
     line-height: 1.3;
   }
 
   .hero-main-heading {
-    font-size: clamp(1.15rem, 4.5vw, 1.45rem);
+    font-size: clamp(1.35rem, 5.5vw, 1.65rem); /* ~22px-26px */
     line-height: 1.22;
     margin-bottom: 0.65rem;
     letter-spacing: -0.01em;
   }
 
   .hero-description-text {
-    font-size: 0.875rem;
+    font-size: 0.935rem; /* ~15px */
     line-height: 1.5;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.35rem;
+    max-width: 100%;
   }
 
   .hero-cta-group {
     flex-direction: column;
     align-items: stretch;
-    gap: 0.75rem;
+    gap: 0.65rem;
     width: 100%;
   }
 
   .hero-cta-group .btn {
-    width: 100%;
+    width: 100% !important;
     justify-content: center;
-    padding: 0.8rem 1.25rem;
-    font-size: 0.925rem;
+    padding: 0.65rem 1.25rem !important;
+    font-size: 0.95rem !important; /* ~15px-16px */
+    min-height: 42px;
+  }
+
+  .hero-cta-group .btn svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  /* General Home Sections Mobile Padding */
+  #college-info {
+    padding: 2.75rem 0 !important;
+  }
+
+  #campus-gallery {
+    padding: 2.75rem 0 !important;
   }
 }
 
 @media (max-width: 480px) {
   .hero-video-section {
-    min-height: 400px;
-    padding: 2.5rem 0;
+    min-height: 340px;
+    padding: 1.75rem 0;
   }
 
   .hero-content-container {
@@ -561,21 +712,35 @@
 
   .hero-college-badge {
     padding: 0.25rem 0.65rem;
+    margin-bottom: 0.5rem;
   }
 
   .hero-college-badge-text {
-    font-size: 0.675rem;
+    font-size: 0.75rem; /* ~12px */
   }
 
   .hero-main-heading {
-    font-size: 1.2rem;
+    font-size: 1.45rem; /* ~23px */
+    line-height: 1.2;
+    margin-bottom: 0.55rem;
   }
 
   .hero-description-text {
-    font-size: 0.825rem;
+    font-size: 0.875rem; /* 14px */
     line-height: 1.45;
-    margin-bottom: 1.25rem;
+    margin-bottom: 1.15rem;
+  }
+
+  .hero-cta-group {
+    gap: 0.55rem;
+  }
+
+  .hero-cta-group .btn {
+    padding: 0.6rem 1rem !important;
+    font-size: 0.9rem !important; /* ~14.5px */
+    min-height: 40px;
   }
 }
+
 
 

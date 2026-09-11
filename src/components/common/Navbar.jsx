@@ -35,31 +35,34 @@ export function Navbar() {
   return (
     <nav className="site-navbar">
       <div className="site-navbar-container">
-        {/* 1. LEFT: Official College Logo */}
-        <div className="navbar-left">
-          <Link to="/" className="navbar-logo-link" aria-label="Sri Sivani College of Engineering">
-            <img
-              src={collegeInfo.logo}
-              alt={collegeInfo.name}
-              className="navbar-logo-img"
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src = `${import.meta.env.BASE_URL}assets/logo/college-logo.png`;
-              }}
-            />
-          </Link>
-        </div>
+        {/* BRANDING GROUP (Logo + Portal Name) */}
+        <div className="navbar-brand-group">
+          {/* 1. LEFT: Official College Logo */}
+          <div className="navbar-left">
+            <Link to="/" className="navbar-logo-link" aria-label="Sri Sivani College of Engineering">
+              <img
+                src={collegeInfo.logo}
+                alt={collegeInfo.name}
+                className="navbar-logo-img"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = `${import.meta.env.BASE_URL}assets/logo/college-logo.png`;
+                }}
+              />
+            </Link>
+          </div>
 
-        {/* 2. CENTER: Balanced College Portal & Affiliation Branding */}
-        <div className="navbar-center">
-          <Link to="/" className="navbar-portal-brand" aria-label="College Portal Home">
-            <div className="navbar-portal-title">
-              COLLEGE PORTAL
-            </div>
-            <div className="navbar-portal-subtitle">
-              AFFILIATED TO JNTUK (CC-W6)
-            </div>
-          </Link>
+          {/* 2. CENTER: Balanced College Portal & Affiliation Branding */}
+          <div className="navbar-center">
+            <Link to="/" className="navbar-portal-brand" aria-label="College Portal Home">
+              <div className="navbar-portal-title">
+                COLLEGE PORTAL
+              </div>
+              <div className="navbar-portal-subtitle">
+                AFFILIATED TO JNTUK (CC-W6)
+              </div>
+            </Link>
+          </div>
         </div>
 
         {/* 3. RIGHT: Clean Navigation Links & Login (About College, Campus, Portal Login) */}
@@ -86,7 +89,7 @@ export function Navbar() {
             </Link>
           ) : (
             <Link to="/login" className="btn btn-primary btn-sm" id="nav-login-btn">
-              <LogIn size={16} />
+              <LogIn size={15} />
               <span>Portal Login</span>
             </Link>
           )}
