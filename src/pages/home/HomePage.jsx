@@ -40,22 +40,20 @@ export function HomePage() {
     }
   }, []);
 
+  const handleScrollTo = (e, targetId) => {
+    e.preventDefault();
+    const el = document.getElementById(targetId);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: '#ffffff' }}>
       <Navbar />
 
       {/* 1. HERO VIDEO SECTION (RAW VIDEO QUALITY & COLORS, NO COLOR FILTERS) */}
-      <section
-        style={{
-          position: 'relative',
-          overflow: 'hidden',
-          minHeight: '520px',
-          height: '75vh',
-          display: 'flex',
-          alignItems: 'center',
-          backgroundColor: '#000000'
-        }}
-      >
+      <section className="hero-video-section">
         {/* Exact Video Quality & Natural Colors - Zero Color Filters */}
         <video
           ref={videoRef}
@@ -84,75 +82,28 @@ export function HomePage() {
           <source src="/assets/video/college-intro.mp4" type="video/mp4" />
         </video>
 
-        {/* Hero Content (Clean readable typography with text-shadow, leaving entire video natural) */}
-        <div
-          style={{
-            position: 'relative',
-            zIndex: 3,
-            maxWidth: 'var(--content-max-width)',
-            width: '100%',
-            margin: '0 auto',
-            padding: '0 2rem',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'flex-start'
-          }}
-        >
+        {/* Hero Content (Clean readable typography with contrast, perfectly responsive on mobile & desktop) */}
+        <div className="hero-content-container">
           {/* College Logo / Shield Pill */}
-          <div
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.6rem',
-              backgroundColor: 'rgba(15, 23, 42, 0.65)',
-              backdropFilter: 'blur(8px)',
-              padding: '0.45rem 1.15rem',
-              borderRadius: 'var(--radius-full)',
-              border: '1px solid rgba(255, 255, 255, 0.35)',
-              marginBottom: '1rem',
-              boxShadow: '0 4px 12px rgba(0,0,0,0.3)'
-            }}
-          >
+          <div className="hero-college-badge">
             <GraduationCap size={18} color="#93c5fd" />
-            <span style={{ fontSize: '0.825rem', fontWeight: '700', letterSpacing: '0.06em', textTransform: 'uppercase', color: '#ffffff' }}>
+            <span className="hero-college-badge-text">
               {collegeInfo.name}
             </span>
           </div>
 
-          {/* Exact preserved font size */}
-          <h1
-            style={{
-              fontSize: 'clamp(1.75rem, 3.2vw, 2.35rem)',
-              fontWeight: '700',
-              color: '#ffffff',
-              lineHeight: 1.25,
-              maxWidth: '750px',
-              marginBottom: '1rem',
-              letterSpacing: '-0.02em',
-              textShadow: '0 2px 12px rgba(0,0,0,0.85), 0 4px 20px rgba(0,0,0,0.6)'
-            }}
-          >
+          {/* Exact preserved desktop font size + mobile responsive clamp */}
+          <h1 className="hero-main-heading">
             COLLEGE ACADEMIC PORTAL
           </h1>
 
-          {/* Exact preserved font size */}
-          <p
-            style={{
-              fontSize: 'clamp(1rem, 2vw, 1.25rem)',
-              color: '#f8fafc',
-              lineHeight: 1.6,
-              maxWidth: '700px',
-              marginBottom: '2.25rem',
-              fontWeight: '500',
-              textShadow: '0 2px 8px rgba(0,0,0,0.85), 0 1px 4px rgba(0,0,0,0.9)'
-            }}
-          >
+          {/* Exact preserved desktop font size + mobile responsive scaling */}
+          <p className="hero-description-text">
             Unified academic management system for engineering students and faculty. Access grades, attendance analytics, semester transcripts, and institutional records.
           </p>
 
           {/* CTAs */}
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center' }}>
+          <div className="hero-cta-group">
             {user ? (
               <Link
                 to={user.role === 'faculty' ? '/faculty/dashboard' : '/student/dashboard'}
@@ -177,6 +128,7 @@ export function HomePage() {
                 </Link>
                 <a
                   href="#college-info"
+                  onClick={(e) => handleScrollTo(e, 'college-info')}
                   className="btn btn-outline btn-lg"
                   style={{
                     backgroundColor: 'rgba(15, 23, 42, 0.65)',
@@ -361,25 +313,9 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* 5. LOGIN CTA */}
-      <section style={{ padding: '4.5rem 0', backgroundColor: 'var(--primary-50)', borderTop: '1px solid var(--primary-100)' }}>
+      {/* 5. LOGIN CTA (SYMBOL REMOVED AS REQUESTED) */}
+      <section style={{ padding: '3.75rem 0', backgroundColor: 'var(--primary-50)', borderTop: '1px solid var(--primary-100)' }}>
         <div style={{ maxWidth: '720px', margin: '0 auto', padding: '0 2rem', textAlign: 'center' }}>
-          <div
-            style={{
-              width: '56px',
-              height: '56px',
-              borderRadius: '50%',
-              backgroundColor: '#ffffff',
-              color: 'var(--primary-700)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              margin: '0 auto 1.25rem',
-              boxShadow: 'var(--shadow-md)'
-            }}
-          >
-            <LogIn size={26} />
-          </div>
           <h2 style={{ fontSize: '2rem', fontWeight: '800', color: 'var(--text-primary)', marginBottom: '0.75rem', letterSpacing: '-0.02em' }}>
             Access College Portal
           </h2>
@@ -399,3 +335,4 @@ export function HomePage() {
     </div>
   );
 }
+

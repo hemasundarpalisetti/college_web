@@ -1,15 +1,35 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { LogIn, Calendar, ShieldCheck } from 'lucide-react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { LogIn, ShieldCheck } from 'lucide-react';
 import { collegeInfo } from '../../data/collegeInfo';
 import { useAuth } from '../../context/AuthContext';
 
 export function Navbar() {
   const { user } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const getDashboardPath = () => {
     if (!user) return '/login';
     return user.role === 'faculty' ? '/faculty/dashboard' : '/student/dashboard';
+  };
+
+  const handleNavClick = (e, targetId) => {
+    e.preventDefault();
+    if (location.pathname === '/') {
+      const el = document.getElementById(targetId);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    } else {
+      navigate('/');
+      setTimeout(() => {
+        const el = document.getElementById(targetId);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 150);
+    }
   };
 
   return (
@@ -42,17 +62,21 @@ export function Navbar() {
           </Link>
         </div>
 
-        {/* 3. RIGHT: Existing Navigation Links & Login */}
+        {/* 3. RIGHT: Clean Navigation Links & Login (About College, Campus, Portal Login) */}
         <div className="navbar-right">
-          <a href="/#college-info" className="navbar-nav-link">
+          <a
+            href="#college-info"
+            onClick={(e) => handleNavClick(e, 'college-info')}
+            className="navbar-nav-link"
+          >
             About College
           </a>
-          <a href="/#campus-gallery" className="navbar-nav-link">
+          <a
+            href="#campus-gallery"
+            onClick={(e) => handleNavClick(e, 'campus-gallery')}
+            className="navbar-nav-link"
+          >
             Campus
-          </a>
-          <a href="/#engineering-day" className="navbar-nav-link navbar-engg-day">
-            <Calendar size={15} />
-            <span>Engineering Day</span>
           </a>
 
           {user ? (
@@ -71,3 +95,4 @@ export function Navbar() {
     </nav>
   );
 }
+
