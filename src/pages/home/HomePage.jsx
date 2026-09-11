@@ -91,23 +91,22 @@ export function HomePage() {
             </span>
           </div>
 
-          {/* Exact preserved desktop font size + mobile responsive clamp */}
+          {/* Fluid responsive heading */}
           <h1 className="hero-main-heading">
             COLLEGE ACADEMIC PORTAL
           </h1>
 
-          {/* Exact preserved desktop font size + mobile responsive scaling */}
+          {/* Fluid responsive description */}
           <p className="hero-description-text">
-            Unified academic management system for engineering students and faculty. Access grades, attendance analytics, semester transcripts, and institutional records.
+            Unified academic management solution for engineering students and faculty. Access grades, attendance analysis, semester transcripts, and instructional materials.
           </p>
 
-          {/* CTAs */}
+          {/* Responsive CTAs */}
           <div className="hero-cta-group">
             {user ? (
               <Link
                 to={user.role === 'faculty' ? '/faculty/dashboard' : '/student/dashboard'}
-                className="btn btn-primary btn-lg"
-                style={{ fontSize: '1.05rem', padding: '0.9rem 2rem', boxShadow: '0 4px 14px rgba(0,0,0,0.35)' }}
+                className="btn btn-primary btn-lg hero-btn-primary"
               >
                 <ShieldCheck size={20} />
                 <span>Enter {user.role === 'faculty' ? 'Faculty' : 'Student'} Dashboard</span>
@@ -117,9 +116,8 @@ export function HomePage() {
               <>
                 <Link
                   to="/login"
-                  className="btn btn-primary btn-lg"
+                  className="btn btn-primary btn-lg hero-btn-primary"
                   id="hero-login-btn"
-                  style={{ fontSize: '1.05rem', padding: '0.9rem 2.25rem', boxShadow: '0 4px 14px rgba(0,0,0,0.35)' }}
                 >
                   <LogIn size={20} />
                   <span>Access Portal Login</span>
@@ -128,14 +126,7 @@ export function HomePage() {
                 <a
                   href="#college-info"
                   onClick={(e) => handleScrollTo(e, 'college-info')}
-                  className="btn btn-outline btn-lg"
-                  style={{
-                    backgroundColor: 'rgba(15, 23, 42, 0.65)',
-                    color: '#ffffff',
-                    borderColor: 'rgba(255, 255, 255, 0.4)',
-                    backdropFilter: 'blur(8px)',
-                    boxShadow: '0 4px 14px rgba(0,0,0,0.35)'
-                  }}
+                  className="btn btn-outline btn-lg hero-btn-secondary"
                 >
                   <span>Explore Overview</span>
                 </a>
@@ -145,79 +136,57 @@ export function HomePage() {
         </div>
       </section>
 
-
-
-
-      {/* 2. COLLEGE INFORMATION SECTION */}
-      <section id="college-info" style={{ padding: '5rem 0', backgroundColor: '#ffffff' }}>
-        <div style={{ maxWidth: 'var(--content-max-width)', margin: '0 auto', padding: '0 2rem' }}>
-          <div style={{ textAlign: 'center', maxWidth: '750px', margin: '0 auto 3.5rem' }}>
-            <span
-              style={{
-                fontSize: '0.8rem',
-                fontWeight: '800',
-                color: 'var(--primary-700)',
-                textTransform: 'uppercase',
-                letterSpacing: '0.1em',
-                backgroundColor: 'var(--primary-50)',
-                padding: '0.35rem 0.85rem',
-                borderRadius: 'var(--radius-full)',
-                display: 'inline-block',
-                marginBottom: '0.75rem'
-              }}
-            >
+      {/* 2. COLLEGE INFORMATION / INSTITUTIONAL PROFILE SECTION */}
+      <section id="college-info" className="section-institutional-profile">
+        <div className="site-container">
+          <div className="section-header-block">
+            <span className="section-badge">
               Institutional Profile
             </span>
-            <h2 style={{ fontSize: '2.25rem', fontWeight: '800', color: 'var(--text-primary)', letterSpacing: '-0.02em', marginBottom: '1rem' }}>
+            <h2 className="section-main-heading">
               {collegeInfo.name}
             </h2>
-            <p style={{ fontSize: '1.05rem', color: 'var(--text-muted)', lineHeight: '1.7' }}>
+            <p className="section-description-text">
               {collegeInfo.description}
             </p>
           </div>
 
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-              gap: '2rem'
-            }}
-          >
+          <div className="feature-cards-grid">
             {/* Card 1 */}
-            <div className="card" style={{ padding: '2rem', borderTop: '4px solid var(--primary-700)' }}>
-              <div style={{ width: '48px', height: '48px', borderRadius: '10px', backgroundColor: 'var(--primary-50)', color: 'var(--primary-700)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.25rem' }}>
+            <div className="card feature-card feature-card-primary">
+              <div className="feature-card-icon-box">
                 <Building size={24} />
               </div>
-              <h3 style={{ fontSize: '1.2rem', fontWeight: '700', marginBottom: '0.6rem' }}>
+              <h3 className="feature-card-title">
                 Autonomous Excellence
               </h3>
-              <p style={{ fontSize: '0.925rem', color: 'var(--text-muted)', lineHeight: '1.6', margin: 0 }}>
+              <p className="feature-card-desc">
                 {collegeInfo.accreditation}. Offering outcome-based engineering education with curriculum designed with global tech industry leaders.
               </p>
             </div>
 
             {/* Card 2 */}
-            <div className="card" style={{ padding: '2rem', borderTop: '4px solid var(--primary-600)' }}>
-              <div style={{ width: '48px', height: '48px', borderRadius: '10px', backgroundColor: 'var(--primary-50)', color: 'var(--primary-700)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.25rem' }}>
+            <div className="card feature-card feature-card-secondary">
+              <div className="feature-card-icon-box">
                 <BookOpen size={24} />
               </div>
-              <h3 style={{ fontSize: '1.2rem', fontWeight: '700', marginBottom: '0.6rem' }}>
+              <h3 className="feature-card-title">
                 Academic Department
               </h3>
-              <p style={{ fontSize: '0.925rem', color: 'var(--text-muted)', lineHeight: '1.6', margin: 0 }}>
+              <p className="feature-card-desc">
                 {collegeInfo.department}. Fostering specialized research in Artificial Intelligence, Distributed Systems, Software Architecture, and Computing.
               </p>
             </div>
 
             {/* Card 3 */}
-            <div className="card" style={{ padding: '2rem', borderTop: '4px solid var(--primary-800)' }}>
-              <div style={{ width: '48px', height: '48px', borderRadius: '10px', backgroundColor: 'var(--primary-50)', color: 'var(--primary-700)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.25rem' }}>
+            <div className="card feature-card feature-card-tertiary">
+              <div className="feature-card-icon-box">
                 <Award size={24} />
               </div>
-              <h3 style={{ fontSize: '1.2rem', fontWeight: '700', marginBottom: '0.6rem' }}>
+              <h3 className="feature-card-title">
                 Location &amp; Infrastructure
               </h3>
-              <p style={{ fontSize: '0.925rem', color: 'var(--text-muted)', lineHeight: '1.6', margin: 0 }}>
+              <p className="feature-card-desc">
                 {collegeInfo.location}. Advanced computing laboratories, digital knowledge libraries, and innovation incubators.
               </p>
             </div>
@@ -226,76 +195,46 @@ export function HomePage() {
       </section>
 
       {/* 3. CAMPUS PHOTO GALLERY */}
-      <section id="campus-gallery" style={{ padding: '4.5rem 0', backgroundColor: 'var(--bg-secondary)', borderTop: '1px solid var(--border-subtle)', borderBottom: '1px solid var(--border-subtle)' }}>
-        <div style={{ maxWidth: 'var(--content-max-width)', margin: '0 auto', padding: '0 2rem' }}>
-          <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: '2.5rem', gap: '1rem' }}>
+      <section id="campus-gallery" className="section-campus-gallery">
+        <div className="site-container">
+          <div className="gallery-header-block">
             <div>
-              <span style={{ fontSize: '0.775rem', fontWeight: '800', color: 'var(--primary-700)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+              <span className="section-badge">
                 Campus Gallery
               </span>
-              <h2 style={{ fontSize: '2rem', fontWeight: '800', color: 'var(--text-primary)', letterSpacing: '-0.02em', marginTop: '0.25rem' }}>
+              <h2 className="section-main-heading">
                 Academic &amp; Research Infrastructure
               </h2>
             </div>
-            <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', maxWidth: '420px', margin: 0 }}>
+            <p className="gallery-header-desc">
               Discover our world-class educational spaces, state-of-the-art computing laboratories, and student facilities.
             </p>
           </div>
 
-          {/* Clean Card Grid */}
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-              gap: '1.5rem'
-            }}
-          >
+          {/* Clean Responsive Card Grid */}
+          <div className="gallery-cards-grid">
             {collegeInfo.gallery.map(item => (
               <div
                 key={item.id}
-                className="card"
-                style={{
-                  padding: 0,
-                  overflow: 'hidden',
-                  borderRadius: 'var(--radius-lg)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  transition: 'transform var(--transition-normal), box-shadow var(--transition-normal)'
-                }}
+                className="card gallery-card"
               >
-                <div style={{ height: '220px', overflow: 'hidden', position: 'relative' }}>
+                <div className="gallery-img-container">
                   <SmartImage
                     src={item.path}
                     alt={item.title}
                     title={item.title}
                     tag={item.tag}
-                    style={{ transition: 'transform 0.4s ease' }}
                   />
-                  <div
-                    style={{
-                      position: 'absolute',
-                      top: '12px',
-                      left: '12px',
-                      backgroundColor: 'rgba(15, 23, 42, 0.8)',
-                      backdropFilter: 'blur(4px)',
-                      color: '#ffffff',
-                      padding: '0.25rem 0.65rem',
-                      borderRadius: 'var(--radius-full)',
-                      fontSize: '0.725rem',
-                      fontWeight: '700',
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.04em'
-                    }}
-                  >
+                  <div className="gallery-tag-pill">
                     {item.tag}
                   </div>
                 </div>
 
-                <div style={{ padding: '1.25rem 1.5rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
-                  <h4 style={{ fontSize: '1.05rem', fontWeight: '700', color: 'var(--text-primary)', marginBottom: '0.4rem' }}>
+                <div className="gallery-content">
+                  <h4 className="gallery-card-title">
                     {item.title}
                   </h4>
-                  <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', lineHeight: '1.5', margin: 0, flex: 1 }}>
+                  <p className="gallery-card-desc">
                     {item.description}
                   </p>
                 </div>
@@ -305,20 +244,22 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* 4. LOGIN CTA (SYMBOL REMOVED AS REQUESTED) */}
-      <section style={{ padding: '4rem 0', backgroundColor: 'var(--primary-50)', borderTop: '1px solid var(--primary-100)' }}>
-        <div style={{ maxWidth: '720px', margin: '0 auto', padding: '0 2rem', textAlign: 'center' }}>
-          <h2 style={{ fontSize: '2rem', fontWeight: '800', color: 'var(--text-primary)', marginBottom: '0.75rem', letterSpacing: '-0.02em' }}>
-            Access College Portal
-          </h2>
-          <p style={{ fontSize: '1rem', color: 'var(--text-secondary)', lineHeight: '1.6', marginBottom: '2rem' }}>
-            Login to access student academic records, marks sheets, semester transcripts, and faculty management controls.
-          </p>
-          <Link to="/login" className="btn btn-primary btn-lg" id="bottom-login-cta-btn">
-            <LogIn size={18} />
-            <span>Go to Portal Login</span>
-            <ArrowRight size={18} />
-          </Link>
+      {/* 4. LOGIN CTA */}
+      <section className="section-login-cta">
+        <div className="site-container">
+          <div className="login-cta-container">
+            <h2 className="section-main-heading" style={{ marginBottom: '0.75rem' }}>
+              Access College Portal
+            </h2>
+            <p className="section-description-text" style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>
+              Login to access student academic records, marks sheets, semester transcripts, and faculty management controls.
+            </p>
+            <Link to="/login" className="btn btn-primary btn-lg hero-btn-primary" id="bottom-login-cta-btn">
+              <LogIn size={18} />
+              <span>Go to Portal Login</span>
+              <ArrowRight size={18} />
+            </Link>
+          </div>
         </div>
       </section>
 
