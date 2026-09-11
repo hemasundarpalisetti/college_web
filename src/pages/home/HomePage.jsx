@@ -63,6 +63,7 @@ export function HomePage() {
           muted
           loop
           playsInline
+          preload="auto"
           poster="./assets/images/college-building-1.jpg"
           style={{
             position: 'absolute',
@@ -71,7 +72,11 @@ export function HomePage() {
             height: '100%',
             objectFit: 'cover',
             zIndex: 1,
-            filter: 'none'
+            filter: 'none',
+            imageRendering: 'high-quality',
+            transform: 'translate3d(0, 0, 0)',
+            backfaceVisibility: 'hidden',
+            willChange: 'transform'
           }}
         >
           <source src={heroVideoFile} type="video/mp4" />

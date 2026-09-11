@@ -25,3 +25,8 @@ dist-ssr
 
 # Scratch & Gemini cache
 .gemini
+
+# Raw video recordings in root
+/video_*.mp4
+/WhatsApp*.mp4
+
