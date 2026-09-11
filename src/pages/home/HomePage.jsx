@@ -16,7 +16,6 @@ import {
 import { Navbar } from '../../components/common/Navbar';
 import { Footer } from '../../components/common/Footer';
 import { SmartImage } from '../../components/common/SmartMedia';
-import { EngineeringDayBanner } from '../../components/common/EngineeringDayBanner';
 import { collegeInfo } from '../../data/collegeInfo';
 import { useAuth } from '../../context/AuthContext';
 import heroVideoFile from '../../assets/video/college-intro.mp4';
@@ -306,15 +305,8 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* 4. SEPTEMBER 15 ENGINEERING DAY BANNER */}
-      <section style={{ padding: '4.5rem 0', backgroundColor: '#ffffff' }}>
-        <div style={{ maxWidth: 'var(--content-max-width)', margin: '0 auto', padding: '0 2rem' }}>
-          <EngineeringDayBanner />
-        </div>
-      </section>
-
-      {/* 5. LOGIN CTA (SYMBOL REMOVED AS REQUESTED) */}
-      <section style={{ padding: '3.75rem 0', backgroundColor: 'var(--primary-50)', borderTop: '1px solid var(--primary-100)' }}>
+      {/* 4. LOGIN CTA (SYMBOL REMOVED AS REQUESTED) */}
+      <section style={{ padding: '4rem 0', backgroundColor: 'var(--primary-50)', borderTop: '1px solid var(--primary-100)' }}>
         <div style={{ maxWidth: '720px', margin: '0 auto', padding: '0 2rem', textAlign: 'center' }}>
           <h2 style={{ fontSize: '2rem', fontWeight: '800', color: 'var(--text-primary)', marginBottom: '0.75rem', letterSpacing: '-0.02em' }}>
             Access College Portal
@@ -330,7 +322,7 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* 6. FOOTER */}
+      {/* 5. FOOTER */}
       <Footer />
     </div>
   );
