@@ -5,13 +5,12 @@ import {
   GraduationCap,
   Award,
   BookOpen,
-  Users,
-  Compass,
   ArrowRight,
   ShieldCheck,
   Building,
   CheckCircle2,
-  Calendar
+  Calendar,
+  Sparkles
 } from 'lucide-react';
 import { Navbar } from '../../components/common/Navbar';
 import { Footer } from '../../components/common/Footer';
@@ -48,67 +47,59 @@ export function HomePage() {
   };
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: '#ffffff' }}>
+    <div className="home-page-wrapper">
       <Navbar />
 
-      {/* 1. HERO VIDEO SECTION (RAW VIDEO QUALITY & COLORS, NO COLOR FILTERS) */}
-      <section className="hero-video-section">
-        {/* Exact Video Quality & Natural Colors - Zero Color Filters */}
-        <video
-          ref={videoRef}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          poster="./assets/images/college-building-1.jpg"
-          style={{
-            position: 'absolute',
-            inset: 0,
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            zIndex: 1,
-            filter: 'none',
-            imageRendering: 'high-quality',
-            transform: 'translate3d(0, 0, 0)',
-            backfaceVisibility: 'hidden',
-            willChange: 'transform'
-          }}
-        >
-          <source src={heroVideoFile} type="video/mp4" />
-          <source src="./assets/video/college-intro.mp4" type="video/mp4" />
-          <source src="/assets/video/college-intro.mp4" type="video/mp4" />
-        </video>
+      {/* 1. HERO VIDEO SECTION (RAW VIDEO QUALITY & COLORS WITH LEGIBILITY BACKDROP) */}
+      <section className="hero-video-section" aria-label="College Academic Portal Hero">
+        {/* Background Video (Muted, Loop, High-Quality) */}
+        <div className="hero-media-wrapper">
+          <video
+            ref={videoRef}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            poster="./assets/images/college-building-1.jpg"
+            className="hero-video-bg"
+          >
+            <source src={heroVideoFile} type="video/mp4" />
+            <source src="./assets/video/college-intro.mp4" type="video/mp4" />
+            <source src="/assets/video/college-intro.mp4" type="video/mp4" />
+          </video>
+          {/* High-Contrast Legibility Overlay */}
+          <div className="hero-overlay-scrim" />
+        </div>
 
-        {/* Hero Content (Clean readable typography with contrast, perfectly responsive on mobile & desktop) */}
-        <div className="hero-content-container">
-          {/* College Logo / Shield Pill */}
+        {/* Hero Content Container (Fluid Typography & Flexible Stack) */}
+        <div className="site-container hero-content-container">
+          {/* College Badge */}
           <div className="hero-college-badge">
-            <GraduationCap size={18} color="#93c5fd" />
+            <GraduationCap size={16} className="hero-badge-icon" />
             <span className="hero-college-badge-text">
               {collegeInfo.name}
             </span>
           </div>
 
-          {/* Fluid responsive heading */}
+          {/* Main Hero Heading */}
           <h1 className="hero-main-heading">
             COLLEGE ACADEMIC PORTAL
           </h1>
 
-          {/* Fluid responsive description */}
+          {/* Responsive Hero Description */}
           <p className="hero-description-text">
             Unified academic management solution for engineering students and faculty. Access grades, attendance analysis, semester transcripts, and instructional materials.
           </p>
 
-          {/* Responsive CTAs */}
+          {/* CTA Buttons */}
           <div className="hero-cta-group">
             {user ? (
               <Link
                 to={user.role === 'faculty' ? '/faculty/dashboard' : '/student/dashboard'}
-                className="btn btn-primary btn-lg hero-btn-primary"
+                className="btn btn-primary hero-btn-primary"
               >
-                <ShieldCheck size={20} />
+                <ShieldCheck size={18} />
                 <span>Enter {user.role === 'faculty' ? 'Faculty' : 'Student'} Dashboard</span>
                 <ArrowRight size={18} />
               </Link>
@@ -116,17 +107,17 @@ export function HomePage() {
               <>
                 <Link
                   to="/login"
-                  className="btn btn-primary btn-lg hero-btn-primary"
+                  className="btn btn-primary hero-btn-primary"
                   id="hero-login-btn"
                 >
-                  <LogIn size={20} />
+                  <LogIn size={18} />
                   <span>Access Portal Login</span>
                   <ArrowRight size={18} />
                 </Link>
                 <a
                   href="#college-info"
                   onClick={(e) => handleScrollTo(e, 'college-info')}
-                  className="btn btn-outline btn-lg hero-btn-secondary"
+                  className="btn btn-outline hero-btn-secondary"
                 >
                   <span>Explore Overview</span>
                 </a>
@@ -136,25 +127,25 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* 2. COLLEGE INFORMATION / INSTITUTIONAL PROFILE SECTION */}
+      {/* 2. INSTITUTIONAL PROFILE SECTION */}
       <section id="college-info" className="section-institutional-profile">
         <div className="site-container">
           <div className="section-header-block">
-            <span className="section-badge">
+            <span className="section-badge-pill">
               Institutional Profile
             </span>
             <h2 className="section-main-heading">
               {collegeInfo.name}
             </h2>
-            <p className="section-description-text">
+            <p className="section-lead-text">
               {collegeInfo.description}
             </p>
           </div>
 
-          <div className="feature-cards-grid">
+          <div className="profile-feature-grid">
             {/* Card 1 */}
-            <div className="card feature-card feature-card-primary">
-              <div className="feature-card-icon-box">
+            <div className="feature-card feature-card-blue">
+              <div className="feature-card-icon-wrap">
                 <Building size={24} />
               </div>
               <h3 className="feature-card-title">
@@ -166,8 +157,8 @@ export function HomePage() {
             </div>
 
             {/* Card 2 */}
-            <div className="card feature-card feature-card-secondary">
-              <div className="feature-card-icon-box">
+            <div className="feature-card feature-card-indigo">
+              <div className="feature-card-icon-wrap">
                 <BookOpen size={24} />
               </div>
               <h3 className="feature-card-title">
@@ -179,8 +170,8 @@ export function HomePage() {
             </div>
 
             {/* Card 3 */}
-            <div className="card feature-card feature-card-tertiary">
-              <div className="feature-card-icon-box">
+            <div className="feature-card feature-card-navy">
+              <div className="feature-card-icon-wrap">
                 <Award size={24} />
               </div>
               <h3 className="feature-card-title">
@@ -197,44 +188,42 @@ export function HomePage() {
       {/* 3. CAMPUS PHOTO GALLERY */}
       <section id="campus-gallery" className="section-campus-gallery">
         <div className="site-container">
-          <div className="gallery-header-block">
+          <div className="gallery-header-row">
             <div>
-              <span className="section-badge">
+              <span className="section-badge-pill">
                 Campus Gallery
               </span>
-              <h2 className="section-main-heading">
+              <h2 className="section-main-heading gallery-heading">
                 Academic &amp; Research Infrastructure
               </h2>
             </div>
-            <p className="gallery-header-desc">
+            <p className="gallery-subtitle-text">
               Discover our world-class educational spaces, state-of-the-art computing laboratories, and student facilities.
             </p>
           </div>
 
           {/* Clean Responsive Card Grid */}
-          <div className="gallery-cards-grid">
+          <div className="gallery-card-grid">
             {collegeInfo.gallery.map(item => (
-              <div
-                key={item.id}
-                className="card gallery-card"
-              >
-                <div className="gallery-img-container">
+              <div key={item.id} className="gallery-item-card">
+                <div className="gallery-media-wrap">
                   <SmartImage
                     src={item.path}
                     alt={item.title}
                     title={item.title}
                     tag={item.tag}
+                    className="gallery-image"
                   />
                   <div className="gallery-tag-pill">
                     {item.tag}
                   </div>
                 </div>
 
-                <div className="gallery-content">
-                  <h4 className="gallery-card-title">
+                <div className="gallery-body-content">
+                  <h4 className="gallery-item-title">
                     {item.title}
                   </h4>
-                  <p className="gallery-card-desc">
+                  <p className="gallery-item-desc">
                     {item.description}
                   </p>
                 </div>
@@ -244,22 +233,20 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* 4. LOGIN CTA */}
-      <section className="section-login-cta">
-        <div className="site-container">
-          <div className="login-cta-container">
-            <h2 className="section-main-heading" style={{ marginBottom: '0.75rem' }}>
-              Access College Portal
-            </h2>
-            <p className="section-description-text" style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>
-              Login to access student academic records, marks sheets, semester transcripts, and faculty management controls.
-            </p>
-            <Link to="/login" className="btn btn-primary btn-lg hero-btn-primary" id="bottom-login-cta-btn">
-              <LogIn size={18} />
-              <span>Go to Portal Login</span>
-              <ArrowRight size={18} />
-            </Link>
-          </div>
+      {/* 4. ACCESS PORTAL CTA */}
+      <section className="section-portal-cta">
+        <div className="site-container portal-cta-container">
+          <h2 className="portal-cta-heading">
+            Access College Portal
+          </h2>
+          <p className="portal-cta-desc">
+            Login to access student academic records, marks sheets, semester transcripts, and faculty management controls.
+          </p>
+          <Link to="/login" className="btn btn-primary btn-lg portal-cta-btn" id="bottom-login-cta-btn">
+            <LogIn size={18} />
+            <span>Go to Portal Login</span>
+            <ArrowRight size={18} />
+          </Link>
         </div>
       </section>
 
@@ -268,4 +255,5 @@ export function HomePage() {
     </div>
   );
 }
+
 

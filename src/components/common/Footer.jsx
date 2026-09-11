@@ -1,84 +1,64 @@
 import React from 'react';
-import { GraduationCap, MapPin, Mail, Phone, Globe, Shield } from 'lucide-react';
+import { MapPin, Mail, Phone, Globe, Shield } from 'lucide-react';
 import { collegeInfo } from '../../data/collegeInfo';
 
 export function Footer() {
   return (
-    <footer
-      style={{
-        backgroundColor: '#ffffff',
-        borderTop: '1px solid var(--border-subtle)',
-        paddingTop: '3.5rem',
-        paddingBottom: '2rem',
-        color: 'var(--text-secondary)'
-      }}
-    >
-      <div style={{ maxWidth: 'var(--content-max-width)', margin: '0 auto', padding: '0 2rem' }}>
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: '2.5rem',
-            marginBottom: '3rem'
-          }}
-        >
+    <footer className="site-footer">
+      <div className="site-container">
+        <div className="footer-main-grid">
           {/* Col 1: Brand & Bio */}
-          <div>
-            <div style={{ marginBottom: '1rem' }}>
+          <div className="footer-col-brand">
+            <div className="footer-brand-header">
               <img
                 src={collegeInfo.logo}
                 alt={collegeInfo.name}
-                style={{
-                  maxHeight: '52px',
-                  maxWidth: '100%',
-                  objectFit: 'contain',
-                  marginBottom: '0.5rem'
-                }}
+                className="footer-logo-img"
               />
-              <div style={{ fontSize: '0.75rem', color: 'var(--primary-700)', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+              <div className="footer-accreditation-badge">
                 {collegeInfo.accreditation}
               </div>
             </div>
-            <p style={{ fontSize: '0.875rem', color: 'var(--text-muted)', lineHeight: '1.6' }}>
+            <p className="footer-bio-text">
               {collegeInfo.description}
             </p>
           </div>
 
           {/* Col 2: Academic Department */}
-          <div>
-            <h5 style={{ fontSize: '0.925rem', fontWeight: '700', color: 'var(--text-primary)', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+          <div className="footer-col-section">
+            <h5 className="footer-col-title">
               Academic Division
             </h5>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', fontSize: '0.875rem' }}>
-              <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', color: 'var(--text-secondary)' }}>
-                <Shield size={18} color="var(--primary-700)" style={{ flexShrink: 0, marginTop: '2px' }} />
+            <div className="footer-links-list">
+              <div className="footer-info-item">
+                <Shield size={18} color="var(--primary-700)" className="footer-info-icon" />
                 <span>{collegeInfo.department}</span>
               </div>
-              <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', color: 'var(--text-secondary)' }}>
-                <MapPin size={18} color="var(--primary-700)" style={{ flexShrink: 0, marginTop: '2px' }} />
+              <div className="footer-info-item">
+                <MapPin size={18} color="var(--primary-700)" className="footer-info-icon" />
                 <span>{collegeInfo.location}</span>
               </div>
             </div>
           </div>
 
           {/* Col 3: Portal Support & Contact */}
-          <div>
-            <h5 style={{ fontSize: '0.925rem', fontWeight: '700', color: 'var(--text-primary)', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+          <div className="footer-col-section">
+            <h5 className="footer-col-title">
               Academic Portal Support
             </h5>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', fontSize: '0.875rem' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <Mail size={16} color="var(--primary-700)" />
-                <a href={`mailto:${collegeInfo.contact.email}`} style={{ color: 'var(--text-secondary)' }}>
+            <div className="footer-links-list">
+              <div className="footer-info-item">
+                <Mail size={16} color="var(--primary-700)" className="footer-info-icon" />
+                <a href={`mailto:${collegeInfo.contact.email}`} className="footer-contact-link">
                   {collegeInfo.contact.email}
                 </a>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <Phone size={16} color="var(--primary-700)" />
+              <div className="footer-info-item">
+                <Phone size={16} color="var(--primary-700)" className="footer-info-icon" />
                 <span>{collegeInfo.contact.phone}</span>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <Globe size={16} color="var(--primary-700)" />
+              <div className="footer-info-item">
+                <Globe size={16} color="var(--primary-700)" className="footer-info-icon" />
                 <span>{collegeInfo.contact.website}</span>
               </div>
             </div>
@@ -86,23 +66,11 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div
-          style={{
-            borderTop: '1px solid var(--border-light)',
-            paddingTop: '1.5rem',
-            display: 'flex',
-            flexWrap: 'wrap',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            gap: '1rem',
-            fontSize: '0.825rem',
-            color: 'var(--text-muted)'
-          }}
-        >
+        <div className="footer-bottom-bar">
           <div>
             © {new Date().getFullYear()} {collegeInfo.name}. All rights reserved. Autonomous Engineering Academic Portal.
           </div>
-          <div style={{ display: 'flex', gap: '1.5rem' }}>
+          <div className="footer-bottom-meta">
             <span>Single-Device LocalStorage Persistent Prototype</span>
             <span>Project Expo Demonstration Edition</span>
           </div>
