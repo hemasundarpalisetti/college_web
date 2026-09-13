@@ -14,19 +14,81 @@ import {
   Maximize2,
   X,
   Phone,
-  Mail
+  Mail,
+  ExternalLink,
+  Briefcase
 } from 'lucide-react';
 import { Navbar } from '../../components/common/Navbar';
 import { Footer } from '../../components/common/Footer';
 import { SmartImage } from '../../components/common/SmartMedia';
-import { collegeInfo } from '../../data/collegeInfo';
+import { collegeInfo, FACULTY_MEMBERS } from '../../data/collegeInfo';
 import { useAuth } from '../../context/AuthContext';
 import heroVideoFile from '../../assets/video/college-intro.mp4';
+
+function FacultyAvatar({ member }) {
+  const [imageFailed, setImageFailed] = useState(false);
+
+  const getGradient = (cat) => {
+    switch (cat) {
+      case 'hod':
+        return 'linear-gradient(135deg, #f59e0b, #d97706)';
+      case 'professor':
+        return 'linear-gradient(135deg, #6366f1, #4338ca)';
+      case 'associate':
+        return 'linear-gradient(135deg, #0ea5e9, #0284c7)';
+      default:
+        return 'linear-gradient(135deg, #2563eb, #1d4ed8)';
+    }
+  };
+
+  return (
+    <div className="faculty-avatar-wrap">
+      {member.image && !imageFailed ? (
+        <img
+          src={member.image}
+          alt={member.name}
+          className="faculty-avatar-img"
+          loading="lazy"
+          onError={() => setImageFailed(true)}
+        />
+      ) : (
+        <div
+          className="faculty-avatar-fallback"
+          style={{ background: getGradient(member.category) }}
+          aria-label={member.name}
+        >
+          <span>{member.initials}</span>
+        </div>
+      )}
+      {member.category === 'hod' && (
+        <span className="faculty-avatar-crown" title="Head of the Department">
+          <Award size={14} />
+        </span>
+      )}
+    </div>
+  );
+}
 
 export function HomePage() {
   const { user } = useAuth();
   const videoRef = useRef(null);
   const [activeGalleryItem, setActiveGalleryItem] = useState(null);
+  const [selectedFacultyCategory, setSelectedFacultyCategory] = useState('all');
+
+  const facultyCounts = {
+    all: FACULTY_MEMBERS.length,
+    hod_prof: FACULTY_MEMBERS.filter(m => m.category === 'hod' || m.category === 'professor').length,
+    associate: FACULTY_MEMBERS.filter(m => m.category === 'associate').length,
+    assistant: FACULTY_MEMBERS.filter(m => m.category === 'assistant').length,
+  };
+
+  const filteredFaculty = FACULTY_MEMBERS.filter((m) => {
+    if (selectedFacultyCategory === 'all') return true;
+    if (selectedFacultyCategory === 'hod_prof') return m.category === 'hod' || m.category === 'professor';
+    if (selectedFacultyCategory === 'associate') return m.category === 'associate';
+    if (selectedFacultyCategory === 'assistant') return m.category === 'assistant';
+    return true;
+  });
 
   // Close preview modal on Escape key
   useEffect(() => {
@@ -278,6 +340,143 @@ export function HomePage() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+ 
+      {/* 2.5. DISTINGUISHED FACULTY MEMBERS */}
+      <section id="faculty-members" className="section-faculty-showcase" aria-label="Department Faculty Members">
+        <div className="site-container">
+          {/* Header */}
+          <div className="faculty-header-wrap">
+            <span className="section-badge-pill">
+              Academic Faculty
+            </span>
+            <h2 className="faculty-heading">
+              Distinguished Faculty Members
+            </h2>
+            <p className="faculty-subtitle-text">
+              Department of Computer Science &amp; Engineering • Highly qualified educators, scholars, and technical researchers committed to student mentorship and academic excellence.
+            </p>
+            <a
+              href="https://srisivani.com/computer-science-engineering/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="faculty-official-link"
+              title="Visit official Department of Computer Science & Engineering webpage on srisivani.com"
+            >
+              <span>View Official CSE Department Portal</span>
+              <ExternalLink size={14} />
+            </a>
+          </div>
+
+          {/* Filter Tabs */}
+          <div className="faculty-filter-tabs-container">
+            <div className="faculty-filter-tabs" role="tablist" aria-label="Filter faculty by designation">
+              <button
+                type="button"
+                role="tab"
+                aria-selected={selectedFacultyCategory === 'all'}
+                className={`faculty-tab-btn ${selectedFacultyCategory === 'all' ? 'active' : ''}`}
+                onClick={() => setSelectedFacultyCategory('all')}
+              >
+                <span>All Faculty</span>
+                <span className="faculty-tab-count">{facultyCounts.all}</span>
+              </button>
+              <button
+                type="button"
+                role="tab"
+                aria-selected={selectedFacultyCategory === 'hod_prof'}
+                className={`faculty-tab-btn ${selectedFacultyCategory === 'hod_prof' ? 'active' : ''}`}
+                onClick={() => setSelectedFacultyCategory('hod_prof')}
+              >
+                <span>HOD &amp; Professors</span>
+                <span className="faculty-tab-count">{facultyCounts.hod_prof}</span>
+              </button>
+              <button
+                type="button"
+                role="tab"
+                aria-selected={selectedFacultyCategory === 'associate'}
+                className={`faculty-tab-btn ${selectedFacultyCategory === 'associate' ? 'active' : ''}`}
+                onClick={() => setSelectedFacultyCategory('associate')}
+              >
+                <span>Associate Professors</span>
+                <span className="faculty-tab-count">{facultyCounts.associate}</span>
+              </button>
+              <button
+                type="button"
+                role="tab"
+                aria-selected={selectedFacultyCategory === 'assistant'}
+                className={`faculty-tab-btn ${selectedFacultyCategory === 'assistant' ? 'active' : ''}`}
+                onClick={() => setSelectedFacultyCategory('assistant')}
+              >
+                <span>Assistant Professors</span>
+                <span className="faculty-tab-count">{facultyCounts.assistant}</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Responsive Faculty Grid */}
+          <div className="faculty-grid">
+            {filteredFaculty.map((member) => (
+              <div key={member.id} className="faculty-card" id={`faculty-${member.id}`}>
+                {/* Accent Top Bar */}
+                <div className={`faculty-card-accent ${member.category}`} />
+
+                <div className="faculty-card-body">
+                  {/* Photo / Avatar */}
+                  <FacultyAvatar member={member} />
+
+                  {/* Role Badge */}
+                  <span className={`faculty-role-badge ${member.category}`}>
+                    {member.category === 'hod' ? '⭐ ' : ''}{member.shortRole}
+                  </span>
+
+                  {/* Faculty Name */}
+                  <h3 className="faculty-name">
+                    {member.name}
+                  </h3>
+
+                  {/* Qualification & Experience */}
+                  <div className="faculty-meta-row">
+                    <span className="faculty-qual-pill" title="Academic Qualification">
+                      <GraduationCap size={13} />
+                      <span>{member.qualification}</span>
+                    </span>
+                    {member.experience && (
+                      <span className="faculty-exp-pill" title="Teaching & Research Experience">
+                        <Briefcase size={12} />
+                        <span>{member.experience}</span>
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Specialization */}
+                  {member.specialization && (
+                    <div className="faculty-specialization" title="Area of Specialization">
+                      <span>{member.specialization}</span>
+                    </div>
+                  )}
+
+                  {/* Department */}
+                  <span className="faculty-dept-label">
+                    {member.department}
+                  </span>
+                </div>
+
+                {/* Card Footer: Direct Email Link */}
+                <div className="faculty-card-footer">
+                  <a
+                    href={`mailto:${member.email}`}
+                    className="faculty-email-link"
+                    title={`Send academic email to ${member.name}`}
+                  >
+                    <Mail size={13} />
+                    <span>{member.email}</span>
+                  </a>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>

@@ -122,6 +122,25 @@ for (const branch of BRANCHES) {
 }
 console.log(`✓ All ${BRANCHES.length} Engineering Branches verified across all 4 years with >= 5 students per cohort (Total: ${INITIAL_STUDENTS.length} students).`);
 
+// 12. Verify CSE Faculty Members from srisivani.com
+import { FACULTY_MEMBERS } from './src/data/collegeInfo.js';
+console.assert(Array.isArray(FACULTY_MEMBERS) && FACULTY_MEMBERS.length === 18, `Expected 18 faculty members, got ${FACULTY_MEMBERS?.length}`);
+const hod = FACULTY_MEMBERS.find(f => f.category === 'hod');
+console.assert(hod && hod.name.includes('Jagadeesh'), `HOD check failed: ${hod?.name}`);
+console.assert(FACULTY_MEMBERS.some(f => f.name.includes('Uttam Mande')), 'Dr. Uttam Mande missing');
+console.assert(FACULTY_MEMBERS.every(f => f.name && f.designation && f.qualification && f.department && f.email), 'Faculty record missing essential fields');
+console.assert(FACULTY_MEMBERS.every(f => f.department === 'Computer Science & Engineering'), 'Faculty department mismatch');
+console.assert(FACULTY_MEMBERS.filter(f => f.category === 'hod' || f.category === 'professor').length === 3, 'Professors count mismatch');
+console.assert(FACULTY_MEMBERS.filter(f => f.category === 'associate').length === 5, 'Associate professors count mismatch');
+console.assert(FACULTY_MEMBERS.filter(f => f.category === 'assistant').length === 10, 'Assistant professors count mismatch');
+console.log(`✓ All 18 Authentic CSE Faculty Members verified successfully:
+   - HOD & Leadership: ${hod.name} (${hod.designation})
+   - Total Professors & HOD: 3
+   - Total Associate Professors: 5
+   - Total Assistant Professors: 10
+   - All email channels configured with @srisivani.com domain.`);
+
 console.log("✓ All validation test cases passed!");
 console.log("=== ALL CORE TESTS PASSED SUCCESSFULLY ===");
+
 

@@ -119,6 +119,13 @@ export function Navbar() {
             About College
           </a>
           <a
+            href="#faculty-members"
+            onClick={(e) => handleNavClick(e, 'faculty-members')}
+            className="navbar-nav-link"
+          >
+            Faculty
+          </a>
+          <a
             href="#campus-gallery"
             onClick={(e) => handleNavClick(e, 'campus-gallery')}
             className="navbar-nav-link"
@@ -171,6 +178,13 @@ export function Navbar() {
             className="navbar-mobile-link"
           >
             About College
+          </a>
+          <a
+            href="#faculty-members"
+            onClick={(e) => handleNavClick(e, 'faculty-members')}
+            className="navbar-mobile-link"
+          >
+            Faculty Members
           </a>
           <a
             href="#campus-gallery"
