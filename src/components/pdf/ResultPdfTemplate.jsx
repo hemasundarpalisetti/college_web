@@ -99,14 +99,14 @@ export function ResultPdfTemplate({ student, semesterKey = 'semester1', marks = 
         <table className="doc-table">
           <thead>
             <tr>
-              <th style={{ textAlign: 'left' }}>Subject Name</th>
-              <th style={{ width: '65px', textAlign: 'center' }}>Credits</th>
-              <th style={{ width: '80px', textAlign: 'center' }}>Internal (40)</th>
-              <th style={{ width: '80px', textAlign: 'center' }}>External (60)</th>
-              <th style={{ width: '80px', textAlign: 'center' }}>Total (100)</th>
-              <th style={{ width: '65px', textAlign: 'center' }}>Grade</th>
-              <th style={{ width: '65px', textAlign: 'center' }}>Point</th>
-              <th style={{ width: '70px', textAlign: 'center' }}>Result</th>
+              <th style={{ width: '38%', textAlign: 'left' }}>Subject Name</th>
+              <th style={{ width: '8%', textAlign: 'center' }}>Credits</th>
+              <th style={{ width: '11%', textAlign: 'center' }}>Internal<br /><span style={{ fontSize: '0.675rem', fontWeight: 'normal', opacity: 0.9 }}>(/40)</span></th>
+              <th style={{ width: '11%', textAlign: 'center' }}>External<br /><span style={{ fontSize: '0.675rem', fontWeight: 'normal', opacity: 0.9 }}>(/60)</span></th>
+              <th style={{ width: '10%', textAlign: 'center' }}>Total<br /><span style={{ fontSize: '0.675rem', fontWeight: 'normal', opacity: 0.9 }}>(/100)</span></th>
+              <th style={{ width: '7%', textAlign: 'center' }}>Grade</th>
+              <th style={{ width: '7%', textAlign: 'center' }}>Point</th>
+              <th style={{ width: '8%', textAlign: 'center' }}>Result</th>
             </tr>
           </thead>
           <tbody>

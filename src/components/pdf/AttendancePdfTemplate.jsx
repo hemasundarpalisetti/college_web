@@ -86,13 +86,13 @@ export function AttendancePdfTemplate({ student, attendance = [] }) {
         <table className="doc-table">
           <thead>
             <tr>
-              <th style={{ width: '90px' }}>Course Code</th>
-              <th>Subject Title</th>
-              <th style={{ width: '90px', textAlign: 'center' }}>Total Classes</th>
-              <th style={{ width: '85px', textAlign: 'center' }}>Present</th>
-              <th style={{ width: '85px', textAlign: 'center' }}>Absent</th>
-              <th style={{ width: '100px', textAlign: 'center' }}>Attendance %</th>
-              <th style={{ width: '100px', textAlign: 'center' }}>Eligibility</th>
+              <th style={{ width: '14%', textAlign: 'center' }}>Course Code</th>
+              <th style={{ width: '36%', textAlign: 'left' }}>Subject Title</th>
+              <th style={{ width: '10%', textAlign: 'center' }}>Total<br /><span style={{ fontSize: '0.675rem', fontWeight: 'normal', opacity: 0.9 }}>Classes</span></th>
+              <th style={{ width: '10%', textAlign: 'center' }}>Present</th>
+              <th style={{ width: '10%', textAlign: 'center' }}>Absent</th>
+              <th style={{ width: '10%', textAlign: 'center' }}>Attendance<br /><span style={{ fontSize: '0.675rem', fontWeight: 'normal', opacity: 0.9 }}>%</span></th>
+              <th style={{ width: '10%', textAlign: 'center' }}>Eligibility</th>
             </tr>
           </thead>
           <tbody>

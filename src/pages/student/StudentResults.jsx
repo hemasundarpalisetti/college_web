@@ -89,7 +89,7 @@ export function StudentResults() {
       </div>
 
       {/* Official Rendered Result Sheet Container */}
-      <div className="official-document-wrapper" style={{ width: '100%', overflowX: 'auto', display: 'flex', justifyContent: 'center', marginBottom: '3rem', padding: '0.5rem 0' }}>
+      <div className="official-document-wrapper" style={{ width: '100%', display: 'flex', justifyContent: 'center', marginBottom: '3rem', padding: '0.5rem 0' }}>
         <ResultPdfTemplate
           student={user}
           semesterKey={selectedSem}

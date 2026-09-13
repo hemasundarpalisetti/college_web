@@ -41,16 +41,16 @@
 .official-document {
   background: #ffffff;
   width: 100%;
-  max-width: 840px;
+  max-width: 880px;
   box-sizing: border-box;
   margin: 0 auto;
-  padding: clamp(1.5rem, 3vw, 2.5rem);
+  padding: clamp(0.75rem, 2vw, 1.5rem);
   border: 1px solid #cbd5e1;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   border-radius: 8px;
   color: #0f172a;
   font-family: 'Inter', system-ui, sans-serif;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .document-header {
@@ -132,8 +132,7 @@
 
 .doc-table-wrap {
   width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
+  overflow: hidden;
   margin-bottom: 1.5rem;
   border: 1px solid #cbd5e1;
   border-radius: 6px;
@@ -142,6 +141,7 @@
 
 .doc-table {
   width: 100%;
+  table-layout: fixed;
   border-collapse: collapse;
   margin-bottom: 0;
   box-sizing: border-box;
@@ -150,25 +150,61 @@
 .doc-table th {
   background-color: #1e40af;
   color: #ffffff;
-  padding: 0.65rem 0.75rem;
-  font-size: 0.8rem;
+  padding: 0.5rem 0.35rem;
+  font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.02em;
   border: 1px solid #1e40af;
-  white-space: nowrap;
+  white-space: normal;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 1.25;
+  word-break: break-word;
+}
+
+.doc-table th:first-child {
+  text-align: left;
+  padding-left: 0.65rem;
 }
 
 .doc-table td {
-  padding: 0.6rem 0.75rem;
-  font-size: 0.825rem;
+  padding: 0.45rem 0.35rem;
+  font-size: 0.775rem;
   border: 1px solid #cbd5e1;
   color: #1e293b;
   box-sizing: border-box;
+  vertical-align: middle;
+  word-break: break-word;
+}
+
+.doc-table td:first-child {
+  text-align: left;
+  padding-left: 0.65rem;
 }
 
 .doc-table tr:nth-child(even) {
   background-color: #f8fafc;
+}
+
+@media screen and (max-width: 640px) {
+  .official-document {
+    padding: 0.65rem 0.4rem;
+  }
+  .doc-table th {
+    padding: 0.35rem 0.2rem;
+    font-size: 0.65rem;
+    letter-spacing: 0;
+  }
+  .doc-table td {
+    padding: 0.35rem 0.2rem;
+    font-size: 0.7rem;
+  }
+  .doc-info-grid {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+    padding: 0.65rem;
+  }
 }
 
 .doc-summary-box {
