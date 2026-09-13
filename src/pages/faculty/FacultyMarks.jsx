@@ -2,6 +2,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { Award, User, BookOpen, Save, CheckCircle2, AlertCircle, Search, ChevronRight, Eye } from 'lucide-react';
 import { getStudents, getStudentMarks, updateStudentSubjectMarks } from '../../data/storage';
+import { BRANCHES } from '../../data/initialData';
 import { calculateGrade, calculateTotal, calculatePercentage, calculateSGPA } from '../../utils/calculations';
 import { useToast } from '../../context/ToastContext';
 
@@ -13,14 +14,18 @@ export function FacultyMarks() {
   const initialStudentId = searchParams.get('student') || (students[0]?.id || 'S001');
 
   const [filterYear, setFilterYear] = useState('ALL');
+  const [filterBranch, setFilterBranch] = useState('ALL');
   const [selectedStudentId, setSelectedStudentId] = useState(initialStudentId);
   const [selectedSem, setSelectedSem] = useState('semester1');
   const [activeSubjectCode, setActiveSubjectCode] = useState('');
 
   const displayStudents = useMemo(() => {
-    if (filterYear === 'ALL') return students;
-    return students.filter(s => s.year === filterYear);
-  }, [students, filterYear]);
+    return students.filter(s => {
+      const matchYear = filterYear === 'ALL' || s.year === filterYear;
+      const matchBranch = filterBranch === 'ALL' || s.branch === filterBranch;
+      return matchYear && matchBranch;
+    });
+  }, [students, filterYear, filterBranch]);
 
   useEffect(() => {
     if (displayStudents.length > 0 && !displayStudents.some(s => s.id === selectedStudentId)) {
@@ -134,10 +139,25 @@ export function FacultyMarks() {
           </div>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', alignItems: 'center' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.25rem', alignItems: 'center' }}>
+          <div>
+            <label className="form-label">Branch Filter:</label>
+            <select
+              className="form-select"
+              value={filterBranch}
+              onChange={(e) => setFilterBranch(e.target.value)}
+              id="faculty-marks-branch-select"
+            >
+              <option value="ALL">All Engineering Branches</option>
+              {BRANCHES.map(b => (
+                <option key={b} value={b}>{b}</option>
+              ))}
+            </select>
+          </div>
+
           <div>
             <label className="form-label">
-              Select Student for Evaluation ({displayStudents.length} {filterYear === 'ALL' ? 'total' : filterYear}):
+              Select Student ({displayStudents.length} available):
             </label>
             <select
               className="form-select"
@@ -147,7 +167,7 @@ export function FacultyMarks() {
             >
               {displayStudents.map(s => (
                 <option key={s.id} value={s.id}>
-                  [{s.year}] {s.rollNumber} — {s.name} ({s.semester})
+                  [{s.year} • {s.branch.includes('AIML') ? 'AIML' : s.branch.includes('CSE') ? 'CSE' : s.branch.includes('ECE') ? 'ECE' : s.branch.includes('EEE') ? 'EEE' : s.branch.includes('MECH') ? 'MECH' : 'CIVIL'}] {s.rollNumber} — {s.name}
                 </option>
               ))}
             </select>

@@ -18,6 +18,7 @@ import {
   Building
 } from 'lucide-react';
 import { getStudents, addStudent, updateStudent, resetStudentPassword, getAllMarks, getAllAttendance } from '../../data/storage';
+import { BRANCHES } from '../../data/initialData';
 import { calculateStudentSummary } from '../../utils/calculations';
 import { validateStudentForm } from '../../utils/validators';
 import { useToast } from '../../context/ToastContext';
@@ -308,10 +309,9 @@ export function FacultyStudents() {
                 id="filter-branch-select"
               >
                 <option value="ALL">All Engineering Branches</option>
-                <option value="Artificial Intelligence & Machine Learning (AIML)">Artificial Intelligence &amp; Machine Learning (AIML)</option>
-                <option value="Computer Science & Engineering">Computer Science &amp; Engineering</option>
-                <option value="Information Science & Engineering">Information Science &amp; Engineering</option>
-                <option value="Electronics & Communication Engg">Electronics &amp; Communication Engg</option>
+                {BRANCHES.map(b => (
+                  <option key={b} value={b}>{b}</option>
+                ))}
               </select>
             </div>
           </div>
@@ -518,11 +518,9 @@ export function FacultyStudents() {
                 value={formData.branch}
                 onChange={(e) => setFormData({ ...formData, branch: e.target.value })}
               >
-                <option value="Artificial Intelligence & Machine Learning (AIML)">Artificial Intelligence &amp; Machine Learning (AIML)</option>
-                <option value="Computer Science & Engineering">Computer Science &amp; Engineering</option>
-                <option value="Information Science & Engineering">Information Science &amp; Engineering</option>
-                <option value="Electronics & Communication Engg">Electronics &amp; Communication Engg</option>
-                <option value="Mechanical Engineering">Mechanical Engineering</option>
+                {BRANCHES.map(b => (
+                  <option key={b} value={b}>{b}</option>
+                ))}
               </select>
             </div>
 
@@ -706,11 +704,9 @@ export function FacultyStudents() {
                 value={formData.branch}
                 onChange={(e) => setFormData({ ...formData, branch: e.target.value })}
               >
-                <option value="Artificial Intelligence & Machine Learning (AIML)">Artificial Intelligence &amp; Machine Learning (AIML)</option>
-                <option value="Computer Science & Engineering">Computer Science &amp; Engineering</option>
-                <option value="Information Science & Engineering">Information Science &amp; Engineering</option>
-                <option value="Electronics & Communication Engg">Electronics &amp; Communication Engg</option>
-                <option value="Mechanical Engineering">Mechanical Engineering</option>
+                {BRANCHES.map(b => (
+                  <option key={b} value={b}>{b}</option>
+                ))}
               </select>
             </div>
 

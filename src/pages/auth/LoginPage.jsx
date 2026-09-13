@@ -337,7 +337,7 @@ export function LoginPage() {
                   title="Dr. Pradeep - HOD of AIML (pwd: faculty123)"
                   style={{ fontSize: '0.75rem', padding: '0.35rem 0.65rem' }}
                 >
-                  <strong>Dr. Pradeep</strong> (HOD)
+                  <strong>Dr. Pradeep</strong> (HOD AIML)
                 </button>
                 <button
                   type="button"
@@ -349,24 +349,25 @@ export function LoginPage() {
                 >
                   <strong>Prof. Himabindu</strong> (Faculty)
                 </button>
+                <button
+                  type="button"
+                  className="btn btn-outline btn-sm"
+                  onClick={() => handleQuickDemoFill('ramesh', 'faculty123', 'faculty')}
+                  id="quick-demo-ramesh"
+                  title="Dr. Ramesh - HOD of CSE (pwd: faculty123)"
+                  style={{ fontSize: '0.75rem', padding: '0.35rem 0.65rem' }}
+                >
+                  <strong>Dr. Ramesh</strong> (HOD CSE)
+                </button>
               </div>
             </div>
 
-            {/* Student Logins across 4 Years */}
+            {/* Student Logins across Branches & Years */}
             <div>
               <div style={{ fontSize: '0.75rem', fontWeight: '700', color: 'var(--text-secondary)', marginBottom: '0.4rem' }}>
-                👤 Student Accounts (Password: <code>student123</code>):
+                👤 Student Accounts across Branches (Password: <code>student123</code>):
               </div>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(175px, 1fr))', gap: '0.4rem' }}>
-                <button
-                  type="button"
-                  className="btn btn-secondary btn-sm"
-                  onClick={() => handleQuickDemoFill('26W61A6101', 'student123', 'student')}
-                  id="quick-demo-student-101"
-                  style={{ fontSize: '0.725rem', justifyContent: 'flex-start', textAlign: 'left', padding: '0.35rem 0.55rem' }}
-                >
-                  <span>[1st Yr] <strong>Ananya</strong> (6101)</span>
-                </button>
                 <button
                   type="button"
                   className="btn btn-secondary btn-sm"
@@ -374,34 +375,61 @@ export function LoginPage() {
                   id="quick-demo-student-6142"
                   style={{ fontSize: '0.725rem', justifyContent: 'flex-start', textAlign: 'left', padding: '0.35rem 0.55rem' }}
                 >
-                  <span>[2nd Yr] <strong>Hemasundar</strong> (6142)</span>
+                  <span>[2nd Yr AIML] <strong>Hemasundar</strong> (6142)</span>
                 </button>
                 <button
                   type="button"
                   className="btn btn-secondary btn-sm"
-                  onClick={() => handleQuickDemoFill('25W61A6122', 'student123', 'student')}
-                  id="quick-demo-student-6122"
+                  onClick={() => handleQuickDemoFill('25W61A6111', 'student123', 'student')}
+                  id="quick-demo-student-6111"
                   style={{ fontSize: '0.725rem', justifyContent: 'flex-start', textAlign: 'left', padding: '0.35rem 0.55rem' }}
                 >
-                  <span>[2nd Yr] <strong>Ganesh</strong> (6122)</span>
+                  <span>[2nd Yr AIML] <strong>Vivek</strong> (6111)</span>
                 </button>
                 <button
                   type="button"
                   className="btn btn-secondary btn-sm"
-                  onClick={() => handleQuickDemoFill('23W61A6101', 'student123', 'student')}
-                  id="quick-demo-student-301"
+                  onClick={() => handleQuickDemoFill('26W61A0501', 'student123', 'student')}
+                  id="quick-demo-student-cse-101"
                   style={{ fontSize: '0.725rem', justifyContent: 'flex-start', textAlign: 'left', padding: '0.35rem 0.55rem' }}
                 >
-                  <span>[3rd Yr] <strong>Sai Kumar</strong> (6101)</span>
+                  <span>[1st Yr CSE] <strong>Rahul</strong> (0501)</span>
                 </button>
                 <button
                   type="button"
                   className="btn btn-secondary btn-sm"
-                  onClick={() => handleQuickDemoFill('22W61A6105', 'student123', 'student')}
-                  id="quick-demo-student-401"
+                  onClick={() => handleQuickDemoFill('25W61A0401', 'student123', 'student')}
+                  id="quick-demo-student-ece-201"
                   style={{ fontSize: '0.725rem', justifyContent: 'flex-start', textAlign: 'left', padding: '0.35rem 0.55rem' }}
                 >
-                  <span>[4th Yr] <strong>Manoj</strong> (6105)</span>
+                  <span>[2nd Yr ECE] <strong>Gopi Chand</strong> (0401)</span>
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-secondary btn-sm"
+                  onClick={() => handleQuickDemoFill('24W61A0201', 'student123', 'student')}
+                  id="quick-demo-student-eee-301"
+                  style={{ fontSize: '0.725rem', justifyContent: 'flex-start', textAlign: 'left', padding: '0.35rem 0.55rem' }}
+                >
+                  <span>[3rd Yr EEE] <strong>Ramana</strong> (0201)</span>
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-secondary btn-sm"
+                  onClick={() => handleQuickDemoFill('22W61A0301', 'student123', 'student')}
+                  id="quick-demo-student-mech-401"
+                  style={{ fontSize: '0.725rem', justifyContent: 'flex-start', textAlign: 'left', padding: '0.35rem 0.55rem' }}
+                >
+                  <span>[4th Yr MECH] <strong>Madhu</strong> (0301)</span>
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-secondary btn-sm"
+                  onClick={() => handleQuickDemoFill('26W61A0101', 'student123', 'student')}
+                  id="quick-demo-student-civ-101"
+                  style={{ fontSize: '0.725rem', justifyContent: 'flex-start', textAlign: 'left', padding: '0.35rem 0.55rem' }}
+                >
+                  <span>[1st Yr CIVIL] <strong>Sandeep</strong> (0101)</span>
                 </button>
               </div>
             </div>

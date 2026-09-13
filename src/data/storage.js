@@ -21,7 +21,7 @@ const KEYS = {
   ATTENDANCE: 'collegePortal_attendance',
   GRIEVANCES: 'collegePortal_grievances',
   CURRENT_USER: 'collegePortal_currentUser',
-  INITIALIZED: 'collegePortal_initialized_v6_parent_names'
+  INITIALIZED: 'collegePortal_initialized_v7_all_branches_5_members'
 };
 
 /**
@@ -36,8 +36,15 @@ export function initializeStorage(force = false) {
   const hasGrievances = localStorage.getItem(KEYS.GRIEVANCES);
   const hasUpdatedSubjects = existingMarks && existingMarks.includes('BS1101') && existingMarks.includes('Linear Algebra and Calculus');
   const hasUpdatedParentNames = existingStudents && existingStudents.includes('Venkateswar Rao') && existingStudents.includes('Sairaju') && existingStudents.includes('Santhosh') && existingStudents.includes('Eshwara Rao');
+  const hasAllBranches = existingStudents &&
+    existingStudents.includes('Computer Science & Engineering') &&
+    existingStudents.includes('Civil Engineering') &&
+    existingStudents.includes('Electrical & Electronics') &&
+    existingStudents.includes('Mechanical Engineering') &&
+    existingStudents.includes('Electronics & Communication') &&
+    existingStudents.includes('SCSE101');
 
-  if (!isInitialized || !has4Years || !hasParentPhone || !hasGrievances || !hasUpdatedSubjects || !hasUpdatedParentNames || force) {
+  if (!isInitialized || !has4Years || !hasParentPhone || !hasGrievances || !hasUpdatedSubjects || !hasUpdatedParentNames || !hasAllBranches || force) {
     localStorage.setItem(KEYS.STUDENTS, JSON.stringify(INITIAL_STUDENTS));
     localStorage.setItem(KEYS.FACULTY, JSON.stringify(INITIAL_FACULTY));
     localStorage.setItem(KEYS.MARKS, JSON.stringify(INITIAL_MARKS));
@@ -59,7 +66,7 @@ export function initializeStorage(force = false) {
       // ignore
     }
 
-    console.log('[Storage] Initialized 4-Year Students with updated Parent Names, Parent Mobile, FRS tracking, and Grievance Data in localStorage.');
+    console.log('[Storage] Initialized 122 Students across all 6 Engineering Branches and 4 Academic Years.');
   }
 }
 

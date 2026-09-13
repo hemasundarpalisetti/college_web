@@ -109,6 +109,19 @@ console.log(`✓ 2nd Year AIML Updated Parent Names verified:
    - 6142: ${s6142.parentName}
    - 6122: ${s6122.parentName}`);
 
+// 11. Verify All 6 Branches and at least 5 students per branch for every year
+import { BRANCHES } from './src/data/initialData.js';
+console.assert(Array.isArray(BRANCHES) && BRANCHES.length === 6, `Expected 6 branches, got ${BRANCHES?.length}`);
+
+const expectedYears = ['1st Year', '2nd Year', '3rd Year', '4th Year'];
+for (const branch of BRANCHES) {
+  for (const yr of expectedYears) {
+    const count = INITIAL_STUDENTS.filter(s => s.branch === branch && s.year === yr).length;
+    console.assert(count >= 5, `Branch "${branch}" in "${yr}" has only ${count} students (expected >= 5)`);
+  }
+}
+console.log(`✓ All ${BRANCHES.length} Engineering Branches verified across all 4 years with >= 5 students per cohort (Total: ${INITIAL_STUDENTS.length} students).`);
+
 console.log("✓ All validation test cases passed!");
 console.log("=== ALL CORE TESTS PASSED SUCCESSFULLY ===");
 
