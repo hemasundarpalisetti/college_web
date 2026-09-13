@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import {
   LogIn,
@@ -21,7 +21,7 @@ import {
 import { Navbar } from '../../components/common/Navbar';
 import { Footer } from '../../components/common/Footer';
 import { SmartImage } from '../../components/common/SmartMedia';
-import { collegeInfo, FACULTY_MEMBERS } from '../../data/collegeInfo';
+import { collegeInfo, FACULTY_MEMBERS, FACULTY_DEPARTMENTS } from '../../data/collegeInfo';
 import { useAuth } from '../../context/AuthContext';
 import heroVideoFile from '../../assets/video/college-intro.mp4';
 
@@ -73,22 +73,57 @@ export function HomePage() {
   const { user } = useAuth();
   const videoRef = useRef(null);
   const [activeGalleryItem, setActiveGalleryItem] = useState(null);
+  const [selectedFacultyBranch, setSelectedFacultyBranch] = useState('all');
   const [selectedFacultyCategory, setSelectedFacultyCategory] = useState('all');
 
-  const facultyCounts = {
-    all: FACULTY_MEMBERS.length,
-    hod_prof: FACULTY_MEMBERS.filter(m => m.category === 'hod' || m.category === 'professor').length,
-    associate: FACULTY_MEMBERS.filter(m => m.category === 'associate').length,
-    assistant: FACULTY_MEMBERS.filter(m => m.category === 'assistant').length,
-  };
+  // Filter faculty by academic branch first
+  const branchFaculty = useMemo(() => {
+    if (selectedFacultyBranch === 'all') return FACULTY_MEMBERS;
+    return FACULTY_MEMBERS.filter(m => m.branchCode.toLowerCase() === selectedFacultyBranch.toLowerCase());
+  }, [selectedFacultyBranch]);
 
-  const filteredFaculty = FACULTY_MEMBERS.filter((m) => {
-    if (selectedFacultyCategory === 'all') return true;
-    if (selectedFacultyCategory === 'hod_prof') return m.category === 'hod' || m.category === 'professor';
-    if (selectedFacultyCategory === 'associate') return m.category === 'associate';
-    if (selectedFacultyCategory === 'assistant') return m.category === 'assistant';
-    return true;
-  });
+  // Total counts for each department tab
+  const branchCounts = useMemo(() => {
+    const counts = { all: FACULTY_MEMBERS.length };
+    FACULTY_DEPARTMENTS.forEach(dept => {
+      if (dept.id !== 'all') {
+        counts[dept.id] = FACULTY_MEMBERS.filter(m => {
+          if (dept.id === 'cse') return m.branchCode === 'CSE';
+          if (dept.id === 'ece') return m.branchCode === 'ECE';
+          if (dept.id === 'eee') return m.branchCode === 'EEE';
+          if (dept.id === 'mech') return m.branchCode === 'MECH';
+          if (dept.id === 'civil') return m.branchCode === 'CIVIL';
+          if (dept.id === 'hbs') return m.branchCode === 'H&BS';
+          if (dept.id === 'mba') return m.branchCode === 'MBA';
+          return false;
+        }).length;
+      }
+    });
+    return counts;
+  }, []);
+
+  // Category counts within the currently selected branch
+  const facultyCounts = useMemo(() => ({
+    all: branchFaculty.length,
+    hod_prof: branchFaculty.filter(m => m.category === 'hod' || m.category === 'professor').length,
+    associate: branchFaculty.filter(m => m.category === 'associate').length,
+    assistant: branchFaculty.filter(m => m.category === 'assistant').length,
+  }), [branchFaculty]);
+
+  // Final filtered list based on both branch and designation
+  const filteredFaculty = useMemo(() => {
+    return branchFaculty.filter((m) => {
+      if (selectedFacultyCategory === 'all') return true;
+      if (selectedFacultyCategory === 'hod_prof') return m.category === 'hod' || m.category === 'professor';
+      if (selectedFacultyCategory === 'associate') return m.category === 'associate';
+      if (selectedFacultyCategory === 'assistant') return m.category === 'assistant';
+      return true;
+    });
+  }, [branchFaculty, selectedFacultyCategory]);
+
+  const activeDepartment = useMemo(() => {
+    return FACULTY_DEPARTMENTS.find(d => d.id === selectedFacultyBranch) || FACULTY_DEPARTMENTS[0];
+  }, [selectedFacultyBranch]);
 
   // Close preview modal on Escape key
   useEffect(() => {
@@ -344,33 +379,60 @@ export function HomePage() {
         </div>
       </section>
  
-      {/* 2.5. DISTINGUISHED FACULTY MEMBERS */}
-      <section id="faculty-members" className="section-faculty-showcase" aria-label="Department Faculty Members">
+      {/* 2.5. DISTINGUISHED FACULTY DIRECTORY (ALL BRANCHES) */}
+      <section id="faculty-members" className="section-faculty-showcase" aria-label="Academic Faculty Directory">
         <div className="site-container">
           {/* Header */}
           <div className="faculty-header-wrap">
             <span className="section-badge-pill">
-              Academic Faculty
+              Academic Faculty Directory
             </span>
             <h2 className="faculty-heading">
               Distinguished Faculty Members
             </h2>
             <p className="faculty-subtitle-text">
-              Department of Computer Science &amp; Engineering • Highly qualified educators, scholars, and technical researchers committed to student mentorship and academic excellence.
+              {selectedFacultyBranch === 'all'
+                ? 'Comprehensive Faculty Directory across all academic branches of Sri Sivani College of Engineering • Dedicated professors, researchers, and technical educators inspiring innovation.'
+                : `${activeDepartment.name} • Highly qualified educators, scholars, and industry-oriented faculty committed to excellence in academic mentorship and engineering education.`}
             </p>
             <a
-              href="https://srisivani.com/computer-science-engineering/"
+              href={activeDepartment.url}
               target="_blank"
               rel="noopener noreferrer"
               className="faculty-official-link"
-              title="Visit official Department of Computer Science & Engineering webpage on srisivani.com"
+              title={`Visit official ${activeDepartment.name} portal on srisivani.com`}
             >
-              <span>View Official CSE Department Portal</span>
+              <span>View Official {activeDepartment.shortName} Portal</span>
               <ExternalLink size={14} />
             </a>
           </div>
 
-          {/* Filter Tabs */}
+          {/* Branch Filter Tabs */}
+          <div className="faculty-branch-tabs-container">
+            <div className="faculty-branch-tabs" role="tablist" aria-label="Filter faculty by academic department">
+              {FACULTY_DEPARTMENTS.map((dept) => {
+                const count = branchCounts[dept.id] ?? FACULTY_MEMBERS.length;
+                return (
+                  <button
+                    key={dept.id}
+                    type="button"
+                    role="tab"
+                    aria-selected={selectedFacultyBranch === dept.id}
+                    className={`faculty-branch-tab-btn ${selectedFacultyBranch === dept.id ? 'active' : ''}`}
+                    onClick={() => {
+                      setSelectedFacultyBranch(dept.id);
+                      setSelectedFacultyCategory('all');
+                    }}
+                  >
+                    <span>{dept.shortName}</span>
+                    <span className="faculty-tab-count">{count}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Designation Sub-Filter Tabs */}
           <div className="faculty-filter-tabs-container">
             <div className="faculty-filter-tabs" role="tablist" aria-label="Filter faculty by designation">
               <button
@@ -416,68 +478,86 @@ export function HomePage() {
             </div>
           </div>
 
-          {/* Responsive Faculty Grid */}
-          <div className="faculty-grid">
-            {filteredFaculty.map((member) => (
-              <div key={member.id} className="faculty-card" id={`faculty-${member.id}`}>
-                {/* Accent Top Bar */}
-                <div className={`faculty-card-accent ${member.category}`} />
+          {/* Responsive Faculty Grid or Empty State */}
+          {filteredFaculty.length === 0 ? (
+            <div className="faculty-empty-state">
+              <p>No faculty members found for this designation in {activeDepartment.shortName}.</p>
+              <button
+                type="button"
+                className="faculty-official-link"
+                onClick={() => setSelectedFacultyCategory('all')}
+              >
+                View All {activeDepartment.shortName} Faculty ({facultyCounts.all})
+              </button>
+            </div>
+          ) : (
+            <div className="faculty-grid">
+              {filteredFaculty.map((member) => (
+                <div key={member.id} className="faculty-card" id={`faculty-${member.id}`}>
+                  {/* Accent Top Bar */}
+                  <div className={`faculty-card-accent ${member.category}`} />
 
-                <div className="faculty-card-body">
-                  {/* Photo / Avatar */}
-                  <FacultyAvatar member={member} />
+                  <div className="faculty-card-body">
+                    {/* Photo / Avatar */}
+                    <FacultyAvatar member={member} />
 
-                  {/* Role Badge */}
-                  <span className={`faculty-role-badge ${member.category}`}>
-                    {member.category === 'hod' ? '⭐ ' : ''}{member.shortRole}
-                  </span>
-
-                  {/* Faculty Name */}
-                  <h3 className="faculty-name">
-                    {member.name}
-                  </h3>
-
-                  {/* Qualification & Experience */}
-                  <div className="faculty-meta-row">
-                    <span className="faculty-qual-pill" title="Academic Qualification">
-                      <GraduationCap size={13} />
-                      <span>{member.qualification}</span>
-                    </span>
-                    {member.experience && (
-                      <span className="faculty-exp-pill" title="Teaching & Research Experience">
-                        <Briefcase size={12} />
-                        <span>{member.experience}</span>
+                    {/* Branch & Role Badges */}
+                    <div className="faculty-card-header-tags">
+                      <span className={`faculty-branch-pill branch-${member.branchCode.toLowerCase().replace(/[^a-z0-9]/g, '')}`}>
+                        {member.branchCode}
                       </span>
+                      <span className={`faculty-role-badge ${member.category}`}>
+                        {member.category === 'hod' ? '⭐ ' : ''}{member.shortRole}
+                      </span>
+                    </div>
+
+                    {/* Faculty Name */}
+                    <h3 className="faculty-name">
+                      {member.name}
+                    </h3>
+
+                    {/* Qualification & Experience */}
+                    <div className="faculty-meta-row">
+                      <span className="faculty-qual-pill" title="Academic Qualification">
+                        <GraduationCap size={13} />
+                        <span>{member.qualification}</span>
+                      </span>
+                      {member.experience && (
+                        <span className="faculty-exp-pill" title="Teaching & Research Experience">
+                          <Briefcase size={12} />
+                          <span>{member.experience}</span>
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Specialization */}
+                    {member.specialization && (
+                      <div className="faculty-specialization" title="Area of Specialization">
+                        <span>{member.specialization}</span>
+                      </div>
                     )}
+
+                    {/* Department */}
+                    <span className="faculty-dept-label">
+                      {member.department}
+                    </span>
                   </div>
 
-                  {/* Specialization */}
-                  {member.specialization && (
-                    <div className="faculty-specialization" title="Area of Specialization">
-                      <span>{member.specialization}</span>
-                    </div>
-                  )}
-
-                  {/* Department */}
-                  <span className="faculty-dept-label">
-                    {member.department}
-                  </span>
+                  {/* Card Footer: Direct Email Link */}
+                  <div className="faculty-card-footer">
+                    <a
+                      href={`mailto:${member.email}`}
+                      className="faculty-email-link"
+                      title={`Send academic email to ${member.name}`}
+                    >
+                      <Mail size={13} />
+                      <span>{member.email}</span>
+                    </a>
+                  </div>
                 </div>
-
-                {/* Card Footer: Direct Email Link */}
-                <div className="faculty-card-footer">
-                  <a
-                    href={`mailto:${member.email}`}
-                    className="faculty-email-link"
-                    title={`Send academic email to ${member.name}`}
-                  >
-                    <Mail size={13} />
-                    <span>{member.email}</span>
-                  </a>
-                </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 

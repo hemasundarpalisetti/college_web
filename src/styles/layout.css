@@ -935,6 +935,64 @@
   transform: translateY(-1px);
 }
 
+/* Branch Filter Tabs */
+.faculty-branch-tabs-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.85rem;
+  width: 100%;
+}
+
+.faculty-branch-tabs {
+  display: flex;
+  gap: 0.45rem;
+  padding: 0.4rem;
+  background: #ffffff;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-sm);
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.faculty-branch-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.faculty-branch-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.5rem 1.1rem;
+  font-size: 0.835rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.faculty-branch-tab-btn:hover {
+  color: var(--text-primary);
+  background: var(--bg-hover);
+}
+
+.faculty-branch-tab-btn.active {
+  background: linear-gradient(135deg, var(--primary-700), var(--primary-900));
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(30, 58, 138, 0.25);
+}
+
+.faculty-branch-tab-btn.active .faculty-tab-count {
+  background: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+}
+
 /* Category Filter Tabs */
 .faculty-filter-tabs-container {
   display: flex;
@@ -945,12 +1003,12 @@
 
 .faculty-filter-tabs {
   display: flex;
-  gap: 0.5rem;
-  padding: 0.35rem;
-  background: #ffffff;
+  gap: 0.4rem;
+  padding: 0.3rem;
+  background: rgba(248, 250, 252, 0.9);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-full);
-  box-shadow: var(--shadow-sm);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
   max-width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
@@ -964,9 +1022,9 @@
 .faculty-tab-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1.15rem;
-  font-size: 0.85rem;
+  gap: 0.45rem;
+  padding: 0.45rem 1rem;
+  font-size: 0.8rem;
   font-weight: 600;
   color: var(--text-secondary);
   background: transparent;
@@ -979,13 +1037,14 @@
 
 .faculty-tab-btn:hover {
   color: var(--text-primary);
-  background: var(--bg-hover);
+  background: #ffffff;
 }
 
 .faculty-tab-btn.active {
-  background: var(--primary-700);
-  color: #ffffff;
-  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
+  background: #ffffff;
+  color: var(--primary-800);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  font-weight: 700;
 }
 
 .faculty-tab-count {
@@ -1000,8 +1059,8 @@
 }
 
 .faculty-tab-btn.active .faculty-tab-count {
-  background: rgba(255, 255, 255, 0.25);
-  color: #ffffff;
+  background: var(--primary-100);
+  color: var(--primary-800);
 }
 
 /* Faculty Grid */
@@ -1110,16 +1169,75 @@
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
+/* Card Header Tags: Branch + Role Badges */
+.faculty-card-header-tags {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.65rem;
+}
+
+.faculty-branch-pill {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.7rem;
+  font-weight: 800;
+  padding: 0.2rem 0.55rem;
+  border-radius: 9999px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: #f1f5f9;
+  color: #334155;
+  border: 1px solid #cbd5e1;
+}
+
+.faculty-branch-pill.branch-cse {
+  background: #eff6ff;
+  color: #1d4ed8;
+  border-color: #bfdbfe;
+}
+.faculty-branch-pill.branch-ece {
+  background: #ecfdf5;
+  color: #047857;
+  border-color: #a7f3d0;
+}
+.faculty-branch-pill.branch-eee {
+  background: #fffbeb;
+  color: #b45309;
+  border-color: #fde68a;
+}
+.faculty-branch-pill.branch-mech {
+  background: #fef2f2;
+  color: #b91c1c;
+  border-color: #fecaca;
+}
+.faculty-branch-pill.branch-civil {
+  background: #f5f3ff;
+  color: #6d28d9;
+  border-color: #ddd6fe;
+}
+.faculty-branch-pill.branch-hbs {
+  background: #f0fdf4;
+  color: #15803d;
+  border-color: #bbf7d0;
+}
+.faculty-branch-pill.branch-mba {
+  background: #fff1f2;
+  color: #be123c;
+  border-color: #fecdd3;
+}
+
 /* Role Badges */
 .faculty-role-badge {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  font-size: 0.75rem;
+  font-size: 0.725rem;
   font-weight: 700;
-  padding: 0.25rem 0.65rem;
+  padding: 0.2rem 0.6rem;
   border-radius: 9999px;
-  margin-bottom: 0.65rem;
   letter-spacing: 0.02em;
   text-transform: uppercase;
 }
@@ -1143,6 +1261,21 @@
   background: #f8fafc;
   color: #475569;
   border: 1px solid #e2e8f0;
+}
+
+/* Empty State */
+.faculty-empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 3rem 1.5rem;
+  background: #ffffff;
+  border-radius: var(--radius-xl);
+  border: 1px dashed var(--border-subtle);
+  color: var(--text-secondary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
 }
 
 /* Name */
@@ -1258,9 +1391,26 @@
 }
 
 @media (max-width: 640px) {
+  .faculty-branch-tabs-container {
+    justify-content: flex-start;
+    padding-inline: 0.25rem;
+    margin-bottom: 0.65rem;
+  }
+
+  .faculty-branch-tabs {
+    border-radius: var(--radius-lg);
+    width: 100%;
+    padding: 0.3rem;
+  }
+
+  .faculty-branch-tab-btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.775rem;
+  }
+
   .faculty-filter-tabs-container {
     justify-content: flex-start;
-    padding-inline: 0.5rem;
+    padding-inline: 0.25rem;
   }
 
   .faculty-filter-tabs {
@@ -1269,27 +1419,27 @@
   }
 
   .faculty-tab-btn {
-    padding: 0.45rem 0.85rem;
-    font-size: 0.8rem;
+    padding: 0.4rem 0.75rem;
+    font-size: 0.775rem;
   }
 
   .faculty-grid {
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 0.85rem;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
   }
 
   .faculty-card-body {
-    padding: 1rem 0.75rem 0.75rem 0.75rem;
+    padding: 1.25rem 1rem 1rem 1rem;
   }
 
   .faculty-avatar-wrap {
-    width: 80px;
-    height: 80px;
-    margin-bottom: 0.75rem;
+    width: 88px;
+    height: 88px;
+    margin-bottom: 0.85rem;
   }
 
   .faculty-name {
-    font-size: 0.925rem;
+    font-size: 0.975rem;
     min-height: auto;
   }
 
@@ -1299,11 +1449,17 @@
   }
 
   .faculty-specialization {
-    font-size: 0.725rem;
+    font-size: 0.75rem;
   }
 
   .faculty-card-footer {
-    padding: 0.6rem 0.75rem;
+    padding: 0.65rem 1rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .faculty-grid {
+    grid-template-columns: 1fr;
   }
 }
 

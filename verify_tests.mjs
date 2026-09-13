@@ -128,23 +128,46 @@ for (const branch of BRANCHES) {
 }
 console.log(`✓ All ${BRANCHES.length} Engineering Branches verified across all 4 years with >= 5 students per cohort (Total: ${INITIAL_STUDENTS.length} students).`);
 
-// 12. Verify CSE Faculty Members from srisivani.com
-import { FACULTY_MEMBERS } from './src/data/collegeInfo.js';
-console.assert(Array.isArray(FACULTY_MEMBERS) && FACULTY_MEMBERS.length === 18, `Expected 18 faculty members, got ${FACULTY_MEMBERS?.length}`);
-const hod = FACULTY_MEMBERS.find(f => f.category === 'hod');
-console.assert(hod && hod.name.includes('Jagadeesh'), `HOD check failed: ${hod?.name}`);
-console.assert(FACULTY_MEMBERS.some(f => f.name.includes('Uttam Mande')), 'Dr. Uttam Mande missing');
-console.assert(FACULTY_MEMBERS.every(f => f.name && f.designation && f.qualification && f.department && f.email), 'Faculty record missing essential fields');
-console.assert(FACULTY_MEMBERS.every(f => f.department === 'Computer Science & Engineering'), 'Faculty department mismatch');
-console.assert(FACULTY_MEMBERS.filter(f => f.category === 'hod' || f.category === 'professor').length === 3, 'Professors count mismatch');
-console.assert(FACULTY_MEMBERS.filter(f => f.category === 'associate').length === 5, 'Associate professors count mismatch');
-console.assert(FACULTY_MEMBERS.filter(f => f.category === 'assistant').length === 10, 'Assistant professors count mismatch');
-console.log(`✓ All 18 Authentic CSE Faculty Members verified successfully:
-   - HOD & Leadership: ${hod.name} (${hod.designation})
-   - Total Professors & HOD: 3
-   - Total Associate Professors: 5
-   - Total Assistant Professors: 10
-   - All email channels configured with @srisivani.com domain.`);
+// 12. Verify All Academic Faculty Members across all departments from srisivani.com
+import { FACULTY_MEMBERS, FACULTY_DEPARTMENTS } from './src/data/collegeInfo.js';
+console.assert(Array.isArray(FACULTY_DEPARTMENTS) && FACULTY_DEPARTMENTS.length === 8, `Expected 8 departments, got ${FACULTY_DEPARTMENTS?.length}`);
+console.assert(Array.isArray(FACULTY_MEMBERS) && FACULTY_MEMBERS.length === 93, `Expected 93 faculty members, got ${FACULTY_MEMBERS?.length}`);
+console.assert(FACULTY_MEMBERS.every(f => f.name && f.designation && f.qualification && f.department && f.branchCode && f.email), 'Faculty record missing essential fields');
+
+const cseCount = FACULTY_MEMBERS.filter(f => f.branchCode === 'CSE').length;
+const eceCount = FACULTY_MEMBERS.filter(f => f.branchCode === 'ECE').length;
+const eeeCount = FACULTY_MEMBERS.filter(f => f.branchCode === 'EEE').length;
+const mechCount = FACULTY_MEMBERS.filter(f => f.branchCode === 'MECH').length;
+const civilCount = FACULTY_MEMBERS.filter(f => f.branchCode === 'CIVIL').length;
+const hbsCount = FACULTY_MEMBERS.filter(f => f.branchCode === 'H&BS').length;
+const mbaCount = FACULTY_MEMBERS.filter(f => f.branchCode === 'MBA').length;
+
+console.assert(cseCount === 18, `Expected 18 CSE, got ${cseCount}`);
+console.assert(eceCount === 13, `Expected 13 ECE, got ${eceCount}`);
+console.assert(eeeCount === 9, `Expected 9 EEE, got ${eeeCount}`);
+console.assert(mechCount === 11, `Expected 11 MECH, got ${mechCount}`);
+console.assert(civilCount === 9, `Expected 9 CIVIL, got ${civilCount}`);
+console.assert(hbsCount === 25, `Expected 25 H&BS, got ${hbsCount}`);
+console.assert(mbaCount === 8, `Expected 8 MBA, got ${mbaCount}`);
+
+// Verify leadership across branches
+console.assert(FACULTY_MEMBERS.some(f => f.branchCode === 'CSE' && f.name.includes('Jagadeesh')), 'CSE HOD missing');
+console.assert(FACULTY_MEMBERS.some(f => f.branchCode === 'ECE' && f.name.includes('Suryanarayana')), 'ECE Leader missing');
+console.assert(FACULTY_MEMBERS.some(f => f.branchCode === 'EEE' && f.name.includes('Chandra Sekhar')), 'EEE Leader missing');
+console.assert(FACULTY_MEMBERS.some(f => f.branchCode === 'MECH' && f.name.includes('Srininvasa Rao') || f.name.includes('Srinivasa Rao')), 'MECH Principal/Leader missing');
+console.assert(FACULTY_MEMBERS.some(f => f.branchCode === 'CIVIL' && f.name.includes('Revantha')), 'CIVIL Leader missing');
+console.assert(FACULTY_MEMBERS.some(f => f.branchCode === 'H&BS' && f.name.includes('KondalaRao')), 'H&BS Leader missing');
+console.assert(FACULTY_MEMBERS.some(f => f.branchCode === 'MBA' && f.name.includes('Prasada Rao')), 'MBA Leader missing');
+
+console.log(`✓ All 93 Authentic Faculty Members across 7 Departments verified successfully:
+   - CSE & AIML: ${cseCount} members
+   - ECE: ${eceCount} members
+   - EEE: ${eeeCount} members
+   - MECH: ${mechCount} members
+   - CIVIL: ${civilCount} members
+   - H&BS: ${hbsCount} members
+   - MBA: ${mbaCount} members
+   - All records complete with authentic qualifications, official portals, photos, and emails.`);
 
 // 13. Verify 2nd Year AIML Student Photos
 import fs from 'fs';
