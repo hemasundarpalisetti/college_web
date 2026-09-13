@@ -111,7 +111,9 @@ export function FacultyStudents() {
         !searchTerm.trim() ||
         s.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         s.rollNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        s.username.toLowerCase().includes(searchTerm.toLowerCase());
+        s.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        (s.parentName && s.parentName.toLowerCase().includes(searchTerm.toLowerCase())) ||
+        (s.parentPhone && s.parentPhone.includes(searchTerm));
 
       const matchBranch = filterBranch === 'ALL' || s.branch === filterBranch;
       const matchYear = filterYear === 'ALL' || s.year === filterYear;

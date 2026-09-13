@@ -169,7 +169,7 @@ export const INITIAL_STUDENTS = [
     phone: "+91 91234 61420",
     studentPhone: "+91 91234 61420",
     parentPhone: "+91 94401 61420",
-    parentName: "P. Satyanarayana",
+    parentName: "P. Venkateswar Rao",
     avatar: "PH",
     admissionDate: "2024-08-16"
   },
@@ -188,7 +188,7 @@ export const INITIAL_STUDENTS = [
     phone: "+91 91234 61220",
     studentPhone: "+91 91234 61220",
     parentPhone: "+91 94401 61220",
-    parentName: "K. Ramana",
+    parentName: "K. Santhosh",
     avatar: "KG",
     admissionDate: "2024-08-16"
   },
@@ -207,7 +207,7 @@ export const INITIAL_STUDENTS = [
     phone: "+91 91234 61340",
     studentPhone: "+91 91234 61340",
     parentPhone: "+91 94401 61340",
-    parentName: "M. Simhachalam",
+    parentName: "M. Eshwara Rao",
     avatar: "MR",
     admissionDate: "2024-08-16"
   },
@@ -226,7 +226,7 @@ export const INITIAL_STUDENTS = [
     phone: "+91 91234 61110",
     studentPhone: "+91 91234 61110",
     parentPhone: "+91 94401 61110",
-    parentName: "B. Gurunadham",
+    parentName: "B. Sairaju",
     avatar: "BV",
     admissionDate: "2024-08-16"
   },

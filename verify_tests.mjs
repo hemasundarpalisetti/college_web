@@ -90,6 +90,25 @@ console.assert(Array.isArray(INITIAL_GRIEVANCES) && INITIAL_GRIEVANCES.length >=
 console.assert(INITIAL_GRIEVANCES.some(g => g.category.includes('FRS')), 'Missing FRS grievance example');
 console.log(`✓ Seeded ${INITIAL_GRIEVANCES.length} initial grievance/suggestion tickets including FRS biometric cases.`);
 
+// 10. Verify Updated Parent Names for 2nd Year AIML Students (6111, 6103, 6134, 6142, 6122)
+const s6111 = INITIAL_STUDENTS.find(s => s.year === '2nd Year' && s.rollNumber.includes('6111'));
+const s6103 = INITIAL_STUDENTS.find(s => s.year === '2nd Year' && s.rollNumber.includes('6103'));
+const s6134 = INITIAL_STUDENTS.find(s => s.year === '2nd Year' && s.rollNumber.includes('6134'));
+const s6142 = INITIAL_STUDENTS.find(s => s.year === '2nd Year' && s.rollNumber.includes('6142'));
+const s6122 = INITIAL_STUDENTS.find(s => s.year === '2nd Year' && s.rollNumber.includes('6122'));
+
+console.assert(s6111 && s6111.parentName.includes('Sairaju'), `6111 parent name failed: ${s6111?.parentName}`);
+console.assert(s6103 && s6103.parentName.includes('Govinda Rao'), `6103 parent name failed: ${s6103?.parentName}`);
+console.assert(s6134 && s6134.parentName.includes('Eshwara Rao'), `6134 parent name failed: ${s6134?.parentName}`);
+console.assert(s6142 && s6142.parentName.includes('Venkateswar Rao'), `6142 parent name failed: ${s6142?.parentName}`);
+console.assert(s6122 && s6122.parentName.includes('Santhosh'), `6122 parent name failed: ${s6122?.parentName}`);
+console.log(`✓ 2nd Year AIML Updated Parent Names verified:
+   - 6111: ${s6111.parentName}
+   - 6103: ${s6103.parentName}
+   - 6134: ${s6134.parentName}
+   - 6142: ${s6142.parentName}
+   - 6122: ${s6122.parentName}`);
+
 console.log("✓ All validation test cases passed!");
 console.log("=== ALL CORE TESTS PASSED SUCCESSFULLY ===");
 

@@ -21,7 +21,7 @@ const KEYS = {
   ATTENDANCE: 'collegePortal_attendance',
   GRIEVANCES: 'collegePortal_grievances',
   CURRENT_USER: 'collegePortal_currentUser',
-  INITIALIZED: 'collegePortal_initialized_v5_frs_contact_chatbot'
+  INITIALIZED: 'collegePortal_initialized_v6_parent_names'
 };
 
 /**
@@ -35,15 +35,31 @@ export function initializeStorage(force = false) {
   const hasParentPhone = existingStudents && existingStudents.includes('parentPhone');
   const hasGrievances = localStorage.getItem(KEYS.GRIEVANCES);
   const hasUpdatedSubjects = existingMarks && existingMarks.includes('BS1101') && existingMarks.includes('Linear Algebra and Calculus');
+  const hasUpdatedParentNames = existingStudents && existingStudents.includes('Venkateswar Rao') && existingStudents.includes('Sairaju') && existingStudents.includes('Santhosh') && existingStudents.includes('Eshwara Rao');
 
-  if (!isInitialized || !has4Years || !hasParentPhone || !hasGrievances || !hasUpdatedSubjects || force) {
+  if (!isInitialized || !has4Years || !hasParentPhone || !hasGrievances || !hasUpdatedSubjects || !hasUpdatedParentNames || force) {
     localStorage.setItem(KEYS.STUDENTS, JSON.stringify(INITIAL_STUDENTS));
     localStorage.setItem(KEYS.FACULTY, JSON.stringify(INITIAL_FACULTY));
     localStorage.setItem(KEYS.MARKS, JSON.stringify(INITIAL_MARKS));
     localStorage.setItem(KEYS.ATTENDANCE, JSON.stringify(INITIAL_ATTENDANCE));
     localStorage.setItem(KEYS.GRIEVANCES, JSON.stringify(INITIAL_GRIEVANCES));
     localStorage.setItem(KEYS.INITIALIZED, 'true');
-    console.log('[Storage] Initialized 4-Year Students with Parent Mobile, FRS tracking, and Grievance Data in localStorage.');
+
+    // Also update currentUser if currently logged in with outdated info
+    try {
+      const curUser = localStorage.getItem(KEYS.CURRENT_USER);
+      if (curUser) {
+        const parsedUser = JSON.parse(curUser);
+        const updatedStudent = INITIAL_STUDENTS.find(s => s.id === parsedUser.id || s.rollNumber === parsedUser.rollNumber);
+        if (updatedStudent) {
+          localStorage.setItem(KEYS.CURRENT_USER, JSON.stringify({ ...parsedUser, ...updatedStudent }));
+        }
+      }
+    } catch (e) {
+      // ignore
+    }
+
+    console.log('[Storage] Initialized 4-Year Students with updated Parent Names, Parent Mobile, FRS tracking, and Grievance Data in localStorage.');
   }
 }
 
