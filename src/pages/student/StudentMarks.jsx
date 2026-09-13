@@ -49,7 +49,7 @@ export function StudentMarks() {
           onClick={() => setSelectedSem('semester1')}
           id="student-marks-sem1-tab"
         >
-          <span>1st Year - 1st Sem (1-1)</span>
+          <span>1st Year - 1st Semester</span>
         </button>
         <button
           type="button"
@@ -57,7 +57,7 @@ export function StudentMarks() {
           onClick={() => setSelectedSem('semester2')}
           id="student-marks-sem2-tab"
         >
-          <span>1st Year - 2nd Sem (1-2)</span>
+          <span>1st Year - 2nd Semester</span>
         </button>
       </div>
 
@@ -98,7 +98,7 @@ export function StudentMarks() {
       <div className="card">
         <div className="card-header">
           <div>
-            <h3 className="card-title">Course-Wise Score Sheet ({selectedSem === 'semester1' ? '1st Year Semester 1 (1-1)' : '1st Year Semester 2 (1-2)'})</h3>
+            <h3 className="card-title">Subject Score Sheet ({selectedSem === 'semester1' ? '1st Year Semester 1' : '1st Year Semester 2'})</h3>
             <span className="card-subtitle">Internal (Max 40) + External (Max 60) = Total Marks (Max 100)</span>
           </div>
         </div>
@@ -107,7 +107,6 @@ export function StudentMarks() {
           <table className="table">
             <thead>
               <tr>
-                <th>Course Code</th>
                 <th>Subject Name</th>
                 <th style={{ textAlign: 'center' }}>Credits</th>
                 <th style={{ textAlign: 'center' }}>Internal (/40)</th>
@@ -121,8 +120,7 @@ export function StudentMarks() {
             <tbody>
               {computedSubjects.map((sub, idx) => (
                 <tr key={sub.code || idx}>
-                  <td style={{ fontWeight: '700', color: 'var(--primary-800)', fontFamily: 'monospace' }}>{sub.code}</td>
-                  <td style={{ fontWeight: '600' }}>{sub.subject}</td>
+                  <td style={{ fontWeight: '700', color: 'var(--text-primary)', fontSize: '0.925rem' }}>{sub.subject}</td>
                   <td style={{ textAlign: 'center' }}>{sub.credits}</td>
                   <td style={{ textAlign: 'center' }}>{sub.internal}</td>
                   <td style={{ textAlign: 'center' }}>{sub.external}</td>
@@ -141,7 +139,7 @@ export function StudentMarks() {
             </tbody>
             <tfoot>
               <tr className="table-summary-row">
-                <td colSpan={2}>Aggregate Total / Semester Performance</td>
+                <td colSpan={1}>Aggregate Total / Semester Performance</td>
                 <td style={{ textAlign: 'center' }}>{totalCredits}</td>
                 <td colSpan={2} style={{ textAlign: 'center' }}>{totalObtained} / {maxMarks} ({percentage}%)</td>
                 <td style={{ textAlign: 'center', fontSize: '1.05rem' }}>{totalObtained}</td>

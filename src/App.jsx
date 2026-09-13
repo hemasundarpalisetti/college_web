@@ -14,6 +14,7 @@ import { StudentProfile } from './pages/student/StudentProfile';
 import { StudentAttendance } from './pages/student/StudentAttendance';
 import { StudentMarks } from './pages/student/StudentMarks';
 import { StudentResults } from './pages/student/StudentResults';
+import { StudentGrievance } from './pages/student/StudentGrievance';
 
 // Faculty Pages
 import { FacultyLayout } from './pages/faculty/FacultyLayout';
@@ -43,6 +44,8 @@ export default function App() {
               <Route path="attendance" element={<StudentAttendance />} />
               <Route path="marks" element={<StudentMarks />} />
               <Route path="results" element={<StudentResults />} />
+              <Route path="grievance" element={<StudentGrievance />} />
+              <Route path="grievances" element={<Navigate to="/student/grievance" replace />} />
             </Route>
 
             {/* Faculty Protected Routes */}

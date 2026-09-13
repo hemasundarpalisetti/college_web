@@ -58,6 +58,14 @@ export function AttendancePdfTemplate({ student, attendance = [] }) {
           <span className="val">{student.semester} ({student.year})</span>
         </div>
         <div className="doc-info-row">
+          <span className="label">Student Mobile:</span>
+          <span className="val">{student.studentPhone || student.phone || '+91-9848022338'}</span>
+        </div>
+        <div className="doc-info-row">
+          <span className="label">Parent Mobile:</span>
+          <span className="val">{student.parentPhone || '+91-9440155622'}</span>
+        </div>
+        <div className="doc-info-row">
           <span className="label">Section:</span>
           <span className="val">Section {student.section}</span>
         </div>
@@ -67,41 +75,49 @@ export function AttendancePdfTemplate({ student, attendance = [] }) {
         </div>
       </div>
 
+      {/* FRS Notice */}
+      <div style={{ margin: '0.75rem 0', padding: '0.45rem 0.85rem', background: '#eff6ff', border: '1px solid #bfdbfe', borderRadius: '4px', fontSize: '0.75rem', color: '#1e40af', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <span><strong>Biometric Verification:</strong> Attendance calculations are authenticated and synchronized daily via the <strong>Facial Recognition System (FRS)</strong>.</span>
+        <span style={{ fontWeight: '700' }}>FRS-W6-{student.rollNumber}</span>
+      </div>
+
       {/* Subject-Wise Attendance Table */}
-      <table className="doc-table">
-        <thead>
-          <tr>
-            <th style={{ width: '90px' }}>Course Code</th>
-            <th>Subject Title</th>
-            <th style={{ width: '90px', textAlign: 'center' }}>Total Classes</th>
-            <th style={{ width: '85px', textAlign: 'center' }}>Present</th>
-            <th style={{ width: '85px', textAlign: 'center' }}>Absent</th>
-            <th style={{ width: '100px', textAlign: 'center' }}>Attendance %</th>
-            <th style={{ width: '100px', textAlign: 'center' }}>Eligibility</th>
-          </tr>
-        </thead>
-        <tbody>
-          {attendance.map((item, idx) => {
-            const pct = item.percentage !== undefined ? item.percentage : calculateAttendance(item.present, item.totalClasses);
-            const subEligible = pct >= 75.0;
-            return (
-              <tr key={item.code || idx}>
-                <td style={{ fontWeight: '700', fontFamily: 'monospace' }}>{item.code}</td>
-                <td style={{ fontWeight: '600' }}>{item.subject}</td>
-                <td style={{ textAlign: 'center' }}>{item.totalClasses}</td>
-                <td style={{ textAlign: 'center', fontWeight: '700', color: '#065f46' }}>{item.present}</td>
-                <td style={{ textAlign: 'center', fontWeight: '700', color: item.absent > 8 ? '#b91c1c' : '#475569' }}>{item.absent}</td>
-                <td style={{ textAlign: 'center', fontWeight: '800', color: subEligible ? '#1e40af' : '#b91c1c' }}>
-                  {pct}%
-                </td>
-                <td style={{ textAlign: 'center', fontWeight: '700', color: subEligible ? '#065f46' : '#b91c1c' }}>
-                  {subEligible ? 'Eligible' : 'Shortage'}
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      <div className="doc-table-wrap">
+        <table className="doc-table">
+          <thead>
+            <tr>
+              <th style={{ width: '90px' }}>Course Code</th>
+              <th>Subject Title</th>
+              <th style={{ width: '90px', textAlign: 'center' }}>Total Classes</th>
+              <th style={{ width: '85px', textAlign: 'center' }}>Present</th>
+              <th style={{ width: '85px', textAlign: 'center' }}>Absent</th>
+              <th style={{ width: '100px', textAlign: 'center' }}>Attendance %</th>
+              <th style={{ width: '100px', textAlign: 'center' }}>Eligibility</th>
+            </tr>
+          </thead>
+          <tbody>
+            {attendance.map((item, idx) => {
+              const pct = item.percentage !== undefined ? item.percentage : calculateAttendance(item.present, item.totalClasses);
+              const subEligible = pct >= 75.0;
+              return (
+                <tr key={item.code || idx}>
+                  <td style={{ fontWeight: '700', fontFamily: 'monospace' }}>{item.code}</td>
+                  <td style={{ fontWeight: '600' }}>{item.subject}</td>
+                  <td style={{ textAlign: 'center' }}>{item.totalClasses}</td>
+                  <td style={{ textAlign: 'center', fontWeight: '700', color: '#065f46' }}>{item.present}</td>
+                  <td style={{ textAlign: 'center', fontWeight: '700', color: item.absent > 8 ? '#b91c1c' : '#475569' }}>{item.absent}</td>
+                  <td style={{ textAlign: 'center', fontWeight: '800', color: subEligible ? '#1e40af' : '#b91c1c' }}>
+                    {pct}%
+                  </td>
+                  <td style={{ textAlign: 'center', fontWeight: '700', color: subEligible ? '#065f46' : '#b91c1c' }}>
+                    {subEligible ? 'Eligible' : 'Shortage'}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
 
       {/* Summary Box */}
       <div className="doc-summary-box">

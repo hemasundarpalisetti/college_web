@@ -50,7 +50,10 @@ export function FacultyStudents() {
     semester: 'Semester 3',
     section: 'A',
     email: '',
-    phone: ''
+    phone: '',
+    studentPhone: '',
+    parentPhone: '',
+    parentName: ''
   });
   const [formErrors, setFormErrors] = useState({});
   const [newPassword, setNewPassword] = useState('');
@@ -129,7 +132,10 @@ export function FacultyStudents() {
       semester: 'Semester 3',
       section: 'A',
       email: '',
-      phone: ''
+      phone: '+91 98480 22338',
+      studentPhone: '+91 98480 22338',
+      parentPhone: '+91 94401 55622',
+      parentName: ''
     });
     setFormErrors({});
     setIsAddModalOpen(true);
@@ -168,7 +174,10 @@ export function FacultyStudents() {
       semester: student.semester,
       section: student.section,
       email: student.email || '',
-      phone: student.phone || ''
+      phone: student.studentPhone || student.phone || '',
+      studentPhone: student.studentPhone || student.phone || '',
+      parentPhone: student.parentPhone || '',
+      parentName: student.parentName || ''
     });
     setFormErrors({});
     setIsEditModalOpen(true);
@@ -335,6 +344,12 @@ export function FacultyStudents() {
                     <td>
                       <div style={{ fontWeight: '600', color: 'var(--text-primary)' }}>{student.name}</div>
                       <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{student.email}</div>
+                      <div style={{ fontSize: '0.75rem', color: '#1e40af', marginTop: '0.25rem', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+                        <span>📱 <strong>Student:</strong> {student.studentPhone || student.phone || 'N/A'}</span>
+                      </div>
+                      <div style={{ fontSize: '0.75rem', color: '#065f46', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+                        <span>👨‍👩‍👦 <strong>Parent:</strong> {student.parentPhone || 'N/A'}</span>
+                      </div>
                     </td>
                     <td style={{ fontFamily: 'monospace', color: 'var(--text-secondary)' }}>
                       {student.username}
@@ -559,27 +574,51 @@ export function FacultyStudents() {
 
           <div className="form-row">
             <div className="form-group">
+              <label className="form-label">Student Mobile Number</label>
+              <input
+                type="tel"
+                className={`form-input ${formErrors.phone ? 'error' : ''}`}
+                placeholder="e.g. +91 98480 22338"
+                value={formData.studentPhone}
+                onChange={(e) => setFormData({ ...formData, studentPhone: e.target.value, phone: e.target.value })}
+              />
+              {formErrors.phone && <span className="form-error">{formErrors.phone}</span>}
+            </div>
+
+            <div className="form-group">
+              <label className="form-label">Parent Mobile Number</label>
+              <input
+                type="tel"
+                className="form-input"
+                placeholder="e.g. +91 94401 55622"
+                value={formData.parentPhone}
+                onChange={(e) => setFormData({ ...formData, parentPhone: e.target.value })}
+              />
+            </div>
+          </div>
+
+          <div className="form-row">
+            <div className="form-group">
+              <label className="form-label">Parent / Guardian Name</label>
+              <input
+                type="text"
+                className="form-input"
+                placeholder="e.g. B. Narayana Rao"
+                value={formData.parentName}
+                onChange={(e) => setFormData({ ...formData, parentName: e.target.value })}
+              />
+            </div>
+
+            <div className="form-group">
               <label className="form-label">Email Address</label>
               <input
                 type="email"
                 className={`form-input ${formErrors.email ? 'error' : ''}`}
-                placeholder="e.g. student@apexengineering.edu"
+                placeholder="e.g. student@srisivani.edu.in"
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               />
               {formErrors.email && <span className="form-error">{formErrors.email}</span>}
-            </div>
-
-            <div className="form-group">
-              <label className="form-label">Phone Number</label>
-              <input
-                type="tel"
-                className={`form-input ${formErrors.phone ? 'error' : ''}`}
-                placeholder="e.g. +91 91234 56789"
-                value={formData.phone}
-                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-              />
-              {formErrors.phone && <span className="form-error">{formErrors.phone}</span>}
             </div>
           </div>
 
@@ -723,22 +762,45 @@ export function FacultyStudents() {
 
           <div className="form-row">
             <div className="form-group">
+              <label className="form-label">Student Mobile Number</label>
+              <input
+                type="tel"
+                className={`form-input ${formErrors.phone ? 'error' : ''}`}
+                value={formData.studentPhone}
+                onChange={(e) => setFormData({ ...formData, studentPhone: e.target.value, phone: e.target.value })}
+              />
+              {formErrors.phone && <span className="form-error">{formErrors.phone}</span>}
+            </div>
+
+            <div className="form-group">
+              <label className="form-label">Parent Mobile Number</label>
+              <input
+                type="tel"
+                className="form-input"
+                value={formData.parentPhone}
+                onChange={(e) => setFormData({ ...formData, parentPhone: e.target.value })}
+              />
+            </div>
+          </div>
+
+          <div className="form-row">
+            <div className="form-group">
+              <label className="form-label">Parent / Guardian Name</label>
+              <input
+                type="text"
+                className="form-input"
+                value={formData.parentName}
+                onChange={(e) => setFormData({ ...formData, parentName: e.target.value })}
+              />
+            </div>
+
+            <div className="form-group">
               <label className="form-label">Email Address</label>
               <input
                 type="email"
                 className={`form-input ${formErrors.email ? 'error' : ''}`}
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              />
-            </div>
-
-            <div className="form-group">
-              <label className="form-label">Phone Number</label>
-              <input
-                type="tel"
-                className={`form-input ${formErrors.phone ? 'error' : ''}`}
-                value={formData.phone}
-                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
               />
             </div>
           </div>

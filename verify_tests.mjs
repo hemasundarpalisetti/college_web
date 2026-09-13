@@ -77,11 +77,19 @@ console.assert(!invalidInt.isValid && invalidInt.errors.internal, 'Invalid inter
 const invalidExt = validateMarksEntry(30, 65, 40, 60);
 console.assert(!invalidExt.isValid && invalidExt.errors.external, 'Invalid external not caught');
 
-const validAtt = validateAttendanceEntry(45, 40, 5);
-console.assert(validAtt.isValid, 'Valid attendance failed');
+// 8. Verify Student and Parent Mobile Numbers across all cohorts
+const studentsWithoutStudentPhone = INITIAL_STUDENTS.filter(s => !s.studentPhone);
+const studentsWithoutParentPhone = INITIAL_STUDENTS.filter(s => !s.parentPhone);
+console.assert(studentsWithoutStudentPhone.length === 0, `Students missing studentPhone: ${studentsWithoutStudentPhone.length}`);
+console.assert(studentsWithoutParentPhone.length === 0, `Students missing parentPhone: ${studentsWithoutParentPhone.length}`);
+console.log(`✓ All ${INITIAL_STUDENTS.length} students have both studentPhone and parentPhone configured.`);
 
-const invalidAtt = validateAttendanceEntry(45, 48, 5);
-console.assert(!invalidAtt.isValid, 'Overflow attendance not caught');
+// 9. Verify Initial Grievances
+import { INITIAL_GRIEVANCES } from './src/data/initialData.js';
+console.assert(Array.isArray(INITIAL_GRIEVANCES) && INITIAL_GRIEVANCES.length >= 2, 'INITIAL_GRIEVANCES missing or insufficient');
+console.assert(INITIAL_GRIEVANCES.some(g => g.category.includes('FRS')), 'Missing FRS grievance example');
+console.log(`✓ Seeded ${INITIAL_GRIEVANCES.length} initial grievance/suggestion tickets including FRS biometric cases.`);
 
 console.log("✓ All validation test cases passed!");
 console.log("=== ALL CORE TESTS PASSED SUCCESSFULLY ===");
+

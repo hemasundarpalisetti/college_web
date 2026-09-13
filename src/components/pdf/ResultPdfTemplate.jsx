@@ -55,7 +55,7 @@ export function ResultPdfTemplate({ student, semesterKey = 'semester1', marks = 
 
       {/* Document Classification */}
       <div className="doc-type-banner">
-        OFFICIAL GRADE STATEMENT &amp; SEMESTER TRANSCRIPT — {semLabel.toUpperCase()}
+        OFFICIAL GRADE STATEMENT &amp; SEMESTER TRANSCRIPT — {semesterKey === 'semester1' ? '1ST YEAR - 1ST SEMESTER' : '1ST YEAR - 2ND SEMESTER'}
       </div>
 
       {/* Student Credentials Grid */}
@@ -77,6 +77,14 @@ export function ResultPdfTemplate({ student, semesterKey = 'semester1', marks = 
           <span className="val">{student.year} ({student.semester})</span>
         </div>
         <div className="doc-info-row">
+          <span className="label">Student Mobile:</span>
+          <span className="val">{student.studentPhone || student.phone || 'N/A'}</span>
+        </div>
+        <div className="doc-info-row">
+          <span className="label">Parent Mobile:</span>
+          <span className="val">{student.parentPhone || 'N/A'}</span>
+        </div>
+        <div className="doc-info-row">
           <span className="label">Section / Batch:</span>
           <span className="val">Section {student.section} (Autonomous)</span>
         </div>
@@ -87,38 +95,38 @@ export function ResultPdfTemplate({ student, semesterKey = 'semester1', marks = 
       </div>
 
       {/* Subject-Wise Performance Table */}
-      <table className="doc-table">
-        <thead>
-          <tr>
-            <th style={{ width: '85px' }}>Course Code</th>
-            <th>Subject Title</th>
-            <th style={{ width: '60px', textAlign: 'center' }}>Credits</th>
-            <th style={{ width: '75px', textAlign: 'center' }}>Internal (40)</th>
-            <th style={{ width: '75px', textAlign: 'center' }}>External (60)</th>
-            <th style={{ width: '75px', textAlign: 'center' }}>Total (100)</th>
-            <th style={{ width: '60px', textAlign: 'center' }}>Grade</th>
-            <th style={{ width: '60px', textAlign: 'center' }}>Point</th>
-            <th style={{ width: '65px', textAlign: 'center' }}>Result</th>
-          </tr>
-        </thead>
-        <tbody>
-          {computedSubjects.map((sub, idx) => (
-            <tr key={sub.code || idx}>
-              <td style={{ fontWeight: '700', fontFamily: 'monospace' }}>{sub.code}</td>
-              <td style={{ fontWeight: '600' }}>{sub.subject}</td>
-              <td style={{ textAlign: 'center' }}>{sub.credits}</td>
-              <td style={{ textAlign: 'center' }}>{sub.internal}</td>
-              <td style={{ textAlign: 'center' }}>{sub.external}</td>
-              <td style={{ textAlign: 'center', fontWeight: '700' }}>{sub.total}</td>
-              <td style={{ textAlign: 'center', fontWeight: '800', color: sub.grade === 'F' ? '#b91c1c' : '#1e40af' }}>{sub.grade}</td>
-              <td style={{ textAlign: 'center' }}>{sub.point}</td>
-              <td style={{ textAlign: 'center', fontWeight: '700', color: sub.status === 'Pass' ? '#065f46' : '#b91c1c' }}>
-                {sub.status}
-              </td>
+      <div className="doc-table-wrap">
+        <table className="doc-table">
+          <thead>
+            <tr>
+              <th style={{ textAlign: 'left' }}>Subject Name</th>
+              <th style={{ width: '65px', textAlign: 'center' }}>Credits</th>
+              <th style={{ width: '80px', textAlign: 'center' }}>Internal (40)</th>
+              <th style={{ width: '80px', textAlign: 'center' }}>External (60)</th>
+              <th style={{ width: '80px', textAlign: 'center' }}>Total (100)</th>
+              <th style={{ width: '65px', textAlign: 'center' }}>Grade</th>
+              <th style={{ width: '65px', textAlign: 'center' }}>Point</th>
+              <th style={{ width: '70px', textAlign: 'center' }}>Result</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {computedSubjects.map((sub, idx) => (
+              <tr key={sub.code || idx}>
+                <td style={{ fontWeight: '700', color: '#0f172a' }}>{sub.subject}</td>
+                <td style={{ textAlign: 'center' }}>{sub.credits}</td>
+                <td style={{ textAlign: 'center' }}>{sub.internal}</td>
+                <td style={{ textAlign: 'center' }}>{sub.external}</td>
+                <td style={{ textAlign: 'center', fontWeight: '700' }}>{sub.total}</td>
+                <td style={{ textAlign: 'center', fontWeight: '800', color: sub.grade === 'F' ? '#b91c1c' : '#1e40af' }}>{sub.grade}</td>
+                <td style={{ textAlign: 'center' }}>{sub.point}</td>
+                <td style={{ textAlign: 'center', fontWeight: '700', color: sub.status === 'Pass' ? '#065f46' : '#b91c1c' }}>
+                  {sub.status}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
       {/* Summary Box */}
       <div className="doc-summary-box">

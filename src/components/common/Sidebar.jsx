@@ -10,7 +10,8 @@ import {
   FileText,
   LogOut,
   GraduationCap,
-  Sparkles
+  Sparkles,
+  MessageSquarePlus
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useToast } from '../../context/ToastContext';
@@ -35,6 +36,7 @@ export function Sidebar({ isOpen, onClose }) {
     { to: '/student/attendance', label: 'Attendance', icon: CheckSquare },
     { to: '/student/marks', label: 'Marks', icon: Award },
     { to: '/student/results', label: 'Semester Results', icon: FileSpreadsheet },
+    { to: '/student/grievance', label: 'Complaints & Suggestions', icon: MessageSquarePlus },
   ];
 
   const facultyLinks = [

@@ -8,6 +8,7 @@ import {
   INITIAL_FACULTY,
   INITIAL_MARKS,
   INITIAL_ATTENDANCE,
+  INITIAL_GRIEVANCES,
   DEFAULT_SUBJECTS_SEM1,
   DEFAULT_SUBJECTS_SEM2
 } from './initialData';
@@ -18,8 +19,9 @@ const KEYS = {
   FACULTY: 'collegePortal_faculty',
   MARKS: 'collegePortal_marks',
   ATTENDANCE: 'collegePortal_attendance',
+  GRIEVANCES: 'collegePortal_grievances',
   CURRENT_USER: 'collegePortal_currentUser',
-  INITIALIZED: 'collegePortal_initialized_all_4years_v4'
+  INITIALIZED: 'collegePortal_initialized_v5_frs_contact_chatbot'
 };
 
 /**
@@ -30,15 +32,18 @@ export function initializeStorage(force = false) {
   const existingStudents = localStorage.getItem(KEYS.STUDENTS);
   const existingMarks = localStorage.getItem(KEYS.MARKS);
   const has4Years = existingStudents && existingStudents.includes('26W61A6101') && existingStudents.includes('22W61A6105');
+  const hasParentPhone = existingStudents && existingStudents.includes('parentPhone');
+  const hasGrievances = localStorage.getItem(KEYS.GRIEVANCES);
   const hasUpdatedSubjects = existingMarks && existingMarks.includes('BS1101') && existingMarks.includes('Linear Algebra and Calculus');
 
-  if (!isInitialized || !has4Years || !hasUpdatedSubjects || force) {
+  if (!isInitialized || !has4Years || !hasParentPhone || !hasGrievances || !hasUpdatedSubjects || force) {
     localStorage.setItem(KEYS.STUDENTS, JSON.stringify(INITIAL_STUDENTS));
     localStorage.setItem(KEYS.FACULTY, JSON.stringify(INITIAL_FACULTY));
     localStorage.setItem(KEYS.MARKS, JSON.stringify(INITIAL_MARKS));
     localStorage.setItem(KEYS.ATTENDANCE, JSON.stringify(INITIAL_ATTENDANCE));
+    localStorage.setItem(KEYS.GRIEVANCES, JSON.stringify(INITIAL_GRIEVANCES));
     localStorage.setItem(KEYS.INITIALIZED, 'true');
-    console.log('[Storage] Initialized 4-Year Students and Updated R23 Curriculum in localStorage.');
+    console.log('[Storage] Initialized 4-Year Students with Parent Mobile, FRS tracking, and Grievance Data in localStorage.');
   }
 }
 
@@ -393,3 +398,55 @@ export function updateStudentSubjectAttendance(studentId, subjectCode, { totalCl
 export function resetDataStore() {
   initializeStorage(true);
 }
+
+// ---------------------------------------------------------------------------
+// Grievance / Complaint & Suggestion Box Management
+// ---------------------------------------------------------------------------
+
+export function getAllGrievances() {
+  initializeStorage();
+  try {
+    const data = localStorage.getItem(KEYS.GRIEVANCES);
+    return data ? JSON.parse(data) : [];
+  } catch (err) {
+    console.error('[Storage] Error reading grievances:', err);
+    return [];
+  }
+}
+
+export function getStudentGrievances(studentId) {
+  const all = getAllGrievances();
+  if (!studentId) return all;
+  return all.filter(g => g.studentId === studentId);
+}
+
+export function submitGrievance(grievanceData) {
+  const all = getAllGrievances();
+  const newTicketId = `TKT-${new Date().getFullYear()}-${String(all.length + 830).padStart(4, '0')}`;
+  const newGrievance = {
+    id: newTicketId,
+    date: new Date().toISOString().split('T')[0],
+    status: 'Pending',
+    remarks: 'Acknowledged by Student Affairs cell. Under review by institutional coordinator.',
+    ...grievanceData
+  };
+  all.unshift(newGrievance);
+  localStorage.setItem(KEYS.GRIEVANCES, JSON.stringify(all));
+  return newGrievance;
+}
+
+export function updateGrievanceStatus(id, { status, remarks }) {
+  const all = getAllGrievances();
+  const index = all.findIndex(g => g.id === id);
+  if (index !== -1) {
+    all[index] = {
+      ...all[index],
+      status: status || all[index].status,
+      remarks: remarks || all[index].remarks
+    };
+    localStorage.setItem(KEYS.GRIEVANCES, JSON.stringify(all));
+    return all[index];
+  }
+  return null;
+}
+

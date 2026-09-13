@@ -75,7 +75,7 @@ export function StudentResults() {
           id="sem1-tab-btn"
         >
           <FileSpreadsheet size={16} />
-          <span>1st Year - 1st Sem Result (1-1)</span>
+          <span>1st Year - 1st Semester Result</span>
         </button>
         <button
           type="button"
@@ -84,12 +84,12 @@ export function StudentResults() {
           id="sem2-tab-btn"
         >
           <FileSpreadsheet size={16} />
-          <span>1st Year - 2nd Sem Result (1-2)</span>
+          <span>1st Year - 2nd Semester Result</span>
         </button>
       </div>
 
       {/* Official Rendered Result Sheet Container */}
-      <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '3rem' }}>
+      <div className="official-document-wrapper" style={{ width: '100%', overflowX: 'auto', display: 'flex', justifyContent: 'center', marginBottom: '3rem', padding: '0.5rem 0' }}>
         <ResultPdfTemplate
           student={user}
           semesterKey={selectedSem}

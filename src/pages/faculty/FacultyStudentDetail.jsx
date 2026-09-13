@@ -264,8 +264,26 @@ export function FacultyStudentDetail() {
             <span className="info-value">{student.email}</span>
           </div>
           <div className="info-item">
-            <span className="info-label">Phone Number</span>
-            <span className="info-value">{student.phone}</span>
+            <span className="info-label">Student Mobile Number</span>
+            <span className="info-value" style={{ fontWeight: '700', color: 'var(--primary-800)' }}>
+              📱 {student.studentPhone || student.phone || 'N/A'}
+            </span>
+          </div>
+          <div className="info-item">
+            <span className="info-label">Parent / Guardian Name</span>
+            <span className="info-value">{student.parentName || 'Parent / Guardian'}</span>
+          </div>
+          <div className="info-item">
+            <span className="info-label">Parent Mobile Number</span>
+            <span className="info-value" style={{ fontWeight: '700', color: '#065f46' }}>
+              👨‍👩‍👦 {student.parentPhone || 'N/A'}
+            </span>
+          </div>
+          <div className="info-item">
+            <span className="info-label">Biometric FRS Status</span>
+            <span className="info-value" style={{ color: '#1e40af', fontWeight: '700' }}>
+              ✓ Enrolled &amp; Active (FRS-W6-{student.rollNumber})
+            </span>
           </div>
           <div className="info-item">
             <span className="info-label">Admission Date</span>
@@ -282,7 +300,7 @@ export function FacultyStudentDetail() {
               <CheckSquare size={18} color="var(--primary-700)" />
               <span>Subject Attendance Records (Semester 2)</span>
             </h3>
-            <span className="card-subtitle">Aggregate: {summary.attendance.overallPercentage}% • {summary.attendance.totalPresent}/{summary.attendance.totalClasses} classes</span>
+            <span className="card-subtitle">FRS Biometric Verified • Aggregate: {summary.attendance.overallPercentage}% • {summary.attendance.totalPresent}/{summary.attendance.totalClasses} classes</span>
           </div>
           <Link to={`/faculty/attendance?student=${student.id}`} className="btn btn-secondary btn-sm">
             <span>Manage All Attendance</span>

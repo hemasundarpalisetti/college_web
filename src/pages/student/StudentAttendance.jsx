@@ -16,8 +16,38 @@ export function StudentAttendance() {
     <div>
       <div className="page-header">
         <div className="page-title-group">
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', backgroundColor: '#eff6ff', border: '1px solid #bfdbfe', color: '#1e40af', padding: '0.2rem 0.65rem', borderRadius: '4px', fontSize: '0.75rem', fontWeight: '700', marginBottom: '0.35rem' }}>
+            <CheckCircle2 size={13} />
+            <span>Biometric FRS Verified Portal</span>
+          </div>
           <h1 className="page-title">Attendance Status</h1>
-          <p className="page-subtitle">Real-time subject attendance tracking and statutory exam eligibility</p>
+          <p className="page-subtitle">Official biometric attendance tracking and statutory exam eligibility</p>
+        </div>
+      </div>
+
+      {/* FRS Notice Banner */}
+      <div style={{ background: 'linear-gradient(90deg, #eff6ff 0%, #f0fdf4 100%)', border: '1px solid #bfdbfe', borderRadius: 'var(--radius-md)', padding: '1rem 1.25rem', marginBottom: '1.5rem', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '1rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          <div style={{ width: '38px', height: '38px', borderRadius: '50%', backgroundColor: '#dbeafe', color: '#1d4ed8', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+            <CheckSquare size={20} />
+          </div>
+          <div>
+            <div style={{ fontWeight: '700', fontSize: '0.925rem', color: '#1e3a8a' }}>
+              Facial Recognition System (FRS) Authenticated
+            </div>
+            <div style={{ fontSize: '0.825rem', color: '#334155' }}>
+              All attendance calculations and eligibility stats are authenticated and synced via the <strong>Facial Recognition System (FRS)</strong>.
+            </div>
+          </div>
+        </div>
+
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', fontSize: '0.825rem', color: '#1e293b' }}>
+          <span style={{ background: '#ffffff', border: '1px solid #cbd5e1', padding: '0.3rem 0.65rem', borderRadius: '4px' }}>
+            📱 <strong>Student Mobile:</strong> {user?.studentPhone || user?.phone || '+91-9848022338'}
+          </span>
+          <span style={{ background: '#ffffff', border: '1px solid #cbd5e1', padding: '0.3rem 0.65rem', borderRadius: '4px' }}>
+            👨‍👩‍👦 <strong>Parent Mobile:</strong> {user?.parentPhone || '+91-9440155622'}
+          </span>
         </div>
       </div>
 
@@ -92,7 +122,7 @@ export function StudentAttendance() {
         <div className="card-header">
           <div>
             <h3 className="card-title">Subject-Wise Attendance Breakdown</h3>
-            <span className="card-subtitle">Formula: (Present / Total Classes) × 100</span>
+            <span className="card-subtitle">Calculations authenticated via FRS: (Present / Total Classes) × 100</span>
           </div>
         </div>
 
@@ -100,8 +130,7 @@ export function StudentAttendance() {
           <table className="table">
             <thead>
               <tr>
-                <th>Subject Code</th>
-                <th>Course Name</th>
+                <th>Subject Name</th>
                 <th style={{ textAlign: 'center' }}>Total Classes</th>
                 <th style={{ textAlign: 'center' }}>Present</th>
                 <th style={{ textAlign: 'center' }}>Absent</th>
@@ -116,9 +145,8 @@ export function StudentAttendance() {
                 const subEligible = pct >= 75.0;
 
                 return (
-                  <tr key={item.code || idx}>
-                    <td style={{ fontWeight: '700', color: 'var(--primary-800)' }}>{item.code}</td>
-                    <td style={{ fontWeight: '600' }}>{item.subject}</td>
+                  <tr key={item.subject || idx}>
+                    <td style={{ fontWeight: '600', color: 'var(--primary-800)' }}>{item.subject}</td>
                     <td style={{ textAlign: 'center', fontWeight: '600' }}>{item.totalClasses}</td>
                     <td style={{ textAlign: 'center', fontWeight: '700', color: '#065f46' }}>{item.present}</td>
                     <td style={{ textAlign: 'center', fontWeight: '700', color: item.absent > 8 ? '#b91c1c' : 'var(--text-secondary)' }}>
@@ -141,7 +169,7 @@ export function StudentAttendance() {
             </tbody>
             <tfoot>
               <tr className="table-summary-row">
-                <td colSpan={2}>Aggregate Academic Summary</td>
+                <td>Aggregate Academic Summary</td>
                 <td style={{ textAlign: 'center' }}>{stats.totalClasses}</td>
                 <td style={{ textAlign: 'center' }}>{stats.totalPresent}</td>
                 <td style={{ textAlign: 'center' }}>{stats.totalAbsent}</td>

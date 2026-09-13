@@ -54,6 +54,14 @@ export function StudentDashboard() {
           <p style={{ fontSize: '0.925rem', color: '#dbeafe', margin: 0 }}>
             Roll No: <strong>{user?.rollNumber}</strong> • {user?.branch} • {user?.semester} (Sec {user?.section})
           </p>
+          <div style={{ marginTop: '0.65rem', display: 'flex', flexWrap: 'wrap', gap: '1.25rem', fontSize: '0.85rem', color: '#ffffff' }}>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem', background: 'rgba(255,255,255,0.12)', padding: '0.25rem 0.65rem', borderRadius: '4px' }}>
+              📱 <strong>Student Mobile:</strong> {user?.studentPhone || user?.phone || '+91-9848022338'}
+            </span>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem', background: 'rgba(255,255,255,0.12)', padding: '0.25rem 0.65rem', borderRadius: '4px' }}>
+              👨‍👩‍👦 <strong>Parent Mobile:</strong> {user?.parentPhone || '+91-9440155622'}
+            </span>
+          </div>
         </div>
       </div>
 
@@ -119,6 +127,12 @@ export function StudentDashboard() {
                   ? 'Your attendance meets the minimum 75% institutional requirement.'
                   : 'Warning: Your attendance is below 75%. Please contact faculty coordinator.'}
               </p>
+              
+              {/* FRS Verification Notice */}
+              <div style={{ marginTop: '0.75rem', width: '100%', padding: '0.55rem 0.75rem', background: '#eff6ff', borderRadius: 'var(--radius-sm)', border: '1px solid #bfdbfe', fontSize: '0.75rem', color: '#1e40af', display: 'flex', alignItems: 'center', gap: '0.5rem', lineHeight: 1.35 }}>
+                <Sparkles size={14} style={{ flexShrink: 0, color: '#2563eb' }} />
+                <span><strong>FRS Verified:</strong> Attendance calculations are authenticated via Facial Recognition System (FRS).</span>
+              </div>
             </div>
           </div>
 
@@ -151,8 +165,7 @@ export function StudentDashboard() {
           <table className="table">
             <thead>
               <tr>
-                <th>Subject Code</th>
-                <th>Course Name</th>
+                <th>Subject Name</th>
                 <th>Credits</th>
                 <th>Internal (/40)</th>
                 <th>External (/60)</th>
@@ -163,9 +176,8 @@ export function StudentDashboard() {
             </thead>
             <tbody>
               {sem2Subjects.map((sub, idx) => (
-                <tr key={sub.code || idx}>
-                  <td style={{ fontWeight: '700', color: 'var(--primary-800)' }}>{sub.code}</td>
-                  <td style={{ fontWeight: '600' }}>{sub.subject}</td>
+                <tr key={sub.subject || idx}>
+                  <td style={{ fontWeight: '600', color: 'var(--primary-800)' }}>{sub.subject}</td>
                   <td>{sub.credits}</td>
                   <td>{sub.internal}</td>
                   <td>{sub.external}</td>

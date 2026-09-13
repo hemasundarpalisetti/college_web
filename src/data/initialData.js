@@ -87,6 +87,9 @@ export const INITIAL_STUDENTS = [
     section: "A",
     email: "26w61a6101@srisivani.edu.in",
     phone: "+91 98481 61010",
+    studentPhone: "+91 98481 61010",
+    parentPhone: "+91 94401 61010",
+    parentName: "R. Sharma",
     avatar: "AS",
     admissionDate: "2025-08-20"
   },
@@ -103,6 +106,9 @@ export const INITIAL_STUDENTS = [
     section: "A",
     email: "26w61a6102@srisivani.edu.in",
     phone: "+91 98481 61020",
+    studentPhone: "+91 98481 61020",
+    parentPhone: "+91 94401 61020",
+    parentName: "K. Appala Naidu",
     avatar: "ST",
     admissionDate: "2025-08-20"
   },
@@ -119,6 +125,9 @@ export const INITIAL_STUDENTS = [
     section: "A",
     email: "26w61a6103@srisivani.edu.in",
     phone: "+91 98481 61030",
+    studentPhone: "+91 98481 61030",
+    parentPhone: "+91 94401 61030",
+    parentName: "M. Verma",
     avatar: "RV",
     admissionDate: "2025-08-20"
   },
@@ -135,6 +144,9 @@ export const INITIAL_STUDENTS = [
     section: "A",
     email: "26w61a6104@srisivani.edu.in",
     phone: "+91 98481 61040",
+    studentPhone: "+91 98481 61040",
+    parentPhone: "+91 94401 61040",
+    parentName: "P. Venkata Reddy",
     avatar: "DR",
     admissionDate: "2025-08-20"
   },
@@ -155,6 +167,9 @@ export const INITIAL_STUDENTS = [
     section: "A",
     email: "25w61a6142@srisivani.edu.in",
     phone: "+91 91234 61420",
+    studentPhone: "+91 91234 61420",
+    parentPhone: "+91 94401 61420",
+    parentName: "P. Satyanarayana",
     avatar: "PH",
     admissionDate: "2024-08-16"
   },
@@ -171,6 +186,9 @@ export const INITIAL_STUDENTS = [
     section: "A",
     email: "25w61a6122@srisivani.edu.in",
     phone: "+91 91234 61220",
+    studentPhone: "+91 91234 61220",
+    parentPhone: "+91 94401 61220",
+    parentName: "K. Ramana",
     avatar: "KG",
     admissionDate: "2024-08-16"
   },
@@ -187,6 +205,9 @@ export const INITIAL_STUDENTS = [
     section: "A",
     email: "25w61a6134@srisivani.edu.in",
     phone: "+91 91234 61340",
+    studentPhone: "+91 91234 61340",
+    parentPhone: "+91 94401 61340",
+    parentName: "M. Simhachalam",
     avatar: "MR",
     admissionDate: "2024-08-16"
   },
@@ -203,6 +224,9 @@ export const INITIAL_STUDENTS = [
     section: "A",
     email: "25w61a6111@srisivani.edu.in",
     phone: "+91 91234 61110",
+    studentPhone: "+91 91234 61110",
+    parentPhone: "+91 94401 61110",
+    parentName: "B. Gurunadham",
     avatar: "BV",
     admissionDate: "2024-08-16"
   },
@@ -219,6 +243,9 @@ export const INITIAL_STUDENTS = [
     section: "A",
     email: "25w61a6157@srisivani.edu.in",
     phone: "+91 91234 61570",
+    studentPhone: "+91 91234 61570",
+    parentPhone: "+91 94401 61570",
+    parentName: "S. Karimullah",
     avatar: "SB",
     admissionDate: "2024-08-16"
   },
@@ -235,6 +262,9 @@ export const INITIAL_STUDENTS = [
     section: "A",
     email: "25w61a6103@srisivani.edu.in",
     phone: "+91 91234 61030",
+    studentPhone: "+91 91234 61030",
+    parentPhone: "+91 94401 61030",
+    parentName: "B. Govinda Rao",
     avatar: "BH",
     admissionDate: "2024-08-16"
   },
@@ -251,6 +281,9 @@ export const INITIAL_STUDENTS = [
     section: "A",
     email: "25w61a6147@srisivani.edu.in",
     phone: "+91 91234 61470",
+    studentPhone: "+91 91234 61470",
+    parentPhone: "+91 94401 61470",
+    parentName: "P. Srinivasa Rao",
     avatar: "PG",
     admissionDate: "2024-08-16"
   },
@@ -271,6 +304,9 @@ export const INITIAL_STUDENTS = [
     section: "A",
     email: "23w61a6101@srisivani.edu.in",
     phone: "+91 98483 61010",
+    studentPhone: "+91 98483 61010",
+    parentPhone: "+91 94403 61010",
+    parentName: "C. Krishna",
     avatar: "CS",
     admissionDate: "2023-08-18"
   },
@@ -287,6 +323,9 @@ export const INITIAL_STUDENTS = [
     section: "A",
     email: "23w61a6115@srisivani.edu.in",
     phone: "+91 98483 61150",
+    studentPhone: "+91 98483 61150",
+    parentPhone: "+91 94403 61150",
+    parentName: "M. Bhaskara Rao",
     avatar: "MT",
     admissionDate: "2023-08-18"
   },
@@ -303,6 +342,9 @@ export const INITIAL_STUDENTS = [
     section: "A",
     email: "23w61a6124@srisivani.edu.in",
     phone: "+91 98483 61240",
+    studentPhone: "+91 98483 61240",
+    parentPhone: "+91 94403 61240",
+    parentName: "B. Jagannadham",
     avatar: "BS",
     admissionDate: "2023-08-18"
   },
@@ -319,6 +361,9 @@ export const INITIAL_STUDENTS = [
     section: "A",
     email: "23w61a6138@srisivani.edu.in",
     phone: "+91 98483 61380",
+    studentPhone: "+91 98483 61380",
+    parentPhone: "+91 94403 61380",
+    parentName: "K. Mohan Rao",
     avatar: "KR",
     admissionDate: "2023-08-18"
   },
@@ -339,6 +384,9 @@ export const INITIAL_STUDENTS = [
     section: "A",
     email: "22w61a6105@srisivani.edu.in",
     phone: "+91 98484 61050",
+    studentPhone: "+91 98484 61050",
+    parentPhone: "+91 94404 61050",
+    parentName: "G. Appa Rao",
     avatar: "GM",
     admissionDate: "2022-08-15"
   },
@@ -355,6 +403,9 @@ export const INITIAL_STUDENTS = [
     section: "A",
     email: "22w61a6118@srisivani.edu.in",
     phone: "+91 98484 61180",
+    studentPhone: "+91 98484 61180",
+    parentPhone: "+91 94404 61180",
+    parentName: "P. Lokanatham",
     avatar: "PH",
     admissionDate: "2022-08-15"
   },
@@ -371,6 +422,9 @@ export const INITIAL_STUDENTS = [
     section: "A",
     email: "22w61a6129@srisivani.edu.in",
     phone: "+91 98484 61290",
+    studentPhone: "+91 98484 61290",
+    parentPhone: "+91 94404 61290",
+    parentName: "S. Vaikunta Rao",
     avatar: "SA",
     admissionDate: "2022-08-15"
   },
@@ -387,6 +441,9 @@ export const INITIAL_STUDENTS = [
     section: "A",
     email: "22w61a6145@srisivani.edu.in",
     phone: "+91 98484 61450",
+    studentPhone: "+91 98484 61450",
+    parentPhone: "+91 94404 61450",
+    parentName: "N. Prasad Rao",
     avatar: "NV",
     admissionDate: "2022-08-15"
   }
@@ -832,3 +889,81 @@ export const INITIAL_ATTENDANCE = {
     { code: "AI4104", subject: "Capstone Major Project Work", totalClasses: 50, present: 44, absent: 6, percentage: 88.00 }
   ]
 };
+
+export const INITIAL_GRIEVANCES = [
+  {
+    id: "TKT-2026-0828",
+    studentId: "S001",
+    studentName: "Palisetti Hemasundar",
+    rollNumber: "25W61A6142",
+    studentPhone: "+91 98480 22338",
+    parentPhone: "+91 94401 55622",
+    type: "Complaint",
+    category: "Attendance & FRS Biometrics",
+    subject: "Morning FRS Biometric verification kiosk sync delay",
+    description: "On Thursday morning (10th Sep), the facial recognition attendance device at Block B entry had a temporary server sync delay. Class coordinator verified attendance manually.",
+    priority: "Medium",
+    status: "Resolved",
+    date: "2026-09-10",
+    createdAt: "2026-09-10",
+    response: "Biometric kiosk network buffer verified and 100% synchronized with college cloud attendance database. Full attendance credit granted.",
+    resolvedAt: "2026-09-11",
+    remarks: "Biometric kiosk network buffer verified and 100% synchronized with college cloud attendance database. Full attendance credit granted."
+  },
+  {
+    id: "TKT-2026-0814",
+    studentId: "S001",
+    studentName: "Palisetti Hemasundar",
+    rollNumber: "25W61A6142",
+    studentPhone: "+91 98480 22338",
+    parentPhone: "+91 94401 55622",
+    type: "Suggestion",
+    category: "Campus Infrastructure & Labs",
+    subject: "High-speed Wi-Fi connectivity in AIML Advanced Lab",
+    description: "Requesting bandwidth boost and Wi-Fi signal extender installation near Workstations 14-25 in the Department AIML Laboratory for model training.",
+    priority: "High",
+    status: "In Progress",
+    date: "2026-09-08",
+    createdAt: "2026-09-08",
+    response: "IT Systems Engineer assigned. Additional dual-band access point scheduled for deployment on 15th Sep.",
+    remarks: "IT Systems Engineer assigned. Additional dual-band access point scheduled for deployment on 15th Sep."
+  },
+  {
+    id: "TKT-2026-0792",
+    studentId: "S001",
+    studentName: "Palisetti Hemasundar",
+    rollNumber: "25W61A6142",
+    studentPhone: "+91 98480 22338",
+    parentPhone: "+91 94401 55622",
+    type: "Suggestion",
+    category: "Hostel & Food Mess",
+    subject: "Reading Room lighting enhancement in Spoorti Sadan Boys Hostel",
+    description: "Requesting replacement of study lamps and additional power sockets in the Ground Floor Common Study Hall of Spoorti Sadan.",
+    priority: "Low",
+    status: "Resolved",
+    date: "2026-09-02",
+    createdAt: "2026-09-02",
+    response: "New LED study luminaires and 4 quad-socket distribution boxes installed by campus electrician on 5th Sep.",
+    resolvedAt: "2026-09-05",
+    remarks: "New LED study luminaires and 4 quad-socket distribution boxes installed by campus electrician on 5th Sep."
+  },
+  {
+    id: "TKT-2026-0820",
+    studentId: "S002",
+    studentName: "Kalla Ganesh Siva Sai",
+    rollNumber: "25W61A6122",
+    studentPhone: "+91 91234 61220",
+    parentPhone: "+91 94401 61220",
+    type: "Suggestion",
+    category: "Library & Digital Resources",
+    subject: "Request for Reference Textbooks on Data Structures in Central Library",
+    description: "Please procure additional copies of Data Structures and Algorithm Analysis in C++ for the 2nd Year AIML batch reserve shelf.",
+    priority: "Medium",
+    status: "Resolved",
+    date: "2026-09-10",
+    createdAt: "2026-09-10",
+    response: "5 additional reference copies made available at the Departmental Book Bank.",
+    resolvedAt: "2026-09-12",
+    remarks: "5 additional reference copies made available at the Departmental Book Bank."
+  }
+];

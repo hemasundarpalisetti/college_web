@@ -102,8 +102,29 @@ export function StudentProfile() {
           </div>
 
           <div className="info-item">
-            <span className="info-label">Registered Phone Number</span>
-            <span className="info-value">{user?.phone || '+91 91234 56780'}</span>
+            <span className="info-label">Student Mobile Number</span>
+            <span className="info-value" style={{ fontWeight: '700', color: 'var(--primary-800)' }}>
+              📱 {user?.studentPhone || user?.phone || '+91-9848022338'}
+            </span>
+          </div>
+
+          <div className="info-item">
+            <span className="info-label">Parent / Guardian Name</span>
+            <span className="info-value">{user?.parentName || 'Parent / Guardian'}</span>
+          </div>
+
+          <div className="info-item">
+            <span className="info-label">Parent Mobile Number</span>
+            <span className="info-value" style={{ fontWeight: '700', color: '#065f46' }}>
+              👨‍👩‍👦 {user?.parentPhone || '+91-9440155622'}
+            </span>
+          </div>
+
+          <div className="info-item">
+            <span className="info-label">Biometric FRS Status</span>
+            <span className="info-value" style={{ color: '#1e40af', fontWeight: '700' }}>
+              ✓ Enrolled &amp; Active (FRS-W6-{user?.rollNumber})
+            </span>
           </div>
 
           <div className="info-item">

@@ -3,6 +3,7 @@ import { Outlet, Navigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { Sidebar } from '../../components/common/Sidebar';
 import { Header } from '../../components/common/Header';
+import { CampusChatbot } from '../../components/common/CampusChatbot';
 
 export function StudentLayout() {
   const { user, loading } = useAuth();
@@ -35,6 +36,9 @@ export function StudentLayout() {
           <Outlet />
         </main>
       </div>
+
+      {/* Floating Campus AI Assistant Widget for Students */}
+      <CampusChatbot />
     </div>
   );
 }
