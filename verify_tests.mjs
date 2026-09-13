@@ -191,6 +191,27 @@ console.log(`✓ All 7 2nd Year AIML Students have authentic profile photos link
    - S006 (Butu Hemanth): ${aiml2ndYear.find(s => s.id === 'S006').photo}
    - S007 (Pidugu Gowtham): ${aiml2ndYear.find(s => s.id === 'S007').photo}`);
 
+// 14. Verify Reports & Transcripts Routes & Hook Imports
+const facultyReportsSrc = fs.readFileSync(path.join(process.cwd(), 'src/pages/faculty/FacultyReports.jsx'), 'utf8');
+console.assert(facultyReportsSrc.includes('useEffect') && facultyReportsSrc.match(/import\s+.*useEffect.*from\s+['"]react['"]/), 'FacultyReports.jsx must import useEffect from react');
+console.assert(facultyReportsSrc.match(/import\s+.*useState.*from\s+['"]react['"]/), 'FacultyReports.jsx must import useState from react');
+console.assert(facultyReportsSrc.match(/import\s+.*useMemo.*from\s+['"]react['"]/), 'FacultyReports.jsx must import useMemo from react');
+
+const studentResultsSrc = fs.readFileSync(path.join(process.cwd(), 'src/pages/student/StudentResults.jsx'), 'utf8');
+console.assert(studentResultsSrc.match(/import\s+.*useState.*from\s+['"]react['"]/), 'StudentResults.jsx must import useState from react');
+console.assert(studentResultsSrc.match(/import\s+.*useMemo.*from\s+['"]react['"]/), 'StudentResults.jsx must import useMemo from react');
+
+const appSrc = fs.readFileSync(path.join(process.cwd(), 'src/App.jsx'), 'utf8');
+console.assert(appSrc.includes('path="reports" element={<FacultyReports />}'), 'App.jsx must route /faculty/reports to FacultyReports');
+console.assert(appSrc.includes('path="reports" element={<Navigate to="/student/results" replace />}'), 'App.jsx must alias /student/reports to /student/results');
+console.assert(appSrc.includes('path="transcripts" element={<Navigate to="/student/results" replace />}'), 'App.jsx must alias /student/transcripts to /student/results');
+console.assert(appSrc.includes('path="transcripts" element={<Navigate to="/faculty/reports" replace />}'), 'App.jsx must alias /faculty/transcripts to /faculty/reports');
+
+console.log(`✓ Reports & Transcripts pages verified:
+   - FacultyReports.jsx imports useEffect, useState, useMemo correctly without ReferenceError
+   - StudentResults.jsx imports all required React hooks correctly
+   - Routes and aliases configured for /faculty/reports, /faculty/transcripts, /student/reports, /student/transcripts`);
+
 console.log("✓ All validation test cases passed!");
 console.log("=== ALL CORE TESTS PASSED SUCCESSFULLY ===");
 

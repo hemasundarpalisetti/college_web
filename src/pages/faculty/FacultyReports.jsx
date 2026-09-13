@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { FileText, Download, Printer, Award, CheckSquare, User, FileSpreadsheet } from 'lucide-react';
 import { getStudents, getStudentMarks, getStudentAttendance } from '../../data/storage';

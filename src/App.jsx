@@ -44,6 +44,8 @@ export default function App() {
               <Route path="attendance" element={<StudentAttendance />} />
               <Route path="marks" element={<StudentMarks />} />
               <Route path="results" element={<StudentResults />} />
+              <Route path="reports" element={<Navigate to="/student/results" replace />} />
+              <Route path="transcripts" element={<Navigate to="/student/results" replace />} />
               <Route path="grievance" element={<StudentGrievance />} />
               <Route path="grievances" element={<Navigate to="/student/grievance" replace />} />
             </Route>
@@ -57,6 +59,7 @@ export default function App() {
               <Route path="attendance" element={<FacultyAttendance />} />
               <Route path="marks" element={<FacultyMarks />} />
               <Route path="reports" element={<FacultyReports />} />
+              <Route path="transcripts" element={<Navigate to="/faculty/reports" replace />} />
               <Route path="profile" element={<FacultyProfile />} />
             </Route>
 
