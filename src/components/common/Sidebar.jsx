@@ -11,7 +11,8 @@ import {
   LogOut,
   GraduationCap,
   Sparkles,
-  MessageSquarePlus
+  MessageSquarePlus,
+  X
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useToast } from '../../context/ToastContext';
@@ -60,42 +61,52 @@ export function Sidebar({ isOpen, onClose }) {
       />
 
       <aside className={`sidebar ${isOpen ? 'open' : ''}`}>
-        {/* Brand Banner */}
-        <a
-          href="#/"
-          onClick={reloadToHomePage}
-          className="sidebar-brand"
-          style={{ textDecoration: 'none', cursor: 'pointer' }}
-          title="Click to reload and return to Home page"
-        >
-          <img
-            src={collegeInfo.logo}
-            alt={collegeInfo.name}
-            style={{
-              width: '36px',
-              height: '36px',
-              aspectRatio: '1 / 1',
-              objectFit: 'contain',
-              flexShrink: 0
-            }}
-          />
-          <div style={{ display: 'flex', flexDirection: 'column', lineHeight: 1.15 }}>
-            <span
+        {/* Brand Banner with Mobile Close Button */}
+        <div className="sidebar-header-row">
+          <a
+            href="#/"
+            onClick={reloadToHomePage}
+            className="sidebar-brand"
+            style={{ textDecoration: 'none', cursor: 'pointer' }}
+            title="Click to reload and return to Home page"
+          >
+            <img
+              src={collegeInfo.logo}
+              alt={collegeInfo.name}
               style={{
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
-                fontWeight: '800',
-                fontSize: '0.875rem',
-                color: '#000000',
-                letterSpacing: '0.01em'
+                width: '36px',
+                height: '36px',
+                aspectRatio: '1 / 1',
+                objectFit: 'contain',
+                flexShrink: 0
               }}
-            >
-              SRI SIVANI
-            </span>
-            <span style={{ fontSize: '0.65rem', fontWeight: '700', color: '#000000', letterSpacing: '0.04em' }}>
-              (AUTONOMOUS)
-            </span>
-          </div>
-        </a>
+            />
+            <div style={{ display: 'flex', flexDirection: 'column', lineHeight: 1.15 }}>
+              <span
+                style={{
+                  fontFamily: "'Plus Jakarta Sans', sans-serif",
+                  fontWeight: '800',
+                  fontSize: '0.875rem',
+                  color: '#000000',
+                  letterSpacing: '0.01em'
+                }}
+              >
+                SRI SIVANI
+              </span>
+              <span style={{ fontSize: '0.65rem', fontWeight: '700', color: '#000000', letterSpacing: '0.04em' }}>
+                (AUTONOMOUS)
+              </span>
+            </div>
+          </a>
+          <button
+            type="button"
+            onClick={onClose}
+            className="sidebar-close-btn"
+            aria-label="Close navigation sidebar"
+          >
+            <X size={18} />
+          </button>
+        </div>
 
         {/* Navigation List */}
         <nav className="sidebar-nav">

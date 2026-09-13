@@ -144,7 +144,7 @@ export function CampusChatbot() {
   };
 
   return (
-    <div style={{ position: 'fixed', bottom: '24px', right: '24px', zIndex: 110 }}>
+    <div className="campus-chatbot-wrapper">
       {/* Floating Toggle Button */}
       {!isOpen && (
         <button
@@ -158,10 +158,10 @@ export function CampusChatbot() {
             color: '#ffffff',
             border: 'none',
             borderRadius: 'var(--radius-full)',
-            padding: '0.85rem 1.35rem',
+            padding: '0.75rem 1.15rem',
             boxShadow: '0 10px 25px -5px rgba(30, 64, 175, 0.4), 0 8px 10px -6px rgba(30, 64, 175, 0.2)',
             cursor: 'pointer',
-            fontSize: '0.925rem',
+            fontSize: '0.875rem',
             fontWeight: '700',
             transition: 'all 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
             transform: 'scale(1)'
@@ -171,7 +171,7 @@ export function CampusChatbot() {
           id="campus-chatbot-toggle-btn"
         >
           <div style={{ position: 'relative' }}>
-            <Bot size={22} />
+            <Bot size={20} />
             <span style={{ position: 'absolute', top: '-2px', right: '-2px', width: '8px', height: '8px', backgroundColor: '#10b981', borderRadius: '50%', border: '2px solid #ffffff' }} />
           </div>
           <span>Campus AI Assistant</span>
@@ -181,18 +181,7 @@ export function CampusChatbot() {
       {/* Chat Window Container */}
       {isOpen && (
         <div
-          style={{
-            width: '380px',
-            height: '520px',
-            backgroundColor: '#ffffff',
-            borderRadius: 'var(--radius-xl)',
-            boxShadow: '0 20px 35px -5px rgba(15, 23, 42, 0.25), 0 10px 10px -5px rgba(15, 23, 42, 0.1)',
-            border: '1px solid var(--border-subtle)',
-            display: 'flex',
-            flexDirection: 'column',
-            overflow: 'hidden',
-            animation: 'modalFadeIn 0.2s ease-out'
-          }}
+          className="campus-chatbot-window"
           id="campus-chatbot-window"
         >
           {/* Header */}

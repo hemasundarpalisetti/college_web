@@ -53,17 +53,9 @@ export function StudentAttendance() {
 
       {/* Hero Attendance Overview */}
       <div className="card" style={{ marginBottom: '2rem' }}>
-        <div
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            gap: '2rem'
-          }}
-        >
+        <div className="attendance-hero-row">
           {/* Circular Indicator */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
+          <div className="attendance-circle-wrap">
             <CircularProgress
               percentage={stats.overallPercentage}
               size={150}
@@ -84,17 +76,7 @@ export function StudentAttendance() {
           </div>
 
           {/* Quick Metrics */}
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(3, 1fr)',
-              gap: '1.5rem',
-              backgroundColor: 'var(--bg-secondary)',
-              padding: '1.25rem 1.75rem',
-              borderRadius: 'var(--radius-lg)',
-              border: '1px solid var(--border-subtle)'
-            }}
-          >
+          <div className="attendance-metrics-grid">
             <div>
               <span className="stat-label">Total Conducted</span>
               <div style={{ fontSize: '1.4rem', fontWeight: '800', color: 'var(--text-primary)' }}>

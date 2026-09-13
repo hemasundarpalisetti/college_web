@@ -116,6 +116,31 @@
   margin-top: 0.25rem;
 }
 
+@media (max-width: 640px) {
+  .stat-card {
+    padding: 0.85rem 0.75rem;
+    gap: 0.65rem;
+    border-radius: var(--radius-md);
+  }
+  .stat-icon-wrapper {
+    width: 38px;
+    height: 38px;
+  }
+  .stat-icon-wrapper svg {
+    width: 18px;
+    height: 18px;
+  }
+  .stat-label {
+    font-size: 0.7rem;
+  }
+  .stat-value {
+    font-size: 1.25rem;
+  }
+  .stat-helper {
+    font-size: 0.68rem;
+  }
+}
+
 /* --------------------------------------------------------------------------
    Buttons
    -------------------------------------------------------------------------- */
@@ -438,12 +463,20 @@
   padding: 0.35rem;
   border-radius: var(--radius-lg);
   border: 1px solid var(--border-subtle);
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.segmented-tabs::-webkit-scrollbar {
+  display: none;
 }
 
 .segmented-tab {
   flex: 1;
-  padding: 0.75rem 1.25rem;
-  font-size: 0.95rem;
+  padding: 0.65rem 1.15rem;
+  font-size: 0.9rem;
   font-weight: 600;
   text-align: center;
   border: none;
@@ -452,16 +485,189 @@
   border-radius: var(--radius-md);
   cursor: pointer;
   transition: all var(--transition-fast);
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 0.45rem;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .segmented-tab.active {
   background-color: #ffffff;
   color: var(--primary-700);
   box-shadow: var(--shadow-sm);
+  font-weight: 700;
+}
+
+@media (max-width: 640px) {
+  .segmented-tabs {
+    padding: 0.25rem;
+    border-radius: var(--radius-md);
+  }
+  .segmented-tab {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8rem;
+    gap: 0.35rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Login Page Responsive System
+   -------------------------------------------------------------------------- */
+.login-page-wrapper {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-secondary);
+  padding: clamp(0.75rem, 3vw, 1.75rem);
+}
+
+.login-card-container {
+  width: 100%;
+  max-width: 480px;
+  background-color: #ffffff;
+  border-radius: var(--radius-xl);
+  box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.1), 0 4px 6px -2px rgba(15, 23, 42, 0.05);
+  border: 1px solid var(--border-subtle);
+  overflow: hidden;
+  margin: auto;
+}
+
+.login-header-banner {
+  padding: clamp(1.25rem, 3vw, 2rem) clamp(1rem, 3vw, 2.25rem) 1.25rem;
+  text-align: center;
+  border-bottom: 1px solid var(--border-light);
+  background: linear-gradient(180deg, var(--primary-50) 0%, #ffffff 100%);
+}
+
+.login-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.825rem;
+  font-weight: 600;
+  color: var(--primary-700);
+  margin-bottom: 0.85rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color var(--transition-fast);
+}
+
+.login-back-btn:hover {
+  color: var(--primary-900);
+  text-decoration: underline;
+}
+
+.login-brand-anchor {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.login-brand-logo {
+  height: clamp(40px, 5vw, 54px);
+  width: clamp(40px, 5vw, 54px);
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.login-brand-text {
+  text-align: left;
+  line-height: 1.2;
+}
+
+.login-inst-title {
+  font-size: clamp(0.825rem, 2.2vw, 0.925rem);
+  font-weight: 800;
+  color: #000000;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+.login-inst-sub {
+  font-size: clamp(0.68rem, 1.8vw, 0.75rem);
+  font-weight: 700;
+  color: var(--primary-800);
+  letter-spacing: 0.03em;
+}
+
+.login-portal-title {
+  font-size: clamp(1.1rem, 2.8vw, 1.3rem);
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.login-portal-sub {
+  font-size: clamp(0.75rem, 1.8vw, 0.825rem);
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+}
+
+.login-body-content {
+  padding: clamp(1.25rem, 3vw, 2.25rem);
+}
+
+.login-segmented-tabs {
+  margin-bottom: 1.5rem;
+}
+
+.login-demo-panel {
+  margin-top: 1.5rem;
+  padding: clamp(0.85rem, 2vw, 1.15rem);
+  background-color: var(--bg-secondary);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+}
+
+.login-demo-faculty-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.login-demo-student-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 0.45rem;
+}
+
+.login-demo-btn {
+  font-size: 0.75rem !important;
+  padding: 0.35rem 0.65rem !important;
+}
+
+.login-demo-student-btn {
+  font-size: 0.725rem !important;
+  justify-content: flex-start !important;
+  text-align: left !important;
+  padding: 0.35rem 0.55rem !important;
+  width: 100%;
+}
+
+@media (max-width: 480px) {
+  .login-card-container {
+    border-radius: var(--radius-lg);
+  }
+  .login-header-banner {
+    padding: 1.25rem 1rem 1rem;
+  }
+  .login-body-content {
+    padding: 1.15rem 1rem;
+  }
+  .login-demo-student-grid {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+  }
 }
 
 /* --------------------------------------------------------------------------
@@ -711,6 +917,110 @@
   color: var(--text-primary);
 }
 
+.profile-identity-bar {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  background-color: var(--bg-secondary);
+  border-radius: var(--radius-lg);
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.attendance-hero-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.attendance-circle-wrap {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.attendance-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  background-color: var(--bg-secondary);
+  padding: 1.25rem 1.75rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-subtle);
+}
+
+@media (max-width: 640px) {
+  .profile-hero {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    gap: 1.15rem;
+    padding: 1.5rem 1rem;
+    border-radius: var(--radius-lg);
+  }
+  .profile-hero .avatar-large,
+  .profile-hero .student-avatar-wrap {
+    margin: 0 auto;
+  }
+  .profile-hero-phones {
+    justify-content: center !important;
+  }
+  .profile-identity-bar {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem 1rem;
+  }
+  .profile-info-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .attendance-hero-row {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.5rem;
+  }
+  .attendance-circle-wrap {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+  .attendance-metrics-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+    padding: 0.85rem;
+    width: 100%;
+    text-align: center;
+  }
+  .attendance-metrics-grid .stat-label {
+    font-size: 0.7rem;
+  }
+  .attendance-metrics-grid div > div:nth-child(2) {
+    font-size: 1.1rem !important;
+  }
+  .modal-overlay {
+    padding: 0.65rem 0.4rem;
+  }
+  .modal-card {
+    max-height: 94vh;
+    border-radius: var(--radius-lg);
+  }
+  .modal-header {
+    padding: 1rem 1.15rem;
+  }
+  .modal-body {
+    padding: 1rem 1.15rem;
+  }
+  .modal-footer {
+    padding: 0.85rem 1.15rem;
+  }
+}
+
 /* Empty State */
 .empty-state {
   padding: 3.5rem 2rem;
@@ -741,5 +1051,40 @@
 
 .spin {
   animation: spin 1s linear infinite;
+}
+
+/* Campus Chatbot Responsive System */
+.campus-chatbot-wrapper {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 110;
+}
+
+.campus-chatbot-window {
+  width: 380px;
+  max-width: calc(100vw - 28px);
+  height: 520px;
+  max-height: calc(100vh - 80px);
+  max-height: calc(100dvh - 80px);
+  background-color: #ffffff;
+  border-radius: var(--radius-xl);
+  box-shadow: 0 20px 35px -5px rgba(15, 23, 42, 0.25), 0 10px 10px -5px rgba(15, 23, 42, 0.1);
+  border: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: modalFadeIn 0.2s ease-out;
+}
+
+@media (max-width: 480px) {
+  .campus-chatbot-wrapper {
+    bottom: 12px;
+    right: 12px;
+  }
+  .campus-chatbot-window {
+    width: calc(100vw - 24px);
+    height: 480px;
+  }
 }
 

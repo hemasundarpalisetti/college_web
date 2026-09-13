@@ -24,17 +24,7 @@ export function FacultyProfile() {
           <span className="badge badge-success">Permanent Academic Faculty</span>
         </div>
 
-        <div
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            alignItems: 'center',
-            gap: '2rem',
-            paddingBottom: '2rem',
-            marginBottom: '2rem',
-            borderBottom: '1px solid var(--border-light)'
-          }}
-        >
+        <div className="profile-identity-bar">
           <div
             style={{
               width: '100px',

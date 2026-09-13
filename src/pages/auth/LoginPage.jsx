@@ -70,50 +70,14 @@ export function LoginPage() {
   };
 
   return (
-    <div
-      style={{
-        minHeight: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: 'var(--bg-secondary)',
-        padding: '1.5rem'
-      }}
-    >
-      <div
-        style={{
-          width: '100%',
-          maxWidth: '480px',
-          backgroundColor: '#ffffff',
-          borderRadius: 'var(--radius-xl)',
-          boxShadow: 'var(--shadow-xl)',
-          border: '1px solid var(--border-subtle)',
-          overflow: 'hidden'
-        }}
-      >
+    <div className="login-page-wrapper">
+      <div className="login-card-container">
         {/* Header Branding */}
-        <div
-          style={{
-            padding: '2rem 2.25rem 1.5rem',
-            textAlign: 'center',
-            borderBottom: '1px solid var(--border-light)',
-            background: 'linear-gradient(180deg, var(--primary-50) 0%, #ffffff 100%)'
-          }}
-        >
+        <div className="login-header-banner">
           <a
             href="#/"
             onClick={reloadToHomePage}
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.4rem',
-              fontSize: '0.825rem',
-              fontWeight: '600',
-              color: 'var(--primary-700)',
-              marginBottom: '1rem',
-              textDecoration: 'none',
-              cursor: 'pointer'
-            }}
+            className="login-back-btn"
             title="Click to reload and return to Home page"
           >
             <ArrowLeft size={16} />
@@ -123,57 +87,35 @@ export function LoginPage() {
           <a
             href="#/"
             onClick={reloadToHomePage}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '0.85rem',
-              marginBottom: '0.85rem',
-              textDecoration: 'none',
-              cursor: 'pointer'
-            }}
+            className="login-brand-anchor"
             title="Click to reload and return to Home page"
           >
             <img
               src={collegeInfo.logo}
               alt={collegeInfo.name}
-              style={{
-                height: '54px',
-                width: '54px',
-                aspectRatio: '1 / 1',
-                objectFit: 'contain',
-                flexShrink: 0
-              }}
+              className="login-brand-logo"
             />
-            <div style={{ textAlign: 'left', lineHeight: '1.2' }}>
-              <div style={{ fontSize: '0.925rem', fontWeight: '800', color: '#000000', letterSpacing: '0.02em', textTransform: 'uppercase' }}>
+            <div className="login-brand-text">
+              <div className="login-inst-title">
                 SRI SIVANI COLLEGE OF ENGINEERING
               </div>
-              <div style={{ fontSize: '0.75rem', fontWeight: '700', color: '#000000', letterSpacing: '0.04em' }}>
+              <div className="login-inst-sub">
                 (AUTONOMOUS)
               </div>
             </div>
           </a>
 
-          <h2
-            style={{
-              fontSize: '1.25rem',
-              fontWeight: '800',
-              color: 'var(--text-primary)',
-              letterSpacing: '-0.02em',
-              margin: 0
-            }}
-          >
+          <h2 className="login-portal-title">
             Academic Management Portal
           </h2>
-          <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>
+          <p className="login-portal-sub">
             Affiliated to JNTUK (CC-W6) • Srikakulam
           </p>
         </div>
 
-        <div style={{ padding: '2rem 2.25rem' }}>
+        <div className="login-body-content">
           {/* TWO LARGE TABS/BUTTONS: [ STUDENT ] [ FACULTY ] */}
-          <div className="segmented-tabs" style={{ marginBottom: '1.75rem' }}>
+          <div className="segmented-tabs login-segmented-tabs">
             <button
               type="button"
               className={`segmented-tab ${activeTab === 'student' ? 'active' : ''}`}
@@ -185,7 +127,7 @@ export function LoginPage() {
               id="student-login-tab"
             >
               <User size={18} />
-              <span>Student</span>
+              <span>Student Login</span>
             </button>
             <button
               type="button"
@@ -198,7 +140,7 @@ export function LoginPage() {
               id="faculty-login-tab"
             >
               <Shield size={18} />
-              <span>Faculty</span>
+              <span>Faculty Login</span>
             </button>
           </div>
 
@@ -223,8 +165,8 @@ export function LoginPage() {
             </div>
 
             <div className="form-group" style={{ marginBottom: '1.25rem' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <label className="form-label" htmlFor="portal-password">
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.25rem' }}>
+                <label className="form-label" htmlFor="portal-password" style={{ marginBottom: 0 }}>
                   Password
                 </label>
                 <button
@@ -243,7 +185,7 @@ export function LoginPage() {
                   Forgot password?
                 </button>
               </div>
-              <div style={{ position: 'relative' }}>
+              <div style={{ position: 'relative', marginTop: '0.35rem' }}>
                 <input
                   type={showPassword ? 'text' : 'password'}
                   id="portal-password"
@@ -285,9 +227,9 @@ export function LoginPage() {
                 id="remember-me"
                 checked={rememberMe}
                 onChange={(e) => setRememberMe(e.target.checked)}
-                style={{ width: '16px', height: '16px', accentColor: 'var(--primary-700)', cursor: 'pointer' }}
+                style={{ width: '16px', height: '16px', accentColor: 'var(--primary-700)', cursor: 'pointer', flexShrink: 0 }}
               />
-              <label htmlFor="remember-me" style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', cursor: 'pointer' }}>
+              <label htmlFor="remember-me" style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', cursor: 'pointer', userSelect: 'none' }}>
                 Remember my session on this browser
               </label>
             </div>
@@ -306,16 +248,8 @@ export function LoginPage() {
           </form>
 
           {/* Quick Demo Credentials Panel */}
-          <div
-            style={{
-              marginTop: '1.75rem',
-              padding: '1.15rem',
-              backgroundColor: 'var(--bg-secondary)',
-              borderRadius: 'var(--radius-md)',
-              border: '1px solid var(--border-subtle)'
-            }}
-          >
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
+          <div className="login-demo-panel">
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem', flexWrap: 'wrap', gap: '0.25rem' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.75rem', fontWeight: '800', color: 'var(--primary-700)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                 <Sparkles size={14} />
                 <span>Quick-Fill Demo Logins:</span>
@@ -328,34 +262,31 @@ export function LoginPage() {
               <div style={{ fontSize: '0.75rem', fontWeight: '700', color: 'var(--text-secondary)', marginBottom: '0.4rem' }}>
                 🛡️ Faculty Accounts:
               </div>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.45rem' }}>
+              <div className="login-demo-faculty-row">
                 <button
                   type="button"
-                  className="btn btn-outline btn-sm"
+                  className="btn btn-outline btn-sm login-demo-btn"
                   onClick={() => handleQuickDemoFill('pradeep', 'faculty123', 'faculty')}
                   id="quick-demo-pradeep"
                   title="Dr. Pradeep - HOD of AIML (pwd: faculty123)"
-                  style={{ fontSize: '0.75rem', padding: '0.35rem 0.65rem' }}
                 >
                   <strong>Dr. Pradeep</strong> (HOD AIML)
                 </button>
                 <button
                   type="button"
-                  className="btn btn-outline btn-sm"
+                  className="btn btn-outline btn-sm login-demo-btn"
                   onClick={() => handleQuickDemoFill('himabindu', 'faculty123', 'faculty')}
                   id="quick-demo-himabindu"
                   title="Prof. Himabindu - Class Teacher (pwd: faculty123)"
-                  style={{ fontSize: '0.75rem', padding: '0.35rem 0.65rem' }}
                 >
                   <strong>Prof. Himabindu</strong> (Faculty)
                 </button>
                 <button
                   type="button"
-                  className="btn btn-outline btn-sm"
+                  className="btn btn-outline btn-sm login-demo-btn"
                   onClick={() => handleQuickDemoFill('ramesh', 'faculty123', 'faculty')}
                   id="quick-demo-ramesh"
                   title="Dr. Ramesh - HOD of CSE (pwd: faculty123)"
-                  style={{ fontSize: '0.75rem', padding: '0.35rem 0.65rem' }}
                 >
                   <strong>Dr. Ramesh</strong> (HOD CSE)
                 </button>
@@ -367,67 +298,60 @@ export function LoginPage() {
               <div style={{ fontSize: '0.75rem', fontWeight: '700', color: 'var(--text-secondary)', marginBottom: '0.4rem' }}>
                 👤 Student Accounts across Branches (Password: <code>student123</code>):
               </div>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(175px, 1fr))', gap: '0.4rem' }}>
+              <div className="login-demo-student-grid">
                 <button
                   type="button"
-                  className="btn btn-secondary btn-sm"
+                  className="btn btn-secondary btn-sm login-demo-student-btn"
                   onClick={() => handleQuickDemoFill('25W61A6142', 'student123', 'student')}
                   id="quick-demo-student-6142"
-                  style={{ fontSize: '0.725rem', justifyContent: 'flex-start', textAlign: 'left', padding: '0.35rem 0.55rem' }}
                 >
                   <span>[2nd Yr AIML] <strong>Hemasundar</strong> (6142)</span>
                 </button>
                 <button
                   type="button"
-                  className="btn btn-secondary btn-sm"
+                  className="btn btn-secondary btn-sm login-demo-student-btn"
                   onClick={() => handleQuickDemoFill('25W61A6111', 'student123', 'student')}
                   id="quick-demo-student-6111"
-                  style={{ fontSize: '0.725rem', justifyContent: 'flex-start', textAlign: 'left', padding: '0.35rem 0.55rem' }}
                 >
                   <span>[2nd Yr AIML] <strong>Vivek</strong> (6111)</span>
                 </button>
                 <button
                   type="button"
-                  className="btn btn-secondary btn-sm"
+                  className="btn btn-secondary btn-sm login-demo-student-btn"
                   onClick={() => handleQuickDemoFill('26W61A0501', 'student123', 'student')}
                   id="quick-demo-student-cse-101"
-                  style={{ fontSize: '0.725rem', justifyContent: 'flex-start', textAlign: 'left', padding: '0.35rem 0.55rem' }}
                 >
                   <span>[1st Yr CSE] <strong>Rahul</strong> (0501)</span>
                 </button>
                 <button
                   type="button"
-                  className="btn btn-secondary btn-sm"
+                  className="btn btn-secondary btn-sm login-demo-student-btn"
                   onClick={() => handleQuickDemoFill('25W61A0401', 'student123', 'student')}
                   id="quick-demo-student-ece-201"
-                  style={{ fontSize: '0.725rem', justifyContent: 'flex-start', textAlign: 'left', padding: '0.35rem 0.55rem' }}
                 >
                   <span>[2nd Yr ECE] <strong>Gopi Chand</strong> (0401)</span>
                 </button>
                 <button
                   type="button"
-                  className="btn btn-secondary btn-sm"
+                  className="btn btn-secondary btn-sm login-demo-student-btn"
                   onClick={() => handleQuickDemoFill('24W61A0201', 'student123', 'student')}
                   id="quick-demo-student-eee-301"
-                  style={{ fontSize: '0.725rem', justifyContent: 'flex-start', textAlign: 'left', padding: '0.35rem 0.55rem' }}
                 >
                   <span>[3rd Yr EEE] <strong>Ramana</strong> (0201)</span>
                 </button>
                 <button
                   type="button"
-                  className="btn btn-secondary btn-sm"
+                  className="btn btn-secondary btn-sm login-demo-student-btn"
                   onClick={() => handleQuickDemoFill('22W61A0301', 'student123', 'student')}
                   id="quick-demo-student-mech-401"
-                  style={{ fontSize: '0.725rem', justifyContent: 'flex-start', textAlign: 'left', padding: '0.35rem 0.55rem' }}
                 >
                   <span>[4th Yr MECH] <strong>Madhu</strong> (0301)</span>
                 </button>
                 <button
                   type="button"
-                  className="btn btn-secondary btn-sm"
+                  className="btn btn-secondary btn-sm login-demo-student-btn"
                   onClick={() => handleQuickDemoFill('26W61A0101', 'student123', 'student')}
                   id="quick-demo-student-civ-101"
-                  style={{ fontSize: '0.725rem', justifyContent: 'flex-start', textAlign: 'left', padding: '0.35rem 0.55rem' }}
                 >
                   <span>[1st Yr CIVIL] <strong>Sandeep</strong> (0101)</span>
                 </button>

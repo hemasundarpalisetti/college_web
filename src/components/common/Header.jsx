@@ -26,8 +26,7 @@ export function Header({ toggleSidebar }) {
         <button
           type="button"
           onClick={toggleSidebar}
-          className="btn btn-outline btn-icon-only"
-          style={{ display: 'none' }}
+          className="header-sidebar-toggle-btn"
           id="mobile-sidebar-toggle"
           aria-label="Toggle navigation menu"
         >
@@ -37,80 +36,44 @@ export function Header({ toggleSidebar }) {
         <a
           href="#/"
           onClick={reloadToHomePage}
-          style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', textDecoration: 'none', cursor: 'pointer' }}
+          className="header-brand-link"
           title="Click to reload and return to Home page"
         >
           <img
             src={collegeInfo.logo}
             alt={collegeInfo.name}
-            style={{
-              width: '44px',
-              height: '44px',
-              aspectRatio: '1 / 1',
-              objectFit: 'contain',
-              flexShrink: 0
-            }}
+            className="header-brand-logo"
           />
-          <div style={{ display: 'flex', flexDirection: 'column', lineHeight: 1.2 }}>
-            <span
-              style={{
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
-                fontWeight: '800',
-                fontSize: '1.05rem',
-                color: '#000000',
-                letterSpacing: '0.01em'
-              }}
-            >
-              SRI SIVANI COLLEGE OF ENGINEERING
+          <div className="header-brand-text">
+            <span className="header-brand-title">
+              <span className="header-brand-title-full">SRI SIVANI COLLEGE OF ENGINEERING</span>
+              <span className="header-brand-title-short" style={{ display: 'none' }}>SSCE</span>
             </span>
-            <span style={{ fontSize: '0.72rem', fontWeight: '700', color: 'var(--primary-700)', letterSpacing: '0.04em' }}>
-              (AUTONOMOUS) • AFFILIATED TO JNTUK (CC-W6)
+            <span className="header-brand-sub">
+              (AUTONOMOUS)
             </span>
           </div>
-          <span className="badge badge-primary" style={{ display: 'inline-flex', marginLeft: '0.35rem' }}>
-            {isFaculty ? 'Faculty Panel' : 'Student Panel'}
+          <span className="badge badge-primary header-panel-badge">
+            {isFaculty ? 'Faculty' : 'Student'}
           </span>
         </a>
       </div>
 
       <div className="header-right">
         {/* User Pill */}
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.75rem',
-            padding: '0.35rem 0.85rem',
-            backgroundColor: 'var(--bg-secondary)',
-            border: '1px solid var(--border-subtle)',
-            borderRadius: 'var(--radius-full)'
-          }}
-        >
+        <div className="header-user-pill">
           {!isFaculty ? (
-            <StudentAvatar student={user} size={32} shape="circle" />
+            <StudentAvatar student={user} size={30} shape="circle" />
           ) : (
-            <div
-              style={{
-                width: '32px',
-                height: '32px',
-                borderRadius: '50%',
-                backgroundColor: 'var(--primary-700)',
-                color: '#ffffff',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '0.8rem',
-                fontWeight: '700'
-              }}
-            >
+            <div className="header-faculty-avatar">
               {user?.avatar || 'FC'}
             </div>
           )}
-          <div style={{ display: 'flex', flexDirection: 'column', lineHeight: 1.15 }}>
-            <span style={{ fontSize: '0.85rem', fontWeight: '700', color: 'var(--text-primary)' }}>
+          <div className="header-user-text">
+            <span className="header-user-name">
               {user?.name}
             </span>
-            <span style={{ fontSize: '0.725rem', color: 'var(--text-muted)' }}>
+            <span className="header-user-id">
               {isFaculty ? (user?.facultyId || 'Faculty') : (user?.rollNumber || 'Student')}
             </span>
           </div>
@@ -120,12 +83,12 @@ export function Header({ toggleSidebar }) {
         <button
           type="button"
           onClick={handleLogout}
-          className="btn btn-outline btn-sm"
+          className="btn btn-outline btn-sm header-logout-btn"
           id="header-logout-btn"
           title="Sign Out"
         >
           <LogOut size={16} />
-          <span>Logout</span>
+          <span className="header-logout-text">Logout</span>
         </button>
       </div>
     </header>

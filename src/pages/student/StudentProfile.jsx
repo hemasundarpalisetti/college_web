@@ -27,18 +27,7 @@ export function StudentProfile() {
         </div>
 
         {/* Profile Identity Bar */}
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '1.5rem',
-            padding: '1.5rem',
-            backgroundColor: 'var(--bg-secondary)',
-            borderRadius: 'var(--radius-lg)',
-            marginBottom: '2rem',
-            borderBottom: '1px solid var(--border-light)'
-          }}
-        >
+        <div className="profile-identity-bar">
           {/* Student Photo / Avatar */}
           <StudentAvatar student={user} size={100} shape="rounded" />
 
