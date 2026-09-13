@@ -1,6 +1,7 @@
 import React from 'react';
 import { MapPin, Mail, Phone, Globe, Shield, PhoneCall, Building2, UserCheck, GraduationCap } from 'lucide-react';
 import { collegeInfo } from '../../data/collegeInfo';
+import { reloadToHomePage } from '../../utils/navigation';
 
 export function Footer() {
   return (
@@ -10,7 +11,13 @@ export function Footer() {
           {/* Col 1: Brand & Accreditation */}
           <div className="footer-col-brand">
             <div className="footer-brand-header">
-              <div className="footer-brand-logo-wrap">
+              <a
+                href="#/"
+                onClick={reloadToHomePage}
+                className="footer-brand-logo-wrap"
+                style={{ textDecoration: 'none', cursor: 'pointer' }}
+                title="Click to reload and return to Home page"
+              >
                 <img
                   src={collegeInfo.logo}
                   alt={collegeInfo.name}
@@ -24,7 +31,7 @@ export function Footer() {
                   <span className="footer-college-name">SRI SIVANI COLLEGE OF ENGINEERING</span>
                   <span className="footer-college-tag">(AUTONOMOUS)</span>
                 </div>
-              </div>
+              </a>
               <div className="footer-accreditation-badge">
                 {collegeInfo.accreditation}
               </div>

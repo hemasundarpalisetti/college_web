@@ -16,6 +16,7 @@ import {
 import { useAuth } from '../../context/AuthContext';
 import { useToast } from '../../context/ToastContext';
 import { collegeInfo } from '../../data/collegeInfo';
+import { reloadToHomePage } from '../../utils/navigation';
 
 export function Sidebar({ isOpen, onClose }) {
   const { user, logout } = useAuth();
@@ -60,7 +61,13 @@ export function Sidebar({ isOpen, onClose }) {
 
       <aside className={`sidebar ${isOpen ? 'open' : ''}`}>
         {/* Brand Banner */}
-        <div className="sidebar-brand">
+        <a
+          href="#/"
+          onClick={reloadToHomePage}
+          className="sidebar-brand"
+          style={{ textDecoration: 'none', cursor: 'pointer' }}
+          title="Click to reload and return to Home page"
+        >
           <img
             src={collegeInfo.logo}
             alt={collegeInfo.name}
@@ -88,7 +95,7 @@ export function Sidebar({ isOpen, onClose }) {
               (AUTONOMOUS)
             </span>
           </div>
-        </div>
+        </a>
 
         {/* Navigation List */}
         <nav className="sidebar-nav">

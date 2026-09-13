@@ -4,6 +4,7 @@ import { Menu, LogOut, User, Bell, Shield } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useToast } from '../../context/ToastContext';
 import { collegeInfo } from '../../data/collegeInfo';
+import { reloadToHomePage } from '../../utils/navigation';
 
 export function Header({ toggleSidebar }) {
   const { user, logout } = useAuth();
@@ -32,7 +33,12 @@ export function Header({ toggleSidebar }) {
           <Menu size={20} />
         </button>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+        <a
+          href="#/"
+          onClick={reloadToHomePage}
+          style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', textDecoration: 'none', cursor: 'pointer' }}
+          title="Click to reload and return to Home page"
+        >
           <img
             src={collegeInfo.logo}
             alt={collegeInfo.name}
@@ -63,7 +69,7 @@ export function Header({ toggleSidebar }) {
           <span className="badge badge-primary" style={{ display: 'inline-flex', marginLeft: '0.35rem' }}>
             {isFaculty ? 'Faculty Panel' : 'Student Panel'}
           </span>
-        </div>
+        </a>
       </div>
 
       <div className="header-right">

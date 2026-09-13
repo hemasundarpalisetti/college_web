@@ -17,6 +17,7 @@ import { useAuth } from '../../context/AuthContext';
 import { useToast } from '../../context/ToastContext';
 import { collegeInfo } from '../../data/collegeInfo';
 import { Modal } from '../../components/common/Modal';
+import { reloadToHomePage } from '../../utils/navigation';
 
 export function LoginPage() {
   const [activeTab, setActiveTab] = useState('student'); // 'student' | 'faculty'
@@ -99,8 +100,9 @@ export function LoginPage() {
             background: 'linear-gradient(180deg, var(--primary-50) 0%, #ffffff 100%)'
           }}
         >
-          <Link
-            to="/"
+          <a
+            href="#/"
+            onClick={reloadToHomePage}
             style={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -108,14 +110,30 @@ export function LoginPage() {
               fontSize: '0.825rem',
               fontWeight: '600',
               color: 'var(--primary-700)',
-              marginBottom: '1rem'
+              marginBottom: '1rem',
+              textDecoration: 'none',
+              cursor: 'pointer'
             }}
+            title="Click to reload and return to Home page"
           >
             <ArrowLeft size={16} />
             <span>Back to Home</span>
-          </Link>
+          </a>
 
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.85rem', marginBottom: '0.85rem' }}>
+          <a
+            href="#/"
+            onClick={reloadToHomePage}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '0.85rem',
+              marginBottom: '0.85rem',
+              textDecoration: 'none',
+              cursor: 'pointer'
+            }}
+            title="Click to reload and return to Home page"
+          >
             <img
               src={collegeInfo.logo}
               alt={collegeInfo.name}
@@ -135,7 +153,7 @@ export function LoginPage() {
                 (AUTONOMOUS)
               </div>
             </div>
-          </div>
+          </a>
 
           <h2
             style={{

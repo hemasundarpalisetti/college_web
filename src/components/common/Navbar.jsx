@@ -3,6 +3,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { LogIn, ShieldCheck, Menu, X, ArrowRight } from 'lucide-react';
 import { collegeInfo } from '../../data/collegeInfo';
 import { useAuth } from '../../context/AuthContext';
+import { reloadToHomePage } from '../../utils/navigation';
 
 export function Navbar() {
   const { user } = useAuth();
@@ -57,7 +58,14 @@ export function Navbar() {
         <div className="navbar-brand-group">
           {/* 1. LEFT: Official College Logo & Prominent Name with Affiliation Directly Below */}
           <div className="navbar-left">
-            <Link to="/" className="navbar-logo-link" aria-label="Sri Sivani College of Engineering (Autonomous)">
+            <a
+              href="#/"
+              onClick={reloadToHomePage}
+              className="navbar-logo-link"
+              aria-label="Sri Sivani College of Engineering (Autonomous) - Reload Home"
+              title="Click to reload and return to Home page"
+              style={{ cursor: 'pointer' }}
+            >
               <img
                 src={collegeInfo.logo}
                 alt="Sri Sivani College of Engineering"
@@ -81,16 +89,23 @@ export function Navbar() {
                   </span>
                 </div>
               </div>
-            </Link>
+            </a>
           </div>
 
           {/* 2. CENTER: College Portal Name */}
           <div className="navbar-center">
-            <Link to="/" className="navbar-portal-brand" aria-label="College Academic Portal">
+            <a
+              href="#/"
+              onClick={reloadToHomePage}
+              className="navbar-portal-brand"
+              aria-label="College Academic Portal - Reload Home"
+              title="Click to reload and return to Home page"
+              style={{ cursor: 'pointer' }}
+            >
               <span className="navbar-portal-title">
                 COLLEGE PORTAL
               </span>
-            </Link>
+            </a>
           </div>
         </div>
 
