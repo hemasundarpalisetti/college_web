@@ -130,7 +130,8 @@ console.log(`✓ All ${BRANCHES.length} Engineering Branches verified across all
 
 // 12. Verify All Academic Faculty Members across all departments from srisivani.com
 import { FACULTY_MEMBERS, FACULTY_DEPARTMENTS } from './src/data/collegeInfo.js';
-console.assert(Array.isArray(FACULTY_DEPARTMENTS) && FACULTY_DEPARTMENTS.length === 8, `Expected 8 departments, got ${FACULTY_DEPARTMENTS?.length}`);
+console.assert(Array.isArray(FACULTY_DEPARTMENTS) && FACULTY_DEPARTMENTS.length === 7, `Expected 7 departments, got ${FACULTY_DEPARTMENTS?.length}`);
+console.assert(!FACULTY_DEPARTMENTS.some(d => d.id === 'all'), 'FACULTY_DEPARTMENTS should not contain "all" button');
 console.assert(Array.isArray(FACULTY_MEMBERS) && FACULTY_MEMBERS.length === 93, `Expected 93 faculty members, got ${FACULTY_MEMBERS?.length}`);
 console.assert(FACULTY_MEMBERS.every(f => f.name && f.designation && f.qualification && f.department && f.branchCode && f.email), 'Faculty record missing essential fields');
 

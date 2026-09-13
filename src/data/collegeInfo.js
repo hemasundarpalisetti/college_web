@@ -86,7 +86,6 @@ export const collegeInfo = {
  * Official Academic Departments with Portals
  */
 export const FACULTY_DEPARTMENTS = [
-  { id: "all", name: "All Academic Departments", shortName: "All Branches", url: "https://srisivani.com/" },
   { id: "cse", name: "Computer Science & Engineering", shortName: "CSE & AIML", url: "https://srisivani.com/computer-science-engineering/" },
   { id: "ece", name: "Electronics & Communication Engineering", shortName: "ECE", url: "https://srisivani.com/electronics-and-communications-engineering/" },
   { id: "eee", name: "Electrical & Electronics Engineering", shortName: "EEE", url: "https://srisivani.com/electrical-and-electronics-engineering/" },

@@ -73,31 +73,28 @@ export function HomePage() {
   const { user } = useAuth();
   const videoRef = useRef(null);
   const [activeGalleryItem, setActiveGalleryItem] = useState(null);
-  const [selectedFacultyBranch, setSelectedFacultyBranch] = useState('all');
+  const [selectedFacultyBranch, setSelectedFacultyBranch] = useState('cse');
   const [selectedFacultyCategory, setSelectedFacultyCategory] = useState('all');
 
   // Filter faculty by academic branch first
   const branchFaculty = useMemo(() => {
-    if (selectedFacultyBranch === 'all') return FACULTY_MEMBERS;
     return FACULTY_MEMBERS.filter(m => m.branchCode.toLowerCase() === selectedFacultyBranch.toLowerCase());
   }, [selectedFacultyBranch]);
 
   // Total counts for each department tab
   const branchCounts = useMemo(() => {
-    const counts = { all: FACULTY_MEMBERS.length };
+    const counts = {};
     FACULTY_DEPARTMENTS.forEach(dept => {
-      if (dept.id !== 'all') {
-        counts[dept.id] = FACULTY_MEMBERS.filter(m => {
-          if (dept.id === 'cse') return m.branchCode === 'CSE';
-          if (dept.id === 'ece') return m.branchCode === 'ECE';
-          if (dept.id === 'eee') return m.branchCode === 'EEE';
-          if (dept.id === 'mech') return m.branchCode === 'MECH';
-          if (dept.id === 'civil') return m.branchCode === 'CIVIL';
-          if (dept.id === 'hbs') return m.branchCode === 'H&BS';
-          if (dept.id === 'mba') return m.branchCode === 'MBA';
-          return false;
-        }).length;
-      }
+      counts[dept.id] = FACULTY_MEMBERS.filter(m => {
+        if (dept.id === 'cse') return m.branchCode === 'CSE';
+        if (dept.id === 'ece') return m.branchCode === 'ECE';
+        if (dept.id === 'eee') return m.branchCode === 'EEE';
+        if (dept.id === 'mech') return m.branchCode === 'MECH';
+        if (dept.id === 'civil') return m.branchCode === 'CIVIL';
+        if (dept.id === 'hbs') return m.branchCode === 'H&BS';
+        if (dept.id === 'mba') return m.branchCode === 'MBA';
+        return false;
+      }).length;
     });
     return counts;
   }, []);
@@ -391,9 +388,7 @@ export function HomePage() {
               Distinguished Faculty Members
             </h2>
             <p className="faculty-subtitle-text">
-              {selectedFacultyBranch === 'all'
-                ? 'Comprehensive Faculty Directory across all academic branches of Sri Sivani College of Engineering • Dedicated professors, researchers, and technical educators inspiring innovation.'
-                : `${activeDepartment.name} • Highly qualified educators, scholars, and industry-oriented faculty committed to excellence in academic mentorship and engineering education.`}
+              {`${activeDepartment.name} • Highly qualified educators, scholars, and industry-oriented faculty committed to excellence in academic mentorship and engineering education.`}
             </p>
             <a
               href={activeDepartment.url}
