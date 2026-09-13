@@ -42,14 +42,14 @@ export function StudentMarks() {
       </div>
 
       {/* Semester Selector Tabs */}
-      <div className="segmented-tabs" style={{ maxWidth: '400px', marginBottom: '2rem' }}>
+      <div className="segmented-tabs" style={{ maxWidth: '520px', marginBottom: '2rem' }}>
         <button
           type="button"
           className={`segmented-tab ${selectedSem === 'semester1' ? 'active' : ''}`}
           onClick={() => setSelectedSem('semester1')}
           id="student-marks-sem1-tab"
         >
-          <span>Semester 1</span>
+          <span>1st Year - 1st Sem (1-1)</span>
         </button>
         <button
           type="button"
@@ -57,7 +57,7 @@ export function StudentMarks() {
           onClick={() => setSelectedSem('semester2')}
           id="student-marks-sem2-tab"
         >
-          <span>Semester 2 (Current)</span>
+          <span>1st Year - 2nd Sem (1-2)</span>
         </button>
       </div>
 
@@ -98,7 +98,7 @@ export function StudentMarks() {
       <div className="card">
         <div className="card-header">
           <div>
-            <h3 className="card-title">Course-Wise Score Sheet ({selectedSem === 'semester1' ? 'Semester 1' : 'Semester 2'})</h3>
+            <h3 className="card-title">Course-Wise Score Sheet ({selectedSem === 'semester1' ? '1st Year Semester 1 (1-1)' : '1st Year Semester 2 (1-2)'})</h3>
             <span className="card-subtitle">Internal (Max 40) + External (Max 60) = Total Marks (Max 100)</span>
           </div>
         </div>

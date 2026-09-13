@@ -195,7 +195,7 @@ export function LoginPage() {
                   type="text"
                   id="portal-username"
                   className="form-input"
-                  placeholder={activeTab === 'student' ? 'e.g. student01' : 'e.g. faculty01'}
+                  placeholder={activeTab === 'student' ? 'e.g. 25W61A6142 or student01' : 'e.g. pradeep or himabindu'}
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   autoComplete="username"
@@ -230,7 +230,7 @@ export function LoginPage() {
                   type={showPassword ? 'text' : 'password'}
                   id="portal-password"
                   className="form-input"
-                  placeholder="Enter your password"
+                  placeholder="Enter your password (e.g. student123 or faculty123)"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   autoComplete="current-password"
@@ -287,40 +287,105 @@ export function LoginPage() {
             </button>
           </form>
 
-          {/* Quick Demo Credentials Panel for Expo Reviewers */}
+          {/* Quick Demo Credentials Panel */}
           <div
             style={{
-              marginTop: '2rem',
-              padding: '1rem 1.15rem',
+              marginTop: '1.75rem',
+              padding: '1.15rem',
               backgroundColor: 'var(--bg-secondary)',
               borderRadius: 'var(--radius-md)',
               border: '1px solid var(--border-subtle)'
             }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.75rem', fontWeight: '700', color: 'var(--primary-700)', textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: '0.6rem' }}>
-              <Sparkles size={14} />
-              <span>Project Expo Quick-Fill Accounts:</span>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.75rem', fontWeight: '800', color: 'var(--primary-700)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                <Sparkles size={14} />
+                <span>Quick-Fill Demo Logins:</span>
+              </div>
+              <span style={{ fontSize: '0.725rem', color: 'var(--text-muted)' }}>All 4 B.Tech Years</span>
             </div>
 
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
-              <button
-                type="button"
-                className="btn btn-outline btn-sm"
-                onClick={() => handleQuickDemoFill('student01', 'student123', 'student')}
-                id="quick-demo-student01"
-                style={{ fontSize: '0.775rem' }}
-              >
-                👤 Student 01 (Aarav)
-              </button>
-              <button
-                type="button"
-                className="btn btn-outline btn-sm"
-                onClick={() => handleQuickDemoFill('faculty01', 'faculty123', 'faculty')}
-                id="quick-demo-faculty01"
-                style={{ fontSize: '0.775rem' }}
-              >
-                🛡️ Faculty 01 (Dr. Rao)
-              </button>
+            {/* Faculty Logins */}
+            <div style={{ marginBottom: '0.85rem' }}>
+              <div style={{ fontSize: '0.75rem', fontWeight: '700', color: 'var(--text-secondary)', marginBottom: '0.4rem' }}>
+                🛡️ Faculty Accounts:
+              </div>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.45rem' }}>
+                <button
+                  type="button"
+                  className="btn btn-outline btn-sm"
+                  onClick={() => handleQuickDemoFill('pradeep', 'faculty123', 'faculty')}
+                  id="quick-demo-pradeep"
+                  title="Dr. Pradeep - HOD of AIML (pwd: faculty123)"
+                  style={{ fontSize: '0.75rem', padding: '0.35rem 0.65rem' }}
+                >
+                  <strong>Dr. Pradeep</strong> (HOD)
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-outline btn-sm"
+                  onClick={() => handleQuickDemoFill('himabindu', 'faculty123', 'faculty')}
+                  id="quick-demo-himabindu"
+                  title="Prof. Himabindu - Class Teacher (pwd: faculty123)"
+                  style={{ fontSize: '0.75rem', padding: '0.35rem 0.65rem' }}
+                >
+                  <strong>Prof. Himabindu</strong> (Faculty)
+                </button>
+              </div>
+            </div>
+
+            {/* Student Logins across 4 Years */}
+            <div>
+              <div style={{ fontSize: '0.75rem', fontWeight: '700', color: 'var(--text-secondary)', marginBottom: '0.4rem' }}>
+                👤 Student Accounts (Password: <code>student123</code>):
+              </div>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(175px, 1fr))', gap: '0.4rem' }}>
+                <button
+                  type="button"
+                  className="btn btn-secondary btn-sm"
+                  onClick={() => handleQuickDemoFill('26W61A6101', 'student123', 'student')}
+                  id="quick-demo-student-101"
+                  style={{ fontSize: '0.725rem', justifyContent: 'flex-start', textAlign: 'left', padding: '0.35rem 0.55rem' }}
+                >
+                  <span>[1st Yr] <strong>Ananya</strong> (6101)</span>
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-secondary btn-sm"
+                  onClick={() => handleQuickDemoFill('25W61A6142', 'student123', 'student')}
+                  id="quick-demo-student-6142"
+                  style={{ fontSize: '0.725rem', justifyContent: 'flex-start', textAlign: 'left', padding: '0.35rem 0.55rem' }}
+                >
+                  <span>[2nd Yr] <strong>Hemasundar</strong> (6142)</span>
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-secondary btn-sm"
+                  onClick={() => handleQuickDemoFill('25W61A6122', 'student123', 'student')}
+                  id="quick-demo-student-6122"
+                  style={{ fontSize: '0.725rem', justifyContent: 'flex-start', textAlign: 'left', padding: '0.35rem 0.55rem' }}
+                >
+                  <span>[2nd Yr] <strong>Ganesh</strong> (6122)</span>
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-secondary btn-sm"
+                  onClick={() => handleQuickDemoFill('23W61A6101', 'student123', 'student')}
+                  id="quick-demo-student-301"
+                  style={{ fontSize: '0.725rem', justifyContent: 'flex-start', textAlign: 'left', padding: '0.35rem 0.55rem' }}
+                >
+                  <span>[3rd Yr] <strong>Sai Kumar</strong> (6101)</span>
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-secondary btn-sm"
+                  onClick={() => handleQuickDemoFill('22W61A6105', 'student123', 'student')}
+                  id="quick-demo-student-401"
+                  style={{ fontSize: '0.725rem', justifyContent: 'flex-start', textAlign: 'left', padding: '0.35rem 0.55rem' }}
+                >
+                  <span>[4th Yr] <strong>Manoj</strong> (6105)</span>
+                </button>
+              </div>
             </div>
           </div>
         </div>

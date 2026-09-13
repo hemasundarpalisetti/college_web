@@ -15,26 +15,6 @@ export function StudentProfile() {
         </div>
       </div>
 
-      {/* Notice Pill */}
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '0.75rem',
-          backgroundColor: 'var(--primary-50)',
-          border: '1px solid var(--primary-200)',
-          borderRadius: 'var(--radius-md)',
-          padding: '0.85rem 1.25rem',
-          marginBottom: '2rem',
-          color: 'var(--primary-900)'
-        }}
-      >
-        <Info size={20} color="var(--primary-700)" style={{ flexShrink: 0 }} />
-        <span style={{ fontSize: '0.875rem' }}>
-          <strong>Institutional Policy:</strong> Student credentials and academic records are centrally managed by the Department Administration. To update contact information or personal details, please contact your Class Advisor.
-        </span>
-      </div>
-
       {/* Profile Card */}
       <div className="card" style={{ marginBottom: '2rem' }}>
         <div className="card-header">
@@ -98,17 +78,17 @@ export function StudentProfile() {
         <div className="profile-info-grid">
           <div className="info-item">
             <span className="info-label">Degree / Program</span>
-            <span className="info-value">{user?.branch || 'Computer Science & Engineering'}</span>
+            <span className="info-value">{user?.branch || 'Artificial Intelligence & Machine Learning (AIML)'}</span>
           </div>
 
           <div className="info-item">
             <span className="info-label">Current Academic Year</span>
-            <span className="info-value">{user?.year || '1st Year'}</span>
+            <span className="info-value">{user?.year || '2nd Year'}</span>
           </div>
 
           <div className="info-item">
             <span className="info-label">Current Semester</span>
-            <span className="info-value">{user?.semester || 'Semester 2'}</span>
+            <span className="info-value">{user?.semester || 'Semester 3'}</span>
           </div>
 
           <div className="info-item">
@@ -118,7 +98,7 @@ export function StudentProfile() {
 
           <div className="info-item">
             <span className="info-label">Official Email Address</span>
-            <span className="info-value">{user?.email || `${user?.username}@apexengineering.edu`}</span>
+            <span className="info-value">{user?.email || `${user?.username}@srisivani.edu.in`}</span>
           </div>
 
           <div className="info-item">

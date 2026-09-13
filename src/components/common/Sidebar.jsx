@@ -10,8 +10,7 @@ import {
   FileText,
   LogOut,
   GraduationCap,
-  Sparkles,
-  Calendar
+  Sparkles
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useToast } from '../../context/ToastContext';
@@ -109,19 +108,6 @@ export function Sidebar({ isOpen, onClose }) {
               </NavLink>
             );
           })}
-
-          <div style={{ margin: '1.25rem 0 0.5rem', padding: '0 0.5rem 0.25rem', fontSize: '0.725rem', fontWeight: '700', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-            Institutional Highlights
-          </div>
-
-          <a
-            href="/#engineering-day"
-            className="sidebar-link"
-            style={{ color: 'var(--primary-800)', backgroundColor: 'var(--primary-50)' }}
-          >
-            <Calendar size={18} color="var(--primary-700)" />
-            <span>Sept 15 Engg Day</span>
-          </a>
         </nav>
 
         {/* User Card & Logout in Footer */}

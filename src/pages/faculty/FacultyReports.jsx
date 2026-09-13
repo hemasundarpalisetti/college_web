@@ -15,10 +15,22 @@ export function FacultyReports() {
   const initialStudentId = searchParams.get('student') || (students[0]?.id || 'S001');
   const initialType = searchParams.get('type') === 'attendance' ? 'attendance' : 'result';
 
+  const [filterYear, setFilterYear] = useState('ALL');
   const [selectedStudentId, setSelectedStudentId] = useState(initialStudentId);
   const [reportType, setReportType] = useState(initialType); // 'result' | 'attendance'
   const [selectedSem, setSelectedSem] = useState('semester1');
   const [isDownloading, setIsDownloading] = useState(false);
+
+  const displayStudents = useMemo(() => {
+    if (filterYear === 'ALL') return students;
+    return students.filter(s => s.year === filterYear);
+  }, [students, filterYear]);
+
+  useEffect(() => {
+    if (displayStudents.length > 0 && !displayStudents.some(s => s.id === selectedStudentId)) {
+      setSelectedStudentId(displayStudents[0].id);
+    }
+  }, [displayStudents, selectedStudentId]);
 
   const selectedStudent = useMemo(() => {
     return students.find(s => s.id === selectedStudentId) || students[0];
@@ -85,18 +97,37 @@ export function FacultyReports() {
 
       {/* Selector Toolbar */}
       <div className="card" style={{ marginBottom: '2rem' }}>
+        <div style={{ marginBottom: '1.25rem' }}>
+          <label className="form-label" style={{ marginBottom: '0.4rem' }}>Filter by Academic Year:</label>
+          <div className="segmented-tabs" style={{ maxWidth: '600px' }}>
+            {['ALL', '1st Year', '2nd Year', '3rd Year', '4th Year'].map(yr => (
+              <button
+                key={yr}
+                type="button"
+                className={`segmented-tab ${filterYear === yr ? 'active' : ''}`}
+                onClick={() => setFilterYear(yr)}
+                id={`report-filter-year-${yr.replace(/\s+/g, '-').toLowerCase()}`}
+              >
+                <span>{yr === 'ALL' ? 'All 4 Years' : yr}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.5rem', alignItems: 'center' }}>
           <div>
-            <label className="form-label">Select Student:</label>
+            <label className="form-label">
+              Select Student ({displayStudents.length} {filterYear === 'ALL' ? 'total' : filterYear}):
+            </label>
             <select
               className="form-select"
               value={selectedStudentId}
               onChange={(e) => setSelectedStudentId(e.target.value)}
               id="report-student-select"
             >
-              {students.map(s => (
+              {displayStudents.map(s => (
                 <option key={s.id} value={s.id}>
-                  {s.rollNumber} — {s.name}
+                  [{s.year}] {s.rollNumber} — {s.name}
                 </option>
               ))}
             </select>

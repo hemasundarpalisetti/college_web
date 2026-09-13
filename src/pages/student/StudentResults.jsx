@@ -67,7 +67,7 @@ export function StudentResults() {
       </div>
 
       {/* Semester Selector Tabs */}
-      <div className="segmented-tabs" style={{ maxWidth: '420px', marginBottom: '2rem' }}>
+      <div className="segmented-tabs" style={{ maxWidth: '540px', marginBottom: '2rem' }}>
         <button
           type="button"
           className={`segmented-tab ${selectedSem === 'semester1' ? 'active' : ''}`}
@@ -75,7 +75,7 @@ export function StudentResults() {
           id="sem1-tab-btn"
         >
           <FileSpreadsheet size={16} />
-          <span>Semester 1 Result</span>
+          <span>1st Year - 1st Sem Result (1-1)</span>
         </button>
         <button
           type="button"
@@ -84,7 +84,7 @@ export function StudentResults() {
           id="sem2-tab-btn"
         >
           <FileSpreadsheet size={16} />
-          <span>Semester 2 Result</span>
+          <span>1st Year - 2nd Sem Result (1-2)</span>
         </button>
       </div>
 

@@ -19,21 +19,26 @@ const KEYS = {
   MARKS: 'collegePortal_marks',
   ATTENDANCE: 'collegePortal_attendance',
   CURRENT_USER: 'collegePortal_currentUser',
-  INITIALIZED: 'collegePortal_initialized'
+  INITIALIZED: 'collegePortal_initialized_all_4years_v4'
 };
 
 /**
- * Initialize LocalStorage with default sample data on first run
+ * Initialize LocalStorage with default sample data on first run or schema update
  */
 export function initializeStorage(force = false) {
   const isInitialized = localStorage.getItem(KEYS.INITIALIZED);
-  if (!isInitialized || force) {
+  const existingStudents = localStorage.getItem(KEYS.STUDENTS);
+  const existingMarks = localStorage.getItem(KEYS.MARKS);
+  const has4Years = existingStudents && existingStudents.includes('26W61A6101') && existingStudents.includes('22W61A6105');
+  const hasUpdatedSubjects = existingMarks && existingMarks.includes('BS1101') && existingMarks.includes('Linear Algebra and Calculus');
+
+  if (!isInitialized || !has4Years || !hasUpdatedSubjects || force) {
     localStorage.setItem(KEYS.STUDENTS, JSON.stringify(INITIAL_STUDENTS));
     localStorage.setItem(KEYS.FACULTY, JSON.stringify(INITIAL_FACULTY));
     localStorage.setItem(KEYS.MARKS, JSON.stringify(INITIAL_MARKS));
     localStorage.setItem(KEYS.ATTENDANCE, JSON.stringify(INITIAL_ATTENDANCE));
     localStorage.setItem(KEYS.INITIALIZED, 'true');
-    console.log('[Storage] Initialized sample data in localStorage.');
+    console.log('[Storage] Initialized 4-Year Students and Updated R23 Curriculum in localStorage.');
   }
 }
 
@@ -84,8 +89,15 @@ export function getStudents() {
 }
 
 export function getStudentById(studentId) {
+  if (!studentId) return null;
+  const cleanId = String(studentId).trim().toLowerCase();
   const students = getStudents();
-  return students.find(s => s.id === studentId || s.username === studentId || s.rollNumber === studentId) || null;
+  return students.find(
+    s => s.id.toLowerCase() === cleanId ||
+         s.username.toLowerCase() === cleanId ||
+         s.rollNumber.toLowerCase() === cleanId ||
+         (s.aliases && s.aliases.some(a => a.toLowerCase() === cleanId))
+  ) || null;
 }
 
 export function addStudent(studentPayload) {
@@ -104,15 +116,15 @@ export function addStudent(studentPayload) {
 
   const newStudent = {
     id: newId,
-    rollNumber: studentPayload.rollNumber.trim(),
-    username: studentPayload.username.trim().toLowerCase(),
+    rollNumber: studentPayload.rollNumber.trim().toUpperCase(),
+    username: studentPayload.username ? studentPayload.username.trim().toLowerCase() : studentPayload.rollNumber.trim().toLowerCase(),
     password: studentPayload.password || 'student123',
     name: studentPayload.name.trim(),
-    branch: studentPayload.branch || 'Computer Science & Engineering',
-    year: studentPayload.year || '1st Year',
-    semester: studentPayload.semester || 'Semester 2',
+    branch: studentPayload.branch || 'Artificial Intelligence & Machine Learning (AIML)',
+    year: studentPayload.year || '2nd Year',
+    semester: studentPayload.semester || 'Semester 3',
     section: studentPayload.section || 'A',
-    email: studentPayload.email || `${studentPayload.username.trim().toLowerCase()}@apexengineering.edu`,
+    email: studentPayload.email || `${studentPayload.rollNumber.trim().toLowerCase()}@srisivani.edu.in`,
     phone: studentPayload.phone || '+91 91234 00000',
     avatar: initials || 'ST',
     admissionDate: new Date().toISOString().split('T')[0]
@@ -208,8 +220,15 @@ export function getFaculty() {
 }
 
 export function getFacultyById(facultyId) {
+  if (!facultyId) return null;
+  const cleanId = String(facultyId).trim().toLowerCase();
   const facultyList = getFaculty();
-  return facultyList.find(f => f.id === facultyId || f.username === facultyId) || null;
+  return facultyList.find(
+    f => f.id.toLowerCase() === cleanId ||
+         f.username.toLowerCase() === cleanId ||
+         f.facultyId?.toLowerCase() === cleanId ||
+         (f.aliases && f.aliases.some(a => a.toLowerCase() === cleanId))
+  ) || null;
 }
 
 // ---------------------------------------------------------------------------

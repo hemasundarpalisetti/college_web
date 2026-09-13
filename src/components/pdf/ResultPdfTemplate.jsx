@@ -5,7 +5,7 @@ import { calculateGrade, calculateTotal, calculatePercentage, calculateSGPA } fr
 export function ResultPdfTemplate({ student, semesterKey = 'semester1', marks = [] }) {
   if (!student) return null;
 
-  const semLabel = semesterKey === 'semester1' ? 'Semester 1' : 'Semester 2';
+  const semLabel = semesterKey === 'semester1' ? '1st Year Semester 1 (1-1)' : '1st Year Semester 2 (1-2)';
   
   // Calculate computed subjects
   const computedSubjects = (marks || []).map(s => {

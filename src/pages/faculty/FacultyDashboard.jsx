@@ -26,6 +26,7 @@ export function FacultyDashboard() {
   const { user } = useAuth();
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
+  const [filterYear, setFilterYear] = useState('ALL');
 
   const students = useMemo(() => getStudents(), []);
   const allMarks = useMemo(() => getAllMarks(), []);
@@ -38,6 +39,13 @@ export function FacultyDashboard() {
     let passedCount = 0;
     let attentionCount = 0;
 
+    const yearCounts = {
+      '1st Year': 0,
+      '2nd Year': 0,
+      '3rd Year': 0,
+      '4th Year': 0
+    };
+
     const list = students.map(s => {
       const summary = calculateStudentSummary(s.id, allMarks, allAttendance);
       const attPct = summary.attendance.overallPercentage;
@@ -49,6 +57,7 @@ export function FacultyDashboard() {
       totalMarksSum += marksPct;
       if (isPassed) passedCount++;
       if (needsAttention) attentionCount++;
+      if (yearCounts[s.year] !== undefined) yearCounts[s.year]++;
 
       return {
         ...s,
@@ -67,20 +76,24 @@ export function FacultyDashboard() {
       avgAttendance: parseFloat((totalAttSum / count).toFixed(1)),
       avgMarks: parseFloat((totalMarksSum / count).toFixed(1)),
       passedCount,
-      attentionCount
+      attentionCount,
+      yearCounts
     };
   }, [students, allMarks, allAttendance]);
 
   const filteredStudents = useMemo(() => {
-    if (!searchTerm.trim()) return studentMetrics.list;
-    const q = searchTerm.toLowerCase();
-    return studentMetrics.list.filter(
-      s => s.name.toLowerCase().includes(q) ||
-           s.rollNumber.toLowerCase().includes(q) ||
-           s.username.toLowerCase().includes(q) ||
-           s.branch.toLowerCase().includes(q)
-    );
-  }, [studentMetrics.list, searchTerm]);
+    return studentMetrics.list.filter(s => {
+      const matchYear = filterYear === 'ALL' || s.year === filterYear;
+      if (!searchTerm.trim()) return matchYear;
+      const q = searchTerm.toLowerCase();
+      const matchSearch =
+        s.name.toLowerCase().includes(q) ||
+        s.rollNumber.toLowerCase().includes(q) ||
+        s.username.toLowerCase().includes(q) ||
+        s.branch.toLowerCase().includes(q);
+      return matchYear && matchSearch;
+    });
+  }, [studentMetrics.list, searchTerm, filterYear]);
 
   return (
     <div>
@@ -205,11 +218,45 @@ export function FacultyDashboard() {
         </div>
       </div>
 
+      {/* 4-Year Cohort Quick Filter Cards */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '0.75rem', marginBottom: '1.5rem' }}>
+        {[
+          { key: 'ALL', label: 'All 4 Years', count: studentMetrics.totalStudents },
+          { key: '1st Year', label: '1st Year', count: studentMetrics.yearCounts['1st Year'] },
+          { key: '2nd Year', label: '2nd Year', count: studentMetrics.yearCounts['2nd Year'] },
+          { key: '3rd Year', label: '3rd Year', count: studentMetrics.yearCounts['3rd Year'] },
+          { key: '4th Year', label: '4th Year', count: studentMetrics.yearCounts['4th Year'] }
+        ].map(cohort => (
+          <button
+            key={cohort.key}
+            type="button"
+            className="card"
+            onClick={() => setFilterYear(cohort.key)}
+            style={{
+              padding: '0.85rem 1.1rem',
+              cursor: 'pointer',
+              border: filterYear === cohort.key ? '2px solid var(--primary-600)' : '1px solid var(--border-subtle)',
+              backgroundColor: filterYear === cohort.key ? 'var(--primary-50)' : '#ffffff',
+              textAlign: 'left',
+              transition: 'all 0.15s ease'
+            }}
+            id={`dashboard-cohort-${cohort.key.replace(/\s+/g, '-').toLowerCase()}`}
+          >
+            <div style={{ fontSize: '0.75rem', fontWeight: '700', color: filterYear === cohort.key ? 'var(--primary-800)' : 'var(--text-secondary)' }}>
+              {cohort.label}
+            </div>
+            <div style={{ fontSize: '1.4rem', fontWeight: '900', color: filterYear === cohort.key ? 'var(--primary-900)' : 'var(--text-primary)', marginTop: '0.15rem' }}>
+              {cohort.count} <span style={{ fontSize: '0.75rem', fontWeight: '600', color: 'var(--text-muted)' }}>students</span>
+            </div>
+          </button>
+        ))}
+      </div>
+
       {/* Student Roster Preview */}
       <div className="card">
         <div className="card-header">
           <div>
-            <h3 className="card-title">Enrolled Students Overview</h3>
+            <h3 className="card-title">Enrolled Students Overview ({filterYear === 'ALL' ? 'All 4 Years' : filterYear})</h3>
             <span className="card-subtitle">Real-time academic records across all students</span>
           </div>
 
@@ -233,7 +280,7 @@ export function FacultyDashboard() {
               <tr>
                 <th>Roll Number</th>
                 <th>Student Name</th>
-                <th>Branch</th>
+                <th>Branch &amp; Year</th>
                 <th>Semester</th>
                 <th style={{ textAlign: 'center' }}>Attendance</th>
                 <th style={{ textAlign: 'center' }}>Avg Marks</th>
@@ -252,7 +299,27 @@ export function FacultyDashboard() {
                     <div style={{ fontWeight: '600', color: 'var(--text-primary)' }}>{student.name}</div>
                     <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{student.email}</div>
                   </td>
-                  <td>{student.branch}</td>
+                  <td>
+                    <div style={{ fontWeight: '500', color: 'var(--text-primary)' }}>{student.branch}</div>
+                    <span
+                      className="badge"
+                      style={{
+                        fontSize: '0.725rem',
+                        fontWeight: '700',
+                        marginTop: '0.2rem',
+                        backgroundColor:
+                          student.year === '1st Year' ? '#dbeafe' :
+                          student.year === '2nd Year' ? '#d1fae5' :
+                          student.year === '3rd Year' ? '#fef3c7' : '#ede9fe',
+                        color:
+                          student.year === '1st Year' ? '#1e40af' :
+                          student.year === '2nd Year' ? '#065f46' :
+                          student.year === '3rd Year' ? '#92400e' : '#5b21b6'
+                      }}
+                    >
+                      {student.year}
+                    </span>
+                  </td>
                   <td>{student.semester} (Sec {student.section})</td>
                   <td style={{ textAlign: 'center' }}>
                     <span className={`badge ${student.attPct >= 75 ? 'badge-success' : 'badge-danger'}`}>

@@ -53,9 +53,9 @@ export function Navbar() {
   return (
     <nav className="site-navbar" role="navigation" aria-label="Main Navigation">
       <div className="site-navbar-container">
-        {/* BRANDING GROUP (Logo + College Name + Portal Name) */}
+        {/* BRANDING GROUP (Enlarged Logo + Prominent College Name & Affiliation + Portal Name) */}
         <div className="navbar-brand-group">
-          {/* 1. LEFT: Official College Logo & Name in Black */}
+          {/* 1. LEFT: Official College Logo & Prominent Name with Affiliation Directly Below */}
           <div className="navbar-left">
             <Link to="/" className="navbar-logo-link" aria-label="Sri Sivani College of Engineering (Autonomous)">
               <img
@@ -71,21 +71,24 @@ export function Navbar() {
                 <span className="navbar-college-name">
                   SRI SIVANI COLLEGE OF ENGINEERING
                 </span>
-                <span className="navbar-college-tag">
-                  (AUTONOMOUS)
-                </span>
+                <div className="navbar-college-subrow">
+                  <span className="navbar-college-tag">
+                    (AUTONOMOUS)
+                  </span>
+                  <span className="navbar-subrow-divider">•</span>
+                  <span className="navbar-college-affiliation">
+                    AFFILIATED TO JNTUK (CC-W6)
+                  </span>
+                </div>
               </div>
             </Link>
           </div>
 
-          {/* 2. CENTER: Balanced College Portal & Affiliation Branding */}
+          {/* 2. CENTER: College Portal Name */}
           <div className="navbar-center">
             <Link to="/" className="navbar-portal-brand" aria-label="College Academic Portal">
               <span className="navbar-portal-title">
                 COLLEGE PORTAL
-              </span>
-              <span className="navbar-portal-subtitle">
-                AFFILIATED TO JNTUK (CC-W6)
               </span>
             </Link>
           </div>

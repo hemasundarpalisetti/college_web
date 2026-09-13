@@ -72,9 +72,13 @@ export function SmartImage({ src, alt, className = '', style = {}, tag = 'Campus
     );
   }
 
+  const resolvedSrc = src?.startsWith('./')
+    ? `${import.meta.env.BASE_URL}${src.replace(/^\.\//, '')}`
+    : src;
+
   return (
     <img
-      src={src}
+      src={resolvedSrc}
       alt={alt || title}
       className={className}
       style={{ width: '100%', height: '100%', objectFit: 'cover', ...style }}

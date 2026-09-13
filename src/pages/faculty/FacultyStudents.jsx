@@ -31,6 +31,7 @@ export function FacultyStudents() {
   const [students, setStudents] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [filterBranch, setFilterBranch] = useState('ALL');
+  const [filterYear, setFilterYear] = useState('ALL');
 
   // Modals state
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -44,9 +45,9 @@ export function FacultyStudents() {
     rollNumber: '',
     username: '',
     password: '',
-    branch: 'Computer Science & Engineering',
-    year: '1st Year',
-    semester: 'Semester 2',
+    branch: 'Artificial Intelligence & Machine Learning (AIML)',
+    year: '2nd Year',
+    semester: 'Semester 3',
     section: 'A',
     email: '',
     phone: ''
@@ -82,12 +83,23 @@ export function FacultyStudents() {
   useEffect(() => {
     const editId = searchParams.get('edit');
     if (editId && students.length > 0) {
-      const s = students.find(item => item.id === editId);
-      if (s) {
-        handleOpenEdit(s);
+      const target = students.find(s => s.id === editId);
+      if (target) {
+        handleOpenEdit(target);
       }
     }
   }, [searchParams, students]);
+
+  // Year counts summary
+  const yearCounts = useMemo(() => {
+    return {
+      ALL: students.length,
+      '1st Year': students.filter(s => s.year === '1st Year').length,
+      '2nd Year': students.filter(s => s.year === '2nd Year').length,
+      '3rd Year': students.filter(s => s.year === '3rd Year').length,
+      '4th Year': students.filter(s => s.year === '4th Year').length,
+    };
+  }, [students]);
 
   // Filtered student list
   const filteredStudents = useMemo(() => {
@@ -99,20 +111,22 @@ export function FacultyStudents() {
         s.username.toLowerCase().includes(searchTerm.toLowerCase());
 
       const matchBranch = filterBranch === 'ALL' || s.branch === filterBranch;
-      return matchSearch && matchBranch;
+      const matchYear = filterYear === 'ALL' || s.year === filterYear;
+      return matchSearch && matchBranch && matchYear;
     });
-  }, [students, searchTerm, filterBranch]);
+  }, [students, searchTerm, filterBranch, filterYear]);
 
   // Open Add Student Modal
   const handleOpenAdd = () => {
+    const nextNum = String(students.length + 1).padStart(2, '0');
     setFormData({
       name: '',
-      rollNumber: `21AIETCS00${students.length + 1}`,
-      username: `student0${students.length + 1}`,
+      rollNumber: `25W61A61${nextNum}`,
+      username: `25W61A61${nextNum}`,
       password: 'student123',
-      branch: 'Computer Science & Engineering',
-      year: '1st Year',
-      semester: 'Semester 2',
+      branch: 'Artificial Intelligence & Machine Learning (AIML)',
+      year: '2nd Year',
+      semester: 'Semester 3',
       section: 'A',
       email: '',
       phone: ''
@@ -215,10 +229,31 @@ export function FacultyStudents() {
         </button>
       </div>
 
+      {/* Year Filter Tabs */}
+      <div className="segmented-tabs" style={{ maxWidth: '680px', marginBottom: '1.25rem' }}>
+        {[
+          { key: 'ALL', label: `All 4 Years (${yearCounts.ALL})` },
+          { key: '1st Year', label: `1st Year (${yearCounts['1st Year']})` },
+          { key: '2nd Year', label: `2nd Year (${yearCounts['2nd Year']})` },
+          { key: '3rd Year', label: `3rd Year (${yearCounts['3rd Year']})` },
+          { key: '4th Year', label: `4th Year (${yearCounts['4th Year']})` }
+        ].map(tab => (
+          <button
+            key={tab.key}
+            type="button"
+            className={`segmented-tab ${filterYear === tab.key ? 'active' : ''}`}
+            onClick={() => setFilterYear(tab.key)}
+            id={`filter-year-${tab.key.replace(/\s+/g, '-').toLowerCase()}`}
+          >
+            <span>{tab.label}</span>
+          </button>
+        ))}
+      </div>
+
       {/* Filter and Search Bar */}
       <div className="card" style={{ marginBottom: '1.5rem', padding: '1.25rem 1.5rem' }}>
         <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '1rem' }}>
-          <div style={{ flex: '1 1 300px', maxWidth: '400px' }}>
+          <div style={{ flex: '1 1 280px', maxWidth: '380px' }}>
             <div className="search-input-wrapper">
               <Search className="search-icon" size={16} />
               <input
@@ -232,22 +267,42 @@ export function FacultyStudents() {
             </div>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <Filter size={16} color="var(--text-muted)" />
-              <span style={{ fontSize: '0.85rem', fontWeight: '600', color: 'var(--text-secondary)' }}>Branch:</span>
+          <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '1rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+              <Filter size={15} color="var(--text-muted)" />
+              <span style={{ fontSize: '0.85rem', fontWeight: '600', color: 'var(--text-secondary)' }}>Year:</span>
+              <select
+                className="form-select"
+                value={filterYear}
+                onChange={(e) => setFilterYear(e.target.value)}
+                style={{ width: 'auto', minWidth: '130px' }}
+                id="filter-year-select"
+              >
+                <option value="ALL">All 4 Years</option>
+                <option value="1st Year">1st Year</option>
+                <option value="2nd Year">2nd Year</option>
+                <option value="3rd Year">3rd Year</option>
+                <option value="4th Year">4th Year</option>
+              </select>
             </div>
-            <select
-              className="form-select"
-              value={filterBranch}
-              onChange={(e) => setFilterBranch(e.target.value)}
-              style={{ width: 'auto', minWidth: '220px' }}
-            >
-              <option value="ALL">All Engineering Branches</option>
-              <option value="Computer Science & Engineering">Computer Science &amp; Engineering</option>
-              <option value="Information Science & Engineering">Information Science &amp; Engineering</option>
-              <option value="Electronics & Communication Engg">Electronics &amp; Communication Engg</option>
-            </select>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+              <Building size={15} color="var(--text-muted)" />
+              <span style={{ fontSize: '0.85rem', fontWeight: '600', color: 'var(--text-secondary)' }}>Branch:</span>
+              <select
+                className="form-select"
+                value={filterBranch}
+                onChange={(e) => setFilterBranch(e.target.value)}
+                style={{ width: 'auto', minWidth: '220px' }}
+                id="filter-branch-select"
+              >
+                <option value="ALL">All Engineering Branches</option>
+                <option value="Artificial Intelligence & Machine Learning (AIML)">Artificial Intelligence &amp; Machine Learning (AIML)</option>
+                <option value="Computer Science & Engineering">Computer Science &amp; Engineering</option>
+                <option value="Information Science & Engineering">Information Science &amp; Engineering</option>
+                <option value="Electronics & Communication Engg">Electronics &amp; Communication Engg</option>
+              </select>
+            </div>
           </div>
         </div>
       </div>
@@ -261,7 +316,7 @@ export function FacultyStudents() {
                 <th>Roll Number</th>
                 <th>Student Name</th>
                 <th>Username</th>
-                <th>Branch / Year</th>
+                <th>Branch &amp; Year</th>
                 <th>Semester</th>
                 <th style={{ textAlign: 'center' }}>Attendance</th>
                 <th style={{ textAlign: 'center' }}>Avg Marks</th>
@@ -285,10 +340,29 @@ export function FacultyStudents() {
                       {student.username}
                     </td>
                     <td>
-                      <div>{student.branch}</div>
-                      <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{student.year}</div>
+                      <div style={{ fontWeight: '500', color: 'var(--text-primary)', marginBottom: '0.25rem' }}>{student.branch}</div>
+                      <span
+                        className="badge"
+                        style={{
+                          fontSize: '0.75rem',
+                          fontWeight: '700',
+                          backgroundColor:
+                            student.year === '1st Year' ? '#dbeafe' :
+                            student.year === '2nd Year' ? '#d1fae5' :
+                            student.year === '3rd Year' ? '#fef3c7' : '#ede9fe',
+                          color:
+                            student.year === '1st Year' ? '#1e40af' :
+                            student.year === '2nd Year' ? '#065f46' :
+                            student.year === '3rd Year' ? '#92400e' : '#5b21b6'
+                        }}
+                      >
+                        {student.year}
+                      </span>
                     </td>
-                    <td>{student.semester} (Sec {student.section})</td>
+                    <td>
+                      <div style={{ fontWeight: '600' }}>{student.semester}</div>
+                      <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Sec {student.section}</div>
+                    </td>
                     <td style={{ textAlign: 'center' }}>
                       <span className={`badge ${student.attPct >= 75 ? 'badge-success' : 'badge-danger'}`}>
                         {student.attPct}%
@@ -427,6 +501,7 @@ export function FacultyStudents() {
                 value={formData.branch}
                 onChange={(e) => setFormData({ ...formData, branch: e.target.value })}
               >
+                <option value="Artificial Intelligence & Machine Learning (AIML)">Artificial Intelligence &amp; Machine Learning (AIML)</option>
                 <option value="Computer Science & Engineering">Computer Science &amp; Engineering</option>
                 <option value="Information Science & Engineering">Information Science &amp; Engineering</option>
                 <option value="Electronics & Communication Engg">Electronics &amp; Communication Engg</option>
@@ -457,8 +532,14 @@ export function FacultyStudents() {
                 value={formData.semester}
                 onChange={(e) => setFormData({ ...formData, semester: e.target.value })}
               >
-                <option value="Semester 1">Semester 1</option>
-                <option value="Semester 2">Semester 2</option>
+                <option value="Semester 1">Semester 1 (1-1)</option>
+                <option value="Semester 2">Semester 2 (1-2)</option>
+                <option value="Semester 3">Semester 3 (2-1)</option>
+                <option value="Semester 4">Semester 4 (2-2)</option>
+                <option value="Semester 5">Semester 5 (3-1)</option>
+                <option value="Semester 6">Semester 6 (3-2)</option>
+                <option value="Semester 7">Semester 7 (4-1)</option>
+                <option value="Semester 8">Semester 8 (4-2)</option>
               </select>
             </div>
 
@@ -584,6 +665,7 @@ export function FacultyStudents() {
                 value={formData.branch}
                 onChange={(e) => setFormData({ ...formData, branch: e.target.value })}
               >
+                <option value="Artificial Intelligence & Machine Learning (AIML)">Artificial Intelligence &amp; Machine Learning (AIML)</option>
                 <option value="Computer Science & Engineering">Computer Science &amp; Engineering</option>
                 <option value="Information Science & Engineering">Information Science &amp; Engineering</option>
                 <option value="Electronics & Communication Engg">Electronics &amp; Communication Engg</option>
@@ -614,8 +696,14 @@ export function FacultyStudents() {
                 value={formData.semester}
                 onChange={(e) => setFormData({ ...formData, semester: e.target.value })}
               >
-                <option value="Semester 1">Semester 1</option>
-                <option value="Semester 2">Semester 2</option>
+                <option value="Semester 1">Semester 1 (1-1)</option>
+                <option value="Semester 2">Semester 2 (1-2)</option>
+                <option value="Semester 3">Semester 3 (2-1)</option>
+                <option value="Semester 4">Semester 4 (2-2)</option>
+                <option value="Semester 5">Semester 5 (3-1)</option>
+                <option value="Semester 6">Semester 6 (3-2)</option>
+                <option value="Semester 7">Semester 7 (4-1)</option>
+                <option value="Semester 8">Semester 8 (4-2)</option>
               </select>
             </div>
 

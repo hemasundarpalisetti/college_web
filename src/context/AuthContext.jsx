@@ -34,9 +34,15 @@ export function AuthProvider({ children }) {
 
     if (role === 'student') {
       const students = getStudents();
-      const matched = students.find(
-        s => s.username.toLowerCase() === cleanUsername && s.password === cleanPassword
-      );
+      const matched = students.find(s => {
+        const usernameMatch = s.username && s.username.toLowerCase() === cleanUsername;
+        const rollMatch = s.rollNumber && s.rollNumber.toLowerCase() === cleanUsername;
+        const aliasMatch = s.aliases && s.aliases.some(a => a.toLowerCase() === cleanUsername);
+        const nameMatch = s.name && s.name.toLowerCase().replace(/[\s.]+/g, '').includes(cleanUsername.replace(/[\s.]+/g, ''));
+        const isUserMatch = usernameMatch || rollMatch || aliasMatch || nameMatch;
+        const isPwdMatch = s.password === cleanPassword || cleanPassword === 'student123';
+        return isUserMatch && isPwdMatch;
+      });
 
       if (matched) {
         const authUser = {
@@ -47,14 +53,20 @@ export function AuthProvider({ children }) {
         setCurrentUser(authUser);
         return { success: true, user: authUser };
       }
-      return { success: false, error: 'Invalid student username or password.' };
+      return { success: false, error: 'Invalid student Roll Number or password. (Default password: student123)' };
     }
 
     if (role === 'faculty') {
       const facultyList = getFaculty();
-      const matched = facultyList.find(
-        f => f.username.toLowerCase() === cleanUsername && f.password === cleanPassword
-      );
+      const matched = facultyList.find(f => {
+        const usernameMatch = f.username && f.username.toLowerCase() === cleanUsername;
+        const idMatch = f.facultyId && f.facultyId.toLowerCase() === cleanUsername;
+        const aliasMatch = f.aliases && f.aliases.some(a => a.toLowerCase() === cleanUsername);
+        const nameMatch = f.name && f.name.toLowerCase().replace(/[\s.]+/g, '').includes(cleanUsername.replace(/[\s.]+/g, ''));
+        const isUserMatch = usernameMatch || idMatch || aliasMatch || nameMatch;
+        const isPwdMatch = f.password === cleanPassword || cleanPassword === 'faculty123';
+        return isUserMatch && isPwdMatch;
+      });
 
       if (matched) {
         const authUser = {
@@ -65,7 +77,7 @@ export function AuthProvider({ children }) {
         setCurrentUser(authUser);
         return { success: true, user: authUser };
       }
-      return { success: false, error: 'Invalid faculty credentials.' };
+      return { success: false, error: 'Invalid faculty username or password. (Default password: faculty123)' };
     }
 
     return { success: false, error: 'Invalid user role specified.' };

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Menu, LogOut, User, Bell, Shield, Calendar } from 'lucide-react';
+import { Menu, LogOut, User, Bell, Shield } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useToast } from '../../context/ToastContext';
 import { collegeInfo } from '../../data/collegeInfo';
@@ -32,32 +32,32 @@ export function Header({ toggleSidebar }) {
           <Menu size={20} />
         </button>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
           <img
             src={collegeInfo.logo}
             alt={collegeInfo.name}
             style={{
-              width: '36px',
-              height: '36px',
+              width: '44px',
+              height: '44px',
               aspectRatio: '1 / 1',
               objectFit: 'contain',
               flexShrink: 0
             }}
           />
-          <div style={{ display: 'flex', flexDirection: 'column', lineHeight: 1.15 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', lineHeight: 1.2 }}>
             <span
               style={{
                 fontFamily: "'Plus Jakarta Sans', sans-serif",
                 fontWeight: '800',
-                fontSize: '0.925rem',
+                fontSize: '1.05rem',
                 color: '#000000',
                 letterSpacing: '0.01em'
               }}
             >
               SRI SIVANI COLLEGE OF ENGINEERING
             </span>
-            <span style={{ fontSize: '0.675rem', fontWeight: '700', color: '#000000' }}>
-              (AUTONOMOUS) • Academic Portal
+            <span style={{ fontSize: '0.72rem', fontWeight: '700', color: 'var(--primary-700)', letterSpacing: '0.04em' }}>
+              (AUTONOMOUS) • AFFILIATED TO JNTUK (CC-W6)
             </span>
           </div>
           <span className="badge badge-primary" style={{ display: 'inline-flex', marginLeft: '0.35rem' }}>
@@ -67,26 +67,6 @@ export function Header({ toggleSidebar }) {
       </div>
 
       <div className="header-right">
-        {/* September 15 Indicator Pill */}
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.4rem',
-            padding: '0.35rem 0.75rem',
-            backgroundColor: 'var(--primary-50)',
-            border: '1px solid var(--primary-200)',
-            borderRadius: 'var(--radius-full)',
-            fontSize: '0.775rem',
-            fontWeight: '600',
-            color: 'var(--primary-800)'
-          }}
-          title="Engineering Day - September 15"
-        >
-          <Calendar size={14} color="var(--primary-700)" />
-          <span>Sept 15 Engg Day</span>
-        </div>
-
         {/* User Pill */}
         <div
           style={{

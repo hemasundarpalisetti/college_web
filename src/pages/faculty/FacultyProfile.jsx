@@ -111,7 +111,7 @@ export function FacultyProfile() {
             <span>Assigned Teaching Courses &amp; Evaluation Responsibilities</span>
           </h4>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.6rem' }}>
-            {(user?.assignedCourses || ['Data Structures & Algorithms', 'Engineering Mathematics-I']).map((course, idx) => (
+            {(user?.assignedCourses || ['Artificial Intelligence Principles & Techniques', 'Machine Learning Foundations']).map((course, idx) => (
               <span key={idx} className="badge badge-primary" style={{ padding: '0.4rem 0.85rem', fontSize: '0.85rem' }}>
                 ✓ {course}
               </span>

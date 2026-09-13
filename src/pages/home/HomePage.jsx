@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {
   LogIn,
@@ -10,7 +10,11 @@ import {
   Building,
   CheckCircle2,
   Calendar,
-  Sparkles
+  Sparkles,
+  Maximize2,
+  X,
+  Phone,
+  Mail
 } from 'lucide-react';
 import { Navbar } from '../../components/common/Navbar';
 import { Footer } from '../../components/common/Footer';
@@ -22,6 +26,16 @@ import heroVideoFile from '../../assets/video/college-intro.mp4';
 export function HomePage() {
   const { user } = useAuth();
   const videoRef = useRef(null);
+  const [activeGalleryItem, setActiveGalleryItem] = useState(null);
+
+  // Close preview modal on Escape key
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') setActiveGalleryItem(null);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   // Guarantee muted autoplay across all browsers without user interaction
   useEffect(() => {
@@ -182,6 +196,89 @@ export function HomePage() {
               </p>
             </div>
           </div>
+
+          {/* Quick Contact & Communications Banner */}
+          <div className="profile-contact-banner">
+            <div className="contact-banner-header">
+              <div className="contact-banner-title-wrap">
+                <span className="section-badge-pill" style={{ backgroundColor: 'var(--primary-100)', color: 'var(--primary-800)' }}>
+                  Institutional Directory
+                </span>
+                <h3 className="contact-banner-heading">Official Communications &amp; Helpdesk</h3>
+              </div>
+              <p className="contact-banner-subtext">
+                Direct telephonic and email channels for general inquiries, administrative assistance, and student support.
+              </p>
+            </div>
+
+            <div className="contact-banner-grid">
+              {/* Phone Contacts */}
+              <div className="contact-box">
+                <div className="contact-box-icon-wrap">
+                  <Phone size={22} />
+                </div>
+                <div className="contact-box-content">
+                  <h4 className="contact-box-title">Phone &amp; Helpline Numbers</h4>
+                  <div className="contact-box-item">
+                    <span className="contact-box-label">Primary Mobile:</span>
+                    <div className="contact-box-links">
+                      <a href="tel:+917382651411" className="contact-link">+91-7382651411</a>
+                      <span className="contact-sep">,</span>
+                      <a href="tel:+917382651466" className="contact-link">+91-7382651466</a>
+                    </div>
+                  </div>
+                  <div className="contact-box-item">
+                    <span className="contact-box-label">Alternative Lines:</span>
+                    <div className="contact-box-links">
+                      <a href="tel:+917382651422" className="contact-link">+91-7382651422</a>
+                      <span className="contact-sep">,</span>
+                      <a href="tel:+917382651455" className="contact-link">55</a>
+                      <span className="contact-sep">,</span>
+                      <a href="tel:+917382651477" className="contact-link">77</a>
+                    </div>
+                  </div>
+                  <div className="contact-box-item">
+                    <span className="contact-box-label">Campus Landline:</span>
+                    <div className="contact-box-links">
+                      <a href="tel:08942231107" className="contact-link">08942-231107</a>
+                      <span className="contact-sep">,</span>
+                      <a href="tel:08942231108" className="contact-link">231108</a>
+                      <span className="contact-sep">,</span>
+                      <a href="tel:08942231106" className="contact-link">231106</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Email Contacts */}
+              <div className="contact-box">
+                <div className="contact-box-icon-wrap contact-box-icon-green">
+                  <Mail size={22} />
+                </div>
+                <div className="contact-box-content">
+                  <h4 className="contact-box-title">Official Email Addresses</h4>
+                  <div className="contact-box-item">
+                    <span className="contact-box-label">General Info &amp; Enquiries:</span>
+                    <a href={`mailto:${collegeInfo.contact.emails.general}`} className="contact-link">
+                      {collegeInfo.contact.emails.general}
+                    </a>
+                  </div>
+                  <div className="contact-box-item">
+                    <span className="contact-box-label">Principal Office:</span>
+                    <a href={`mailto:${collegeInfo.contact.emails.principal}`} className="contact-link">
+                      {collegeInfo.contact.emails.principal}
+                    </a>
+                  </div>
+                  <div className="contact-box-item">
+                    <span className="contact-box-label">Vice Principal:</span>
+                    <a href={`mailto:${collegeInfo.contact.emails.vicePrincipal}`} className="contact-link">
+                      {collegeInfo.contact.emails.vicePrincipal}
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -205,7 +302,15 @@ export function HomePage() {
           {/* Clean Responsive Card Grid */}
           <div className="gallery-card-grid">
             {collegeInfo.gallery.map(item => (
-              <div key={item.id} className="gallery-item-card">
+              <div
+                key={item.id}
+                className="gallery-item-card"
+                onClick={() => setActiveGalleryItem(item)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') setActiveGalleryItem(item); }}
+                aria-label={`View ${item.title}`}
+              >
                 <div className="gallery-media-wrap">
                   <SmartImage
                     src={item.path}
@@ -216,6 +321,11 @@ export function HomePage() {
                   />
                   <div className="gallery-tag-pill">
                     {item.tag}
+                  </div>
+                  <div className="gallery-media-hover-overlay">
+                    <div className="gallery-media-hover-icon" title="View Full Photo">
+                      <Maximize2 size={18} />
+                    </div>
                   </div>
                 </div>
 
@@ -230,6 +340,41 @@ export function HomePage() {
               </div>
             ))}
           </div>
+
+          {/* Lightbox Preview Modal */}
+          {activeGalleryItem && (
+            <div
+              className="gallery-modal-backdrop"
+              onClick={() => setActiveGalleryItem(null)}
+              role="dialog"
+              aria-modal="true"
+            >
+              <div className="gallery-modal-card" onClick={(e) => e.stopPropagation()}>
+                <button
+                  type="button"
+                  className="gallery-modal-close-btn"
+                  onClick={() => setActiveGalleryItem(null)}
+                  aria-label="Close image preview"
+                >
+                  <X size={20} />
+                </button>
+                <div className="gallery-modal-img-wrap">
+                  <SmartImage
+                    src={activeGalleryItem.path}
+                    alt={activeGalleryItem.title}
+                    title={activeGalleryItem.title}
+                    tag={activeGalleryItem.tag}
+                    className="gallery-modal-img"
+                  />
+                </div>
+                <div className="gallery-modal-info">
+                  <span className="gallery-modal-badge">{activeGalleryItem.tag}</span>
+                  <h3 className="gallery-modal-title">{activeGalleryItem.title}</h3>
+                  <p className="gallery-modal-desc">{activeGalleryItem.description}</p>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </section>
 

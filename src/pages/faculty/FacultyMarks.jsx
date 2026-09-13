@@ -12,9 +12,21 @@ export function FacultyMarks() {
   const students = useMemo(() => getStudents(), []);
   const initialStudentId = searchParams.get('student') || (students[0]?.id || 'S001');
 
+  const [filterYear, setFilterYear] = useState('ALL');
   const [selectedStudentId, setSelectedStudentId] = useState(initialStudentId);
   const [selectedSem, setSelectedSem] = useState('semester1');
   const [activeSubjectCode, setActiveSubjectCode] = useState('');
+
+  const displayStudents = useMemo(() => {
+    if (filterYear === 'ALL') return students;
+    return students.filter(s => s.year === filterYear);
+  }, [students, filterYear]);
+
+  useEffect(() => {
+    if (displayStudents.length > 0 && !displayStudents.some(s => s.id === selectedStudentId)) {
+      setSelectedStudentId(displayStudents[0].id);
+    }
+  }, [displayStudents, selectedStudentId]);
   
   // Marks inputs
   const [internalVal, setInternalVal] = useState(0);
@@ -103,20 +115,39 @@ export function FacultyMarks() {
         )}
       </div>
 
-      {/* Top Controls: Student Selector & Semester Toggle */}
+      {/* Top Controls: Year Filter, Student Selector & Semester Toggle */}
       <div className="card" style={{ marginBottom: '2rem' }}>
+        <div style={{ marginBottom: '1.25rem' }}>
+          <label className="form-label" style={{ marginBottom: '0.4rem' }}>Filter by Academic Year:</label>
+          <div className="segmented-tabs" style={{ maxWidth: '600px' }}>
+            {['ALL', '1st Year', '2nd Year', '3rd Year', '4th Year'].map(yr => (
+              <button
+                key={yr}
+                type="button"
+                className={`segmented-tab ${filterYear === yr ? 'active' : ''}`}
+                onClick={() => setFilterYear(yr)}
+                id={`marks-filter-year-${yr.replace(/\s+/g, '-').toLowerCase()}`}
+              >
+                <span>{yr === 'ALL' ? 'All 4 Years' : yr}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', alignItems: 'center' }}>
           <div>
-            <label className="form-label">Select Student for Evaluation:</label>
+            <label className="form-label">
+              Select Student for Evaluation ({displayStudents.length} {filterYear === 'ALL' ? 'total' : filterYear}):
+            </label>
             <select
               className="form-select"
               value={selectedStudentId}
               onChange={(e) => setSelectedStudentId(e.target.value)}
               id="faculty-marks-student-select"
             >
-              {students.map(s => (
+              {displayStudents.map(s => (
                 <option key={s.id} value={s.id}>
-                  {s.rollNumber} — {s.name} ({s.branch})
+                  [{s.year}] {s.rollNumber} — {s.name} ({s.semester})
                 </option>
               ))}
             </select>
