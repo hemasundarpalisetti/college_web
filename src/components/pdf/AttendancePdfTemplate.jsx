@@ -32,6 +32,23 @@ export function AttendancePdfTemplate({ student, attendance = [] }) {
             {collegeInfo.location} • Affiliated to JNTUK (CC-W6)
           </p>
         </div>
+        {student.photo && (
+          <div style={{ marginLeft: 'auto', flexShrink: 0, textAlign: 'center' }}>
+            <img
+              src={student.photo}
+              alt={student.name}
+              style={{
+                width: '68px',
+                height: '82px',
+                objectFit: 'cover',
+                border: '1px solid #94a3b8',
+                borderRadius: '3px',
+                boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
+              }}
+              onError={(e) => { e.target.style.display = 'none'; }}
+            />
+          </div>
+        )}
       </div>
 
       {/* Document Classification */}

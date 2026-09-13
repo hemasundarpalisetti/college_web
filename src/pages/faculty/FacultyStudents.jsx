@@ -23,6 +23,7 @@ import { calculateStudentSummary } from '../../utils/calculations';
 import { validateStudentForm } from '../../utils/validators';
 import { useToast } from '../../context/ToastContext';
 import { Modal } from '../../components/common/Modal';
+import { StudentAvatar } from '../../components/common/StudentAvatar';
 
 export function FacultyStudents() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -344,9 +345,14 @@ export function FacultyStudents() {
                       {student.rollNumber}
                     </td>
                     <td>
-                      <div style={{ fontWeight: '600', color: 'var(--text-primary)' }}>{student.name}</div>
-                      <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{student.email}</div>
-                      <div style={{ fontSize: '0.75rem', color: '#1e40af', marginTop: '0.25rem', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                        <StudentAvatar student={student} size={38} shape="circle" />
+                        <div>
+                          <div style={{ fontWeight: '600', color: 'var(--text-primary)' }}>{student.name}</div>
+                          <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{student.email}</div>
+                        </div>
+                      </div>
+                      <div style={{ fontSize: '0.75rem', color: '#1e40af', marginTop: '0.35rem', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
                         <span>📱 <strong>Student:</strong> {student.studentPhone || student.phone || 'N/A'}</span>
                       </div>
                       <div style={{ fontSize: '0.75rem', color: '#065f46', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>

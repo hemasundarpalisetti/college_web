@@ -5,6 +5,7 @@ import { useAuth } from '../../context/AuthContext';
 import { useToast } from '../../context/ToastContext';
 import { collegeInfo } from '../../data/collegeInfo';
 import { reloadToHomePage } from '../../utils/navigation';
+import { StudentAvatar } from './StudentAvatar';
 
 export function Header({ toggleSidebar }) {
   const { user, logout } = useAuth();
@@ -85,22 +86,26 @@ export function Header({ toggleSidebar }) {
             borderRadius: 'var(--radius-full)'
           }}
         >
-          <div
-            style={{
-              width: '32px',
-              height: '32px',
-              borderRadius: '50%',
-              backgroundColor: 'var(--primary-700)',
-              color: '#ffffff',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '0.8rem',
-              fontWeight: '700'
-            }}
-          >
-            {user?.avatar || (isFaculty ? 'FC' : 'ST')}
-          </div>
+          {!isFaculty ? (
+            <StudentAvatar student={user} size={32} shape="circle" />
+          ) : (
+            <div
+              style={{
+                width: '32px',
+                height: '32px',
+                borderRadius: '50%',
+                backgroundColor: 'var(--primary-700)',
+                color: '#ffffff',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '0.8rem',
+                fontWeight: '700'
+              }}
+            >
+              {user?.avatar || 'FC'}
+            </div>
+          )}
           <div style={{ display: 'flex', flexDirection: 'column', lineHeight: 1.15 }}>
             <span style={{ fontSize: '0.85rem', fontWeight: '700', color: 'var(--text-primary)' }}>
               {user?.name}

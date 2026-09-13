@@ -383,6 +383,7 @@ export const INITIAL_STUDENTS = [
     "parentPhone": "+91 94401 61420",
     "parentName": "P. Venkateswar Rao",
     "avatar": "PH",
+    "photo": "./assets/images/students/hemasundar.jpeg",
     "admissionDate": "2024-08-16"
   },
   {
@@ -407,6 +408,7 @@ export const INITIAL_STUDENTS = [
     "parentPhone": "+91 94401 61220",
     "parentName": "K. Santhosh",
     "avatar": "KG",
+    "photo": "./assets/images/students/ganesh.jpeg",
     "admissionDate": "2024-08-16"
   },
   {
@@ -431,6 +433,7 @@ export const INITIAL_STUDENTS = [
     "parentPhone": "+91 94401 61340",
     "parentName": "M. Eshwara Rao",
     "avatar": "MR",
+    "photo": "./assets/images/students/raju.jpeg",
     "admissionDate": "2024-08-16"
   },
   {
@@ -455,6 +458,7 @@ export const INITIAL_STUDENTS = [
     "parentPhone": "+91 94401 61110",
     "parentName": "B. Sairaju",
     "avatar": "BV",
+    "photo": "./assets/images/students/vivek.jpeg",
     "admissionDate": "2024-08-16"
   },
   {
@@ -479,6 +483,7 @@ export const INITIAL_STUDENTS = [
     "parentPhone": "+91 94401 61570",
     "parentName": "S. Karimullah",
     "avatar": "SB",
+    "photo": "./assets/images/students/shaik-bhasa.jpeg",
     "admissionDate": "2024-08-16"
   },
   {
@@ -503,6 +508,7 @@ export const INITIAL_STUDENTS = [
     "parentPhone": "+91 94401 61030",
     "parentName": "B. Govinda Rao",
     "avatar": "BH",
+    "photo": "./assets/images/students/hemanth.jpeg",
     "admissionDate": "2024-08-16"
   },
   {
@@ -527,6 +533,7 @@ export const INITIAL_STUDENTS = [
     "parentPhone": "+91 94401 61470",
     "parentName": "P. Srinivasa Rao",
     "avatar": "PG",
+    "photo": "./assets/images/students/gowtham.jpeg",
     "admissionDate": "2024-08-16"
   },
   {

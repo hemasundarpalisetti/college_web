@@ -2,6 +2,7 @@ import React from 'react';
 import { User, Mail, Phone, BookOpen, Calendar, Shield, Lock, Info, Building } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { collegeInfo } from '../../data/collegeInfo';
+import { StudentAvatar } from '../../components/common/StudentAvatar';
 
 export function StudentProfile() {
   const { user } = useAuth();
@@ -25,36 +26,21 @@ export function StudentProfile() {
           <span className="badge badge-primary">Active Regular Student</span>
         </div>
 
+        {/* Profile Identity Bar */}
         <div
           style={{
             display: 'flex',
-            flexWrap: 'wrap',
             alignItems: 'center',
-            gap: '2rem',
-            paddingBottom: '2rem',
+            gap: '1.5rem',
+            padding: '1.5rem',
+            backgroundColor: 'var(--bg-secondary)',
+            borderRadius: 'var(--radius-lg)',
             marginBottom: '2rem',
             borderBottom: '1px solid var(--border-light)'
           }}
         >
-          {/* Avatar / Photo placeholder */}
-          <div
-            style={{
-              width: '100px',
-              height: '100px',
-              borderRadius: 'var(--radius-lg)',
-              backgroundColor: 'var(--primary-100)',
-              color: 'var(--primary-800)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '2.25rem',
-              fontWeight: '800',
-              border: '3px solid var(--primary-300)',
-              boxShadow: 'var(--shadow-sm)'
-            }}
-          >
-            {user?.avatar || 'ST'}
-          </div>
+          {/* Student Photo / Avatar */}
+          <StudentAvatar student={user} size={100} shape="rounded" />
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
             <h2 style={{ fontSize: '1.6rem', fontWeight: '800', color: 'var(--text-primary)', margin: 0 }}>

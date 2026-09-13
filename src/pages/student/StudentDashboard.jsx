@@ -19,6 +19,7 @@ import { calculateStudentSummary } from '../../utils/calculations';
 import { StatCard } from '../../components/common/StatCard';
 import { PerformanceChart } from '../../components/common/PerformanceChart';
 import { CircularProgress, ProgressBar } from '../../components/common/ProgressIndicators';
+import { StudentAvatar } from '../../components/common/StudentAvatar';
 
 export function StudentDashboard() {
   const { user } = useAuth();
@@ -40,9 +41,7 @@ export function StudentDashboard() {
     <div>
       {/* Welcome Banner */}
       <div className="profile-hero" style={{ marginBottom: '2rem' }}>
-        <div className="avatar-large">
-          {user?.avatar || 'ST'}
-        </div>
+        <StudentAvatar student={user} size={90} shape="rounded" />
         <div style={{ flex: 1 }}>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', backgroundColor: 'rgba(255, 255, 255, 0.16)', padding: '0.25rem 0.75rem', borderRadius: 'var(--radius-full)', fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem' }}>
             <Sparkles size={13} />

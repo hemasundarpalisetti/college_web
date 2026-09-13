@@ -140,6 +140,28 @@ console.log(`✓ All 18 Authentic CSE Faculty Members verified successfully:
    - Total Assistant Professors: 10
    - All email channels configured with @srisivani.com domain.`);
 
+// 13. Verify 2nd Year AIML Student Photos
+import fs from 'fs';
+import path from 'path';
+const aiml2ndYear = INITIAL_STUDENTS.filter(s => s.year === '2nd Year' && s.branch.includes('AIML'));
+console.assert(aiml2ndYear.length === 7, `Expected 7 2nd Year AIML students, found ${aiml2ndYear.length}`);
+for (const student of aiml2ndYear) {
+  console.assert(student.photo, `Student ${student.name} (${student.rollNumber}) missing photo attribute`);
+  const relativePath = student.photo.replace(/^\.\//, '');
+  const physicalPath = path.join(process.cwd(), 'public', relativePath);
+  console.assert(fs.existsSync(physicalPath), `Photo file not found on disk: ${physicalPath} for ${student.name}`);
+  const stat = fs.statSync(physicalPath);
+  console.assert(stat.size > 1000, `Photo file abnormally small: ${stat.size} bytes`);
+}
+console.log(`✓ All 7 2nd Year AIML Students have authentic profile photos linked and verified on disk:
+   - S001 (Palisetti Hemasundar): ${aiml2ndYear.find(s => s.id === 'S001').photo}
+   - S002 (Kalla Ganesh Siva Sai): ${aiml2ndYear.find(s => s.id === 'S002').photo}
+   - S003 (Metikoti Raju): ${aiml2ndYear.find(s => s.id === 'S003').photo}
+   - S004 (Burle Vivek): ${aiml2ndYear.find(s => s.id === 'S004').photo}
+   - S005 (Shaik Bhasa): ${aiml2ndYear.find(s => s.id === 'S005').photo}
+   - S006 (Butu Hemanth): ${aiml2ndYear.find(s => s.id === 'S006').photo}
+   - S007 (Pidugu Gowtham): ${aiml2ndYear.find(s => s.id === 'S007').photo}`);
+
 console.log("✓ All validation test cases passed!");
 console.log("=== ALL CORE TESTS PASSED SUCCESSFULLY ===");
 
