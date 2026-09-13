@@ -481,7 +481,7 @@ export const INITIAL_STUDENTS = [
     "phone": "+91 91234 61570",
     "studentPhone": "+91 91234 61570",
     "parentPhone": "+91 94401 61570",
-    "parentName": "S. Karimullah",
+    "parentName": "S. Allah",
     "avatar": "SB",
     "photo": "./assets/images/students/shaik-bhasa.jpeg",
     "admissionDate": "2024-08-16"
@@ -531,7 +531,7 @@ export const INITIAL_STUDENTS = [
     "phone": "+91 91234 61470",
     "studentPhone": "+91 91234 61470",
     "parentPhone": "+91 94401 61470",
-    "parentName": "P. Srinivasa Rao",
+    "parentName": "P. Satya Rao",
     "avatar": "PG",
     "photo": "./assets/images/students/gowtham.jpeg",
     "admissionDate": "2024-08-16"

@@ -21,7 +21,7 @@ const KEYS = {
   ATTENDANCE: 'collegePortal_attendance',
   GRIEVANCES: 'collegePortal_grievances',
   CURRENT_USER: 'collegePortal_currentUser',
-  INITIALIZED: 'collegePortal_initialized_v8_aiml_student_photos'
+  INITIALIZED: 'collegePortal_initialized_v9_updated_fathers_6147_bhasa'
 };
 
 /**
@@ -35,7 +35,13 @@ export function initializeStorage(force = false) {
   const hasParentPhone = existingStudents && existingStudents.includes('parentPhone');
   const hasGrievances = localStorage.getItem(KEYS.GRIEVANCES);
   const hasUpdatedSubjects = existingMarks && existingMarks.includes('BS1101') && existingMarks.includes('Linear Algebra and Calculus');
-  const hasUpdatedParentNames = existingStudents && existingStudents.includes('Venkateswar Rao') && existingStudents.includes('Sairaju') && existingStudents.includes('Santhosh') && existingStudents.includes('Eshwara Rao');
+  const hasUpdatedParentNames = existingStudents &&
+    existingStudents.includes('Venkateswar Rao') &&
+    existingStudents.includes('Sairaju') &&
+    existingStudents.includes('Santhosh') &&
+    existingStudents.includes('Eshwara Rao') &&
+    existingStudents.includes('Satya Rao') &&
+    existingStudents.includes('Allah');
   const hasAIMLPhotos = existingStudents && existingStudents.includes('hemasundar.jpeg') && existingStudents.includes('ganesh.jpeg') && existingStudents.includes('raju.jpeg');
   const hasAllBranches = existingStudents &&
     existingStudents.includes('Computer Science & Engineering') &&
