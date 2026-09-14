@@ -2273,6 +2273,94 @@
   text-decoration: underline;
 }
 
+/* ==========================================================================
+   Footer Google Map Section
+   ========================================================================== */
+.footer-map-section {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  padding: clamp(1.25rem, 2.5vw, 1.75rem);
+  margin-bottom: clamp(1.75rem, 3vw, 2.5rem);
+  box-shadow: var(--shadow-xs);
+  transition: box-shadow var(--transition-normal);
+}
+
+.footer-map-section:hover {
+  box-shadow: var(--shadow-sm);
+}
+
+.footer-map-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.footer-map-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.footer-map-title {
+  font-size: clamp(0.95rem, 1.1vw, 1.05rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-map-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.footer-map-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.footer-map-wrapper {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-xs);
+  border: 1px solid var(--border-light);
+  background-color: #f1f5f9;
+}
+
+.footer-map-wrapper iframe {
+  width: 100%;
+  height: clamp(220px, 30vw, 300px);
+  border: 0;
+  display: block;
+}
+
+@media (max-width: 640px) {
+  .footer-map-section {
+    padding: 1rem 0.85rem;
+    border-radius: var(--radius-lg);
+  }
+  .footer-map-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+  .footer-map-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .footer-map-wrapper iframe {
+    height: 220px;
+  }
+}
+
 .footer-bottom-bar {
   border-top: 1px solid var(--border-light);
   padding-top: 1.5rem;

@@ -322,7 +322,7 @@ export function FacultyStudents() {
       {/* Students Table */}
       <div className="card">
         <div className="table-container">
-          <table className="table">
+          <table className="table table-wide">
             <thead>
               <tr>
                 <th>Roll Number</th>

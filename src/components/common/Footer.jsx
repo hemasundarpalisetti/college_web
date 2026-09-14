@@ -1,5 +1,5 @@
 import React from 'react';
-import { MapPin, Mail, Phone, Globe, Shield, PhoneCall, Building2, UserCheck, GraduationCap } from 'lucide-react';
+import { MapPin, Mail, Phone, Globe, Shield, PhoneCall, Building2, UserCheck, GraduationCap, Navigation } from 'lucide-react';
 import { collegeInfo } from '../../data/collegeInfo';
 import { reloadToHomePage } from '../../utils/navigation';
 
@@ -154,6 +154,44 @@ export function Footer() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* Google Maps Embed Section */}
+        <div className="footer-map-section">
+          <div className="footer-map-header">
+            <div className="footer-map-title-group">
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <MapPin size={20} color="var(--primary-700)" />
+                <h5 className="footer-map-title">Campus Location &amp; Directions</h5>
+              </div>
+              <p className="footer-map-subtitle">
+                {collegeInfo.location}
+              </p>
+            </div>
+            <a
+              href="https://maps.google.com/?q=Sri+Sivani+College+of+Engineering,+NH-16,+Chilakapalem,+Srikakulam,+Andhra+Pradesh+532410"
+              target="_blank"
+              rel="noreferrer"
+              className="btn btn-outline btn-sm footer-map-btn"
+              title="Open directions in Google Maps"
+            >
+              <Navigation size={15} />
+              <span>Get Directions</span>
+            </a>
+          </div>
+
+          <div className="footer-map-wrapper">
+            <iframe
+              title="Sri Sivani College of Engineering Google Map"
+              src="https://maps.google.com/maps?q=Sri+Sivani+College+of+Engineering,+NH-16,+Chilakapalem,+Srikakulam,+Andhra+Pradesh+532410&t=&z=15&ie=UTF8&iwloc=&output=embed"
+              width="100%"
+              height="280"
+              style={{ border: 0, display: 'block', borderRadius: 'var(--radius-lg)' }}
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
           </div>
         </div>
 

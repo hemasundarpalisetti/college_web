@@ -6,19 +6,14 @@ import {
   Award,
   BookOpen,
   ArrowRight,
-  TrendingUp,
   FileSpreadsheet,
-  Calendar,
-  AlertCircle,
-  Clock,
   Sparkles
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { getStudentMarks, getStudentAttendance } from '../../data/storage';
 import { calculateStudentSummary } from '../../utils/calculations';
 import { StatCard } from '../../components/common/StatCard';
-import { PerformanceChart } from '../../components/common/PerformanceChart';
-import { CircularProgress, ProgressBar } from '../../components/common/ProgressIndicators';
+import { CircularProgress } from '../../components/common/ProgressIndicators';
 import { StudentAvatar } from '../../components/common/StudentAvatar';
 
 export function StudentDashboard() {
@@ -96,46 +91,43 @@ export function StudentDashboard() {
         />
       </div>
 
-      {/* Main Grid: Chart & Attendance Quick Summary */}
-      <div className="grid-2-1" style={{ marginBottom: '2rem' }}>
-        {/* Performance Chart */}
-        <PerformanceChart
-          subjects={sem2Subjects}
-          title="Semester 2 Subject Scores (Live)"
-        />
-
-        {/* Attendance Widget Card */}
-        <div className="card" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+      {/* Attendance Status Card */}
+      <div className="card" style={{ marginBottom: '2rem' }}>
+        <div className="card-header">
           <div>
-            <div className="card-header">
-              <h3 className="card-title">Attendance Status</h3>
-              <span className={`badge ${overallAttPct >= 75 ? 'badge-success' : 'badge-danger'}`}>
-                {overallAttPct >= 75 ? 'Eligible' : 'Shortage'}
-              </span>
-            </div>
+            <h3 className="card-title">Attendance Status &amp; FRS Compliance</h3>
+            <span className="card-subtitle">Biometric Facial Recognition System (FRS) authenticated record</span>
+          </div>
+          <span className={`badge ${overallAttPct >= 75 ? 'badge-success' : 'badge-danger'}`}>
+            {overallAttPct >= 75 ? 'Statutory Eligible' : 'Attendance Shortage'}
+          </span>
+        </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '1.25rem 0' }}>
-              <CircularProgress
-                percentage={overallAttPct}
-                size={140}
-                strokeWidth={12}
-                label="Aggregate"
-              />
-              <p style={{ fontSize: '0.825rem', color: 'var(--text-muted)', textAlign: 'center', marginTop: '1rem' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '1.5rem', padding: '1rem 0.5rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', flexWrap: 'wrap' }}>
+            <CircularProgress
+              percentage={overallAttPct}
+              size={130}
+              strokeWidth={12}
+              label="Aggregate"
+            />
+            <div>
+              <h4 style={{ margin: '0 0 0.35rem 0', fontSize: '1.05rem', fontWeight: '800', color: 'var(--text-primary)' }}>
+                {overallAttPct >= 75 ? 'Statutory Examination Eligible (≥ 75%)' : 'Attendance Shortage Warning (< 75%)'}
+              </h4>
+              <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', margin: '0 0 0.75rem 0', maxWidth: '520px', lineHeight: 1.5 }}>
                 {overallAttPct >= 75
-                  ? 'Your attendance meets the minimum 75% institutional requirement.'
-                  : 'Warning: Your attendance is below 75%. Please contact faculty coordinator.'}
+                  ? `Your aggregate attendance of ${overallAttPct}% meets institutional requirements across ${summary.attendance.totalClasses} conducted sessions (${summary.attendance.totalPresent} present, ${summary.attendance.totalAbsent} absent).`
+                  : `Your aggregate attendance of ${overallAttPct}% is below the mandatory 75% institutional requirement (${summary.attendance.totalAbsent} absences recorded). Please contact your faculty coordinator.`}
               </p>
-              
-              {/* FRS Verification Notice */}
-              <div style={{ marginTop: '0.75rem', width: '100%', padding: '0.55rem 0.75rem', background: '#eff6ff', borderRadius: 'var(--radius-sm)', border: '1px solid #bfdbfe', fontSize: '0.75rem', color: '#1e40af', display: 'flex', alignItems: 'center', gap: '0.5rem', lineHeight: 1.35 }}>
-                <Sparkles size={14} style={{ flexShrink: 0, color: '#2563eb' }} />
-                <span><strong>FRS Verified:</strong> Attendance calculations are authenticated via Facial Recognition System (FRS).</span>
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', padding: '0.35rem 0.65rem', background: '#eff6ff', borderRadius: 'var(--radius-sm)', border: '1px solid #bfdbfe', fontSize: '0.75rem', color: '#1e40af' }}>
+                <Sparkles size={13} style={{ flexShrink: 0, color: '#2563eb' }} />
+                <span>Authenticated via FRS (Facial Recognition System)</span>
               </div>
             </div>
           </div>
 
-          <Link to="/student/attendance" className="btn btn-secondary btn-sm" style={{ width: '100%', marginTop: '1rem' }}>
+          <Link to="/student/attendance" className="btn btn-secondary btn-sm">
             <span>View Full Attendance Sheet</span>
             <ArrowRight size={15} />
           </Link>
@@ -149,7 +141,7 @@ export function StudentDashboard() {
             <h3 className="card-title">Subject-Wise Academic Performance (Semester 2)</h3>
             <span className="card-subtitle">Real-time marks recorded by faculty</span>
           </div>
-          <div style={{ display: 'flex', gap: '0.5rem' }}>
+          <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
             <Link to="/student/marks" className="btn btn-outline btn-sm">
               <span>View Marks Table</span>
             </Link>

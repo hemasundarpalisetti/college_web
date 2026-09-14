@@ -260,7 +260,7 @@ export function FacultyDashboard() {
             <span className="card-subtitle">Real-time academic records across all students</span>
           </div>
 
-          <div style={{ width: '280px' }}>
+          <div style={{ width: '280px', maxWidth: '100%' }}>
             <div className="search-input-wrapper">
               <Search className="search-icon" size={16} />
               <input
@@ -275,7 +275,7 @@ export function FacultyDashboard() {
         </div>
 
         <div className="table-container">
-          <table className="table">
+          <table className="table table-wide">
             <thead>
               <tr>
                 <th>Roll Number</th>

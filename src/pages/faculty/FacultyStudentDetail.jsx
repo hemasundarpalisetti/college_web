@@ -393,7 +393,7 @@ export function FacultyStudentDetail() {
         </div>
 
         <div className="table-container">
-          <table className="table">
+          <table className="table table-wide">
             <thead>
               <tr>
                 <th>Code</th>

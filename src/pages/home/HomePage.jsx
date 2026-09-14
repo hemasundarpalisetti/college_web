@@ -48,6 +48,7 @@ function FacultyAvatar({ member }) {
           src={member.image}
           alt={member.name}
           className="faculty-avatar-img"
+          style={member.imagePosition ? { objectPosition: member.imagePosition } : undefined}
           loading="lazy"
           onError={() => setImageFailed(true)}
         />
@@ -73,7 +74,7 @@ export function HomePage() {
   const { user } = useAuth();
   const videoRef = useRef(null);
   const [activeGalleryItem, setActiveGalleryItem] = useState(null);
-  const [selectedFacultyBranch, setSelectedFacultyBranch] = useState('cse');
+  const [selectedFacultyBranch, setSelectedFacultyBranch] = useState('aiml');
   const [selectedFacultyCategory, setSelectedFacultyCategory] = useState('all');
 
   // Filter faculty by academic branch first
@@ -86,6 +87,7 @@ export function HomePage() {
     const counts = {};
     FACULTY_DEPARTMENTS.forEach(dept => {
       counts[dept.id] = FACULTY_MEMBERS.filter(m => {
+        if (dept.id === 'aiml') return m.branchCode === 'AIML';
         if (dept.id === 'cse') return m.branchCode === 'CSE';
         if (dept.id === 'ece') return m.branchCode === 'ECE';
         if (dept.id === 'eee') return m.branchCode === 'EEE';

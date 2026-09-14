@@ -25,6 +25,7 @@ dist-ssr
 
 # Scratch & Gemini cache
 .gemini
+.vite
 
 # Raw video recordings in root
 /video_*.mp4

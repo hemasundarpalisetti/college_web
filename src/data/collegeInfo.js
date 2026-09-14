@@ -86,7 +86,8 @@ export const collegeInfo = {
  * Official Academic Departments with Portals
  */
 export const FACULTY_DEPARTMENTS = [
-  { id: "cse", name: "Computer Science & Engineering", shortName: "CSE & AIML", url: "https://srisivani.com/computer-science-engineering/" },
+  { id: "aiml", name: "Artificial Intelligence & Machine Learning", shortName: "AIML", url: "https://srisivani.com/computer-science-engineering/" },
+  { id: "cse", name: "Computer Science & Engineering", shortName: "CSE", url: "https://srisivani.com/computer-science-engineering/" },
   { id: "ece", name: "Electronics & Communication Engineering", shortName: "ECE", url: "https://srisivani.com/electronics-and-communications-engineering/" },
   { id: "eee", name: "Electrical & Electronics Engineering", shortName: "EEE", url: "https://srisivani.com/electrical-and-electronics-engineering/" },
   { id: "mech", name: "Mechanical Engineering", shortName: "MECH", url: "https://srisivani.com/mechanical-engineering/" },
@@ -100,8 +101,71 @@ export const FACULTY_DEPARTMENTS = [
  * Source: Official srisivani.com Department Rosters
  */
 export const FACULTY_MEMBERS = [
+  /* ================== AIML FACULTY ================== */
   {
-    "id": "fac-hod",
+    "id": "fac-aiml-hod",
+    "name": "Mr. P. Pradeep",
+    "designation": "Head of the Department (HOD) & Assistant Professor",
+    "shortRole": "HOD & Asst. Professor",
+    "qualification": "M.Tech",
+    "department": "Artificial Intelligence & Machine Learning",
+    "category": "hod",
+    "image": "https://srisivani.com/wp-content/uploads/2025/04/Pradeep-.jpg",
+    "initials": "PP",
+    "email": "p.pradeep@srisivani.com",
+    "experience": "7+ Years Experience",
+    "specialization": "Operating Systems & Python",
+    "branchCode": "AIML"
+  },
+  {
+    "id": "fac-aiml-rajesh",
+    "name": "Mr. M. Rajesh Kumar",
+    "designation": "Assistant Professor",
+    "shortRole": "Assistant Professor",
+    "qualification": "M.Tech",
+    "department": "Artificial Intelligence & Machine Learning",
+    "category": "assistant",
+    "image": "./assets/images/faculty/rajesh-kumar.jpg",
+    "initials": "MRK",
+    "email": "rajeshkumar.aiml@srisivani.com",
+    "experience": "6+ Years Experience",
+    "specialization": "Machine Learning & AI Systems",
+    "branchCode": "AIML"
+  },
+  {
+    "id": "fac-aiml-bindu",
+    "name": "Mrs. Hima Bindu",
+    "designation": "Assistant Professor",
+    "shortRole": "Assistant Professor",
+    "qualification": "M.Tech",
+    "department": "Artificial Intelligence & Machine Learning",
+    "category": "assistant",
+    "image": "./assets/images/faculty/hima-bindu.jpg",
+    "initials": "HB",
+    "email": "hima.bindu@srisivani.com",
+    "experience": "5+ Years Experience",
+    "specialization": "Data Structures & Network Security",
+    "branchCode": "AIML"
+  },
+  {
+    "id": "fac-aiml-kbj",
+    "name": "Dr. KBJ Kumar",
+    "designation": "Associate Professor",
+    "shortRole": "Associate Professor",
+    "qualification": "M.Tech, Ph.D.",
+    "department": "Artificial Intelligence & Machine Learning",
+    "category": "associate",
+    "image": null,
+    "initials": "KBJ",
+    "email": "kbj.kumar@srisivani.com",
+    "experience": "10+ Years Experience",
+    "specialization": "Artificial Intelligence & NLP",
+    "branchCode": "AIML"
+  },
+
+  /* ================== CSE FACULTY ================== */
+  {
+    "id": "fac-cse-hod",
     "name": "Mr. Y. Jagadeesh Kumar",
     "designation": "Head of the Department (HOD) & Assistant Professor",
     "shortRole": "HOD & Asst. Professor",
@@ -191,21 +255,6 @@ export const FACULTY_MEMBERS = [
     "branchCode": "CSE"
   },
   {
-    "id": "fac-assoc-4",
-    "name": "Dr. KBJ Kumar",
-    "designation": "Associate Professor",
-    "shortRole": "Associate Professor",
-    "qualification": "M.Tech, Ph.D.",
-    "department": "Computer Science & Engineering",
-    "category": "associate",
-    "image": null,
-    "initials": "KBJ",
-    "email": "kbj.kumar@srisivani.com",
-    "experience": "10+ Years Experience",
-    "specialization": "Artificial Intelligence & NLP",
-    "branchCode": "CSE"
-  },
-  {
     "id": "fac-assoc-5",
     "name": "Dr. T. Stephen",
     "designation": "Associate Professor",
@@ -233,21 +282,6 @@ export const FACULTY_MEMBERS = [
     "email": "bhagyasri@srisivani.com",
     "experience": "8+ Years Experience",
     "specialization": "Web Technologies & Java",
-    "branchCode": "CSE"
-  },
-  {
-    "id": "fac-asst-2",
-    "name": "Mr. P. Pradeep",
-    "designation": "Assistant Professor",
-    "shortRole": "Assistant Professor",
-    "qualification": "M.Tech",
-    "department": "Computer Science & Engineering",
-    "category": "assistant",
-    "image": "https://srisivani.com/wp-content/uploads/2025/04/Pradeep-.jpg",
-    "initials": "PP",
-    "email": "p.pradeep@srisivani.com",
-    "experience": "7+ Years Experience",
-    "specialization": "Operating Systems & Python",
     "branchCode": "CSE"
   },
   {
@@ -338,21 +372,6 @@ export const FACULTY_MEMBERS = [
     "email": "k.suma@srisivani.com",
     "experience": "5+ Years Experience",
     "specialization": "Compiler Design",
-    "branchCode": "CSE"
-  },
-  {
-    "id": "fac-asst-9",
-    "name": "Mrs. Hima Bindu",
-    "designation": "Assistant Professor",
-    "shortRole": "Assistant Professor",
-    "qualification": "M.Tech",
-    "department": "Computer Science & Engineering",
-    "category": "assistant",
-    "image": "https://srisivani.com/wp-content/uploads/2025/04/Bindu.jpeg",
-    "initials": "HB",
-    "email": "hima.bindu@srisivani.com",
-    "experience": "4+ Years Experience",
-    "specialization": "Network Security",
     "branchCode": "CSE"
   },
   {

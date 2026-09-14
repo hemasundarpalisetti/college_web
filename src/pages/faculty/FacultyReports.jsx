@@ -77,7 +77,7 @@ export function FacultyReports() {
           <p className="page-subtitle">Generate, preview, print, and export official student result sheets and attendance certificates</p>
         </div>
 
-        <div style={{ display: 'flex', gap: '0.75rem' }}>
+        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
           <button
             type="button"
             className="btn btn-outline btn-sm"
